@@ -1,4 +1,4 @@
-# Prototype: RTO Services AI — Grounded Transport Guidance Prototype
+# 🚗 RTO Services AI — Grounded Transport Guidance Prototype
 
 [![React 19](https://img.shields.io/badge/React-19.2.8-blue.svg?logo=react)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8.2.0-646CFF.svg?logo=vite)](https://vitejs.dev/)
@@ -10,23 +10,73 @@ An intelligent, grounded Retrieval-Augmented Generation (RAG) assistant designed
 
 ---
 
-## 🌟 Key Features
+## 📁 Project Architecture & Modular Structure
 
-### 1. 💬 Grounded AI Chat Assistant
+The codebase is organized following the **Separation of Concerns (SoC)** principle, decomposing application domains into isolated functional feature modules and shared layout components.
+
+```
+rto-services/
+├── public/                     # Static assets
+├── src/
+│   ├── components/             # Shared UI & Layout Components
+│   │   ├── common/
+│   │   │   └── MarkdownViewer.jsx # Markdown parser & citation badge formatter
+│   │   └── layout/
+│   │       ├── Sidebar.jsx      # Navigation sidebar, branding & AI Trust Center
+│   │       ├── Header.jsx       # Dynamic top bar with user context selectors
+│   │       └── Footer.jsx       # Legal caveated disclaimer & MoRTH notice
+│   ├── features/               # Isolated Functional Feature Modules
+│   │   ├── chat/               # Module 1: AI Conversational Assistant
+│   │   │   ├── components/
+│   │   │   │   ├── ChatWindow.jsx    # Chat header, messages list, suggestion chips & inputs
+│   │   │   │   ├── QuickScenarios.jsx# Citizen scenario templates
+│   │   │   │   ├── AppointmentPrep.jsx# RTO slot visit readiness checklist
+│   │   │   │   └── FeedbackAudit.jsx  # Accuracy feedback audit logger
+│   │   │   └── ChatAssistantView.jsx # Top-level chat dashboard layout
+│   │   ├── wizard/             # Module 2: Step & Checklist Builder
+│   │   │   ├── components/
+│   │   │   │   ├── WizardForm.jsx    # Service & applicant selection form
+│   │   │   │   └── WizardResults.jsx # Dynamic document checklist & step roadmap
+│   │   │   └── WizardView.jsx    # Step builder layout view
+│   │   ├── compare/            # Module 3: State Comparison Matrix
+│   │   │   └── StateMatrixView.jsx # Side-by-side state variations comparison table
+│   │   ├── inspector/          # Module 4: Developer RAG Pipeline Inspector
+│   │   │   └── PipelineInspectorView.jsx # 5-layer diagnostic metrics & prompt inspector
+│   │   └── analytics/          # Module 5: Helpdesk Trends & Analytics
+│   │       └── AnalyticsView.jsx # Citizen friction insights & session query audit logs
+│   ├── data/
+│   │   └── rto_database.json   # Verified RTO knowledge base & rules database
+│   ├── utils/
+│   │   ├── ragEngine.js        # Data indexing, TF-IDF tokenization, & meta-boosting search
+│   │   └── intelligenceEngine.js # Synthesis engine, language detection & hallucination guard
+│   ├── App.jsx                 # Main application container & tab router
+│   ├── App.css                 # Component & module styles
+│   ├── index.css               # Global theme tokens, variables & glassmorphism CSS
+│   └── main.jsx                # React application entry point
+├── .oxlintrc.json              # Oxlint rules configuration
+├── package.json                # Project manifest & scripts
+└── vite.config.js              # Vite build setup
+```
+
+---
+
+## 🌟 Key Functional Modules
+
+### 1. 💬 `src/features/chat` (AI Chat Assistant)
 - **Context-Aware RAG Engine**: Generates responses strictly tied to verified database chunks with clickable source citations (`[Source ID]`).
-- **Multilingual Support**: Automatic detection and response generation for English, Hindi, and Hinglish.
+- **Multilingual Support**: Automatic language detection and response generation for English, Hindi, and Hinglish.
 - **Hallucination Safeguards**: Real-time grounding score calculation and confidence indicators on every assistant message.
 - **Voice Simulators**: Built-in speech-to-text (Saaras STT) and text-to-speech (Bulbul TTS) simulation modes.
-- **Feedback Mechanism**: Instant upvote/downvote logging saved to local storage for auditing response quality.
+- **Feedback Audit**: Instant upvote/downvote logging saved to local storage for auditing response quality.
 
-### 2. 📋 Step & Document Checklist Wizard
+### 2. 📋 `src/features/wizard` (Step & Document Checklist Wizard)
 - Interactive workflow builder based on selected service, state, and applicant category (General, Under 18, Senior Citizen 40+).
 - Interactive document checklist allowing citizens to track required original documents and physical RTO visit preparation.
 
-### 3. 📊 State Variations Comparison Matrix
+### 3. 📊 `src/features/compare` (State Variations Comparison Matrix)
 - Dynamic side-by-side comparison table detailing fee structures, contactless portal support (Parivahan/Sarathi/Vahan), and testing standards across Delhi (DL), Maharashtra (MH), and Karnataka (KA).
 
-### 4. 🔬 Developer RAG Pipeline Inspector
+### 4. 🔬 `src/features/inspector` (Developer RAG Pipeline Inspector)
 - A 5-layer diagnostic panel exposing internal AI pipeline operations:
   - Raw query and active context parameters.
   - TF-IDF keyword tokenization and retrieval scoring.
@@ -34,7 +84,7 @@ An intelligent, grounded Retrieval-Augmented Generation (RAG) assistant designed
   - Synthesized system prompt sent to the intelligence layer.
   - Grounding ratio and hallucination guard metrics.
 
-### 5. 📈 Helpdesk Trends & Analytics
+### 5. 📈 `src/features/analytics` (Helpdesk Trends & Analytics)
 - Live visual analytics tracking feedback metrics, query confidence averages, grounding ratios, and historical user interaction logs.
 
 ---
@@ -45,7 +95,7 @@ An intelligent, grounded Retrieval-Augmented Generation (RAG) assistant designed
                     ┌─────────────────────────┐
                     │  User Interface (React) │
                     │   - Context Controls    │
-                    │   - Interactive Tabs    │
+                    │   - Modular Feature Views│
                     └────────────┬────────────┘
                                  │
                                  ▼
@@ -69,47 +119,6 @@ An intelligent, grounded Retrieval-Augmented Generation (RAG) assistant designed
                     │  - Answer Synthesizer   │
                     │  - Hallucination Guard  │
                     └─────────────────────────┘
-```
-
-### RAG & Intelligence Pipeline
-1. **Indexing (`src/utils/ragEngine.js`)**: Converts `rto_database.json` into semantic search chunks categorized by `description`, `steps`, `state_details`, `requirements`, and `faqs`.
-2. **Retrieval & Meta-Boosting**: Uses Jaccard term overlap combined with title weighting and dynamic score boosts for state codes and applicant categories.
-3. **Grounding Guard (`src/utils/intelligenceEngine.js`)**: Validates generated response tokens against retrieved chunks to derive a Grounding Ratio (Status: `PASSED`, `WARNING`, or `FAILED`).
-
----
-
-## 📚 Knowledge Base Coverage
-
-| Service | Supported States | Applicant Categories | Key Coverage |
-| :--- | :--- | :--- | :--- |
-| **Learner's License (LL)** | Delhi (DL), Maharashtra (MH), Karnataka (KA) | General, Under 18 (MCWOG), Senior (40+) | Online test rules, Form 1A, slot booking, fees |
-| **Permanent DL** | Delhi (DL), Maharashtra (MH), Karnataka (KA) | General, Senior | Track test formats, 30-day waiting rule, smart cards |
-| **DL Renewal** | Delhi (DL), Maharashtra (MH), Karnataka (KA) | General, Senior (40+) | Grace period rules, medical certificate requirements |
-| **RC Transfer** | Delhi (DL), Maharashtra (MH), Karnataka (KA) | Buyer / Seller | Form 29 & 30, NOC requirements, buyer verification |
-| **E-Challan & Disputes** | All States | General | Virtual Court steps, Lok Adalat discount process |
-
----
-
-## 📁 Repository Structure
-
-```
-rto-services/
-├── public/                     # Static assets
-├── src/
-│   ├── assets/                 # App images and vector assets
-│   ├── data/
-│   │   └── rto_database.json   # Verified RTO knowledge base & rules
-│   ├── utils/
-│   │   ├── ragEngine.js        # Indexing, tokenization, & chunk retrieval
-│   │   └── intelligenceEngine.js # Grounded synthesis & hallucination checks
-│   ├── App.jsx                 # Core dashboard application & tab router
-│   ├── App.css                 # Component & layout styles
-│   ├── index.css               # Global CSS variable tokens & theme rules
-│   └── main.jsx                # Application entry point
-├── .oxlintrc.json              # Oxlint linting configuration
-├── index.html                  # HTML template
-├── package.json                # Dependencies and npm scripts
-└── vite.config.js              # Vite build setup
 ```
 
 ---
