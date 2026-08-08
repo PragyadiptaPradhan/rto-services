@@ -1,12 +1,15 @@
 /**
- * Intelligence Layer for RTO Services AI
- * Simulates a grounded LLM processing queries using the RAG prompt,
- * handling multilingual translation (English, Hindi, Hinglish), time/fee estimations,
- * alternate service recommendations, and hallucination checks.
+ * Refactored Intelligence Layer for RTO Services AI
+ * Coordinates language detection, RAG retrieval, provider-agnostic LLM response generation,
+ * and hallucination/grounding validation.
  */
 
+import { evaluateGrounding } from './hallucinationGuard.js';
+import { LocalFallbackProvider } from './llm/localFallbackProvider.js';
+
 // Simple language detector
-const detectLanguage = (query) => {
+export const detectLanguage = (query) => {
+  if (!query) return 'en';
   const lowercase = query.toLowerCase();
   
   // Hindi script check
@@ -26,8 +29,8 @@ const detectLanguage = (query) => {
   return 'en';
 };
 
-// Mock translation data for UI / responses
-const TRANSLATIONS = {
+// UI text translations
+export const TRANSLATIONS = {
   hi: {
     disclaimer: "⚠️ यह एक मार्गदर्शक प्रोटोटाइप है, आधिकारिक आरटीओ अनुमोदन या कानूनी प्रणाली नहीं।",
     no_info: "क्षमा करें, मुझे इस प्रश्न के लिए आधिकारिक डेटाबेस में कोई जानकारी नहीं मिली। कृपया पुनः प्रयास करें या अन्य सेवाओं का चयन करें।",
@@ -58,199 +61,137 @@ const TRANSLATIONS = {
 };
 
 export class IntelligenceEngine {
-  constructor(ragEngine) {
+  constructor(ragEngine, llmProvider = null) {
     this.rag = ragEngine;
+    // Default to LocalFallbackProvider if no LLM provider is configured
+    this.llmProvider = llmProvider || new LocalFallbackProvider();
+  }
+
+  setLLMProvider(provider) {
+    if (provider && typeof provider.generateResponse === 'function') {
+      this.llmProvider = provider;
+    }
   }
 
   /**
-   * Generates a grounded, styled response
+   * Generates a grounded response via RAG retrieval & LLM provider execution
    * @param {string} query User natural language query
    * @param {object} userContext { stateCode, vehicleType, applicantType, language }
    */
-  generate(query, userContext = {}) {
-    // 1. Detect language (or use userContext choice)
+  async generateAsync(query, userContext = {}) {
     const lang = userContext.language || detectLanguage(query);
     const text = TRANSLATIONS[lang] || TRANSLATIONS.en;
 
-    // 2. Retrieve chunks using filters from context
     const filters = {
       state: userContext.stateCode,
       serviceId: userContext.serviceId,
       applicantType: userContext.applicantType
     };
-    
-    const retrievedChunks = this.rag.retrieve(query, filters, 4);
 
-    // 3. Hallucination Guard / Confidence Check
+    // 1. Retrieve knowledge chunks
+    const retrievedChunks = this.rag.retrieve(query, filters, 4);
     const maxScore = retrievedChunks.length > 0 ? retrievedChunks[0].score : 0;
-    
-    // Fallback if relevance is too low or no chunks match
+    const prompt = this.rag.assemblePrompt(query, retrievedChunks, userContext);
+
+    // 2. Low-confidence fallback check
     if (retrievedChunks.length === 0 || maxScore < 0.1) {
-      const response = this.synthesizeFallback(query, lang, text);
+      const fallbackProvider = new LocalFallbackProvider();
+      const fallbackResult = await fallbackProvider.generateResponse({ query, chunks: [], language: lang, textTranslations: text });
       return {
-        response,
+        response: fallbackResult.response,
         retrievedChunks: [],
         confidence: 0,
         hallucinationCheck: { status: "FAILED", score: 0 },
         language: lang,
-        prompt: this.rag.assemblePrompt(query, [], userContext)
+        prompt,
+        providerUsed: fallbackProvider.name
       };
     }
 
-    // 4. Synthesize response based on retrieved chunks and language
-    const response = this.synthesizeResponse(query, retrievedChunks, lang, text, userContext);
+    // 3. Generate response using active LLM provider
+    let llmResult;
+    try {
+      llmResult = await this.llmProvider.generateResponse({
+        query,
+        chunks: retrievedChunks,
+        prompt,
+        userContext,
+        language: lang,
+        textTranslations: text
+      });
+    } catch (err) {
+      console.warn(`[IntelligenceEngine] ${this.llmProvider.name} failed (${err.message}). Falling back to LocalFallbackProvider.`);
+      const fallbackProvider = new LocalFallbackProvider();
+      llmResult = await fallbackProvider.generateResponse({
+        query,
+        chunks: retrievedChunks,
+        prompt,
+        userContext,
+        language: lang,
+        textTranslations: text
+      });
+    }
 
-    // 5. Calculate Hallucination Guard details
-    // Ensure response terms map back to retrieved chunks
-    const responseTokens = new Set(response.toLowerCase().split(/\s+/));
-    const chunkTokens = new Set(retrievedChunks.map(c => c.content.toLowerCase()).join(" ").split(/\s+/));
-    
-    let matchedWords = 0;
-    let totalImportantWords = 0;
-    
-    responseTokens.forEach(word => {
-      if (word.length > 4) { // check only significant words
-        totalImportantWords++;
-        if (chunkTokens.has(word)) matchedWords++;
-      }
-    });
+    // 4. Evaluate Fact Grounding
+    const hallucinationCheck = evaluateGrounding(llmResult.response, retrievedChunks);
+    const confidence = Math.round(Math.min(maxScore * 40 + 20, 100));
 
-    const groundingRatio = totalImportantWords > 0 ? (matchedWords / totalImportantWords) : 1;
-    const hallucinationStatus = groundingRatio > 0.7 ? "PASSED" : "WARNING";
+    return {
+      response: llmResult.response,
+      retrievedChunks,
+      confidence,
+      hallucinationCheck,
+      language: lang,
+      prompt,
+      providerUsed: this.llmProvider.name,
+      modelUsed: llmResult.model || "default"
+    };
+  }
 
-    // 6. Generate the simulated system prompt for the developer view
+  /**
+   * Synchronous generate method maintaining 100% backward compatibility for App.jsx
+   */
+  generate(query, userContext = {}) {
+    const lang = userContext.language || detectLanguage(query);
+    const text = TRANSLATIONS[lang] || TRANSLATIONS.en;
+
+    const filters = {
+      state: userContext.stateCode,
+      serviceId: userContext.serviceId,
+      applicantType: userContext.applicantType
+    };
+
+    const retrievedChunks = this.rag.retrieve(query, filters, 4);
+    const maxScore = retrievedChunks.length > 0 ? retrievedChunks[0].score : 0;
     const prompt = this.rag.assemblePrompt(query, retrievedChunks, userContext);
+
+    const fallbackProvider = new LocalFallbackProvider();
+    
+    if (retrievedChunks.length === 0 || maxScore < 0.1) {
+      const fallbackResult = fallbackProvider.synthesizeFallback(query, lang, text);
+      return {
+        response: fallbackResult,
+        retrievedChunks: [],
+        confidence: 0,
+        hallucinationCheck: { status: "FAILED", score: 0 },
+        language: lang,
+        prompt
+      };
+    }
+
+    const response = fallbackProvider.synthesizeResponse(query, retrievedChunks, lang, text);
+    const hallucinationCheck = evaluateGrounding(response, retrievedChunks);
+    const confidence = Math.round(Math.min(maxScore * 40 + 20, 100));
 
     return {
       response,
       retrievedChunks,
-      confidence: Math.round(Math.min(maxScore * 40 + 20, 100)), // Scale score to 0-100%
-      hallucinationCheck: {
-        status: hallucinationStatus,
-        score: Math.round(groundingRatio * 100)
-      },
+      confidence,
+      hallucinationCheck,
       language: lang,
       prompt
     };
   }
-
-  // Generate fallback suggestions when info is missing
-  synthesizeFallback(query, lang, text) {
-    let suggestions = "";
-    if (lang === 'hi') {
-      suggestions = `\n\n**सुझाव:**
-- यदि आप Learner's License के बारे में जानना चाहते हैं, तो "LL" या "लाइसेंस" लिखें।
-- वाहन ट्रांसफर के लिए "ownership transfer" या "RC transfer" लिखें।
-- ट्रैफिक चालान के लिए "challan" या "Lok Adalat" लिखें।`;
-    } else if (lang === 'hinglish') {
-      suggestions = `\n\n**Suggestions:**
-- Agar aap Learner's License ke baare me janna chahte hain, toh "LL" ya "license" likhein.
-- Vehicle transfer ke liye "ownership transfer" ya "RC transfer" likhein.
-- Traffic challan ke liye "challan" ya "Lok Adalat" likhein.`;
-    } else {
-      suggestions = `\n\n**Suggestions:**
-- For Learner's License guidance, type "Learner's License" or "LL".
-- For Transfer of Vehicle Ownership, type "ownership transfer" or "RC transfer".
-- For Traffic Challans, type "e-challan" or "Lok Adalat".`;
-    }
-
-    return `${text.no_info}${suggestions}\n\n*${text.disclaimer}*`;
-  }
-
-  // Synthesize answer combining chunks
-  synthesizeResponse(query, chunks, lang, text, context) {
-    let paragraphs = [];
-    
-    // Add disclaimer upfront
-    paragraphs.push(`*${text.disclaimer}*`);
-
-    // Check if we have specific chunks
-    const descriptionChunk = chunks.find(c => c.type === 'description');
-    const stepsChunk = chunks.find(c => c.type === 'steps');
-    const stateChunk = chunks.find(c => c.type === 'state_details');
-    const reqChunk = chunks.find(c => c.type === 'requirements');
-    const faqChunks = chunks.filter(c => c.type === 'faq' || c.type === 'general_faq');
-
-    // 1. Description Section
-    if (descriptionChunk) {
-      if (lang === 'hi') {
-        paragraphs.push(`### विवरण:
-${descriptionChunk.content} [श्रौत: ${descriptionChunk.id}]`);
-      } else if (lang === 'hinglish') {
-        paragraphs.push(`### Details:
-${descriptionChunk.content} [Source: ${descriptionChunk.id}]`);
-      } else {
-        paragraphs.push(`### Service Overview:
-${descriptionChunk.content} [Source: ${descriptionChunk.id}]`);
-      }
-    }
-
-    // 2. State specific details
-    if (stateChunk) {
-      if (lang === 'hi') {
-        paragraphs.push(`### राज्य-विशिष्ट जानकारी (${stateChunk.metadata.state}):
-- **शुल्क विवरण:** ${stateChunk.content.match(/Fee Structure: (.*)/)?.[1] || "आरटीओ पोर्टल पर देखें"}
-- **परीक्षण का तरीका:** ${stateChunk.content.match(/Test Format: (.*)/)?.[1] || "आरटीओ में उपस्थित होना होगा"}
-- **विशेष निर्देश:** ${stateChunk.content.match(/State-Specific Notes: (.*)/)?.[1] || "कोई नहीं"} [स्रोत: ${stateChunk.id}]`);
-      } else if (lang === 'hinglish') {
-        paragraphs.push(`### State-Specific Info (${stateChunk.metadata.state}):
-- **Fees Structure:** ${stateChunk.content.match(/Fee Structure: (.*)/)?.[1] || "Check online on RTO portal"}
-- **Test Format:** ${stateChunk.content.match(/Test Format: (.*)/)?.[1] || "RTO visit required"}
-- **Special Instruction:** ${stateChunk.content.match(/State-Specific Notes: (.*)/)?.[1] || "None"} [Source: ${stateChunk.id}]`);
-      } else {
-        paragraphs.push(`### State-Specific Information (${stateChunk.metadata.state}):
-- **Fee Breakdown:** ${stateChunk.content.match(/Fee Structure: (.*)/)?.[1] || "Refer to transport portal"}
-- **Testing Standard:** ${stateChunk.content.match(/Test Format: (.*)/)?.[1] || "Standard computer test"}
-- **Important Note:** ${stateChunk.content.match(/State-Specific Notes: (.*)/)?.[1] || "None"} [Source: ${stateChunk.id}]`);
-      }
-    }
-
-    // 3. Document Requirements
-    if (reqChunk) {
-      paragraphs.push(`### ${text.docs} (${reqChunk.metadata.applicantType || "General"} Category):
-${reqChunk.content.split('Required Documents:')[1]?.trim() || reqChunk.content} [Source: ${reqChunk.id}]`);
-    }
-
-    // 4. Process Steps
-    if (stepsChunk) {
-      paragraphs.push(`### ${text.steps}:
-${stepsChunk.content.split('Application steps to apply for')[1]?.split('\n').slice(1).join('\n') || stepsChunk.content} [Source: ${stepsChunk.id}]`);
-    }
-
-    // 5. Frequently Asked Questions
-    if (faqChunks.length > 0) {
-      const faqList = faqChunks.map(f => {
-        const question = f.content.match(/Question: (.*)/)?.[1] || f.title;
-        const answer = f.content.match(/Answer: (.*)/)?.[1] || f.content;
-        return `**Q: ${question}**\n*A: ${answer}* [Source: ${f.id}]`;
-      }).join("\n\n");
-      
-      paragraphs.push(`### Frequently Asked Questions:\n${faqList}`);
-    }
-
-    // 6. Time Estimate if available
-    let estimatedTime = "7 - 15 working days";
-    if (query.toLowerCase().includes("license") || query.toLowerCase().includes("licence")) {
-      estimatedTime = "LL: Instant download upon passing. Permanent DL Smart Card: 7-15 days after passing driving test.";
-    } else if (query.toLowerCase().includes("transfer") || query.toLowerCase().includes("ownership")) {
-      estimatedTime = "15 - 30 working days depending on RTO verification.";
-    }
-    
-    if (lang === 'hi') {
-      paragraphs.push(`### ${text.time}:
-- लगभग ${estimatedTime}`);
-    } else if (lang === 'hinglish') {
-      paragraphs.push(`### ${text.time}:
-- Lagbhag ${estimatedTime}`);
-    } else {
-      paragraphs.push(`### ${text.time}:
-- Approximately ${estimatedTime}`);
-    }
-
-    // 7. References section
-    const citationList = chunks.map(c => `- **[${c.id}]** - ${c.title}`).join("\n");
-    paragraphs.push(`### ${text.citations}:\n${citationList}`);
-
-    return paragraphs.join("\n\n");
-  }
 }
+
+export default IntelligenceEngine;
