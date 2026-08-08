@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import rtoDatabase from './data/rto_database.json';
+import rtoDatabase from './data/index.js';
 import { RAGEngine } from './utils/ragEngine';
 import { IntelligenceEngine } from './utils/intelligenceEngine';
 

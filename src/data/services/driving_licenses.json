@@ -1,0 +1,420 @@
+[
+  {
+    "id": "learners_license",
+    "name": "Learner's License (LL) Application",
+    "category": "Driving License Services",
+    "description": "Initial temporary license valid for 6 months, allowing candidates to practice driving under the supervision of a permanent DL holder.",
+    "prerequisites": "Minimum age of 16 for non-geared motorcycle (<50cc) with parental consent; 18 for light motor vehicles (cars/geared motorcycles).",
+    "common_steps": [
+      "Fill LL application form online on Sarathi Parivahan portal.",
+      "Upload required documents (Age proof, Address proof, Photo, and Signature).",
+      "Upload Form 1 (Physical Fitness Self-Declaration). For applicants < 18, upload parent consent form.",
+      "Pay the application fee online.",
+      "Book a slot for the Learner's License Test (if applicable in the state).",
+      "Take the computer-based/online test covering traffic signs, rules of the road, and safety guidelines. Score minimum 60% to pass.",
+      "Download and print the digital LL instantly upon passing."
+    ],
+    "state_variations": {
+      "DL": {
+        "state_name": "Delhi",
+        "contactless": true,
+        "fee_breakdown": "Application Fee: ₹150, Test Fee: ₹50, Total: ₹200",
+        "test_format": "Contactless Online Test from home (using Aadhaar e-KYC face authentication). No RTO visit needed.",
+        "special_note": "Aadhaar e-KYC is mandatory for the contactless home-based test."
+      },
+      "MH": {
+        "state_name": "Maharashtra",
+        "contactless": false,
+        "fee_breakdown": "Application Fee: ₹150, Test Fee: ₹50, Total: ₹200",
+        "test_format": "Computer Screen Test at the local RTO. Requires slot booking and physical visit.",
+        "special_note": "Biometrics verification will be done at the RTO prior to the test."
+      },
+      "KA": {
+        "state_name": "Karnataka",
+        "contactless": false,
+        "fee_breakdown": "Application Fee: ₹150, Test/LL Card Fee: ₹100, Total: ₹250",
+        "test_format": "Computer Screen Test at the local RTO. Requires slot booking and physical visit.",
+        "special_note": "Requires visiting the RTO with original documents for verification before taking the test."
+      }
+    },
+    "applicant_requirements": {
+      "General": {
+        "documents": [
+          "Aadhaar Card (serves as Age and Address proof)",
+          "Form 1 (Self-declaration of Physical Fitness)",
+          "Recent Passport Size Photograph & Signature scan"
+        ],
+        "additional_notes": "Aadhaar e-KYC is highly recommended to speed up the approval process."
+      },
+      "Under18": {
+        "documents": [
+          "Aadhaar Card or School Leaving Certificate",
+          "Form 1 (Self-declaration of Physical Fitness)",
+          "Parent / Guardian Consent Declaration (Form 1 signed by parent)",
+          "Parent's ID proof (Aadhaar/Voter ID)"
+        ],
+        "additional_notes": "Only valid for non-geared motorcycles up to 50cc displacement."
+      },
+      "Senior": {
+        "documents": [
+          "Aadhaar Card / Passport",
+          "Form 1A (Medical Certificate signed by a registered Government Doctor) - Mandatory for age above 40",
+          "Recent Passport Size Photograph"
+        ],
+        "additional_notes": "Medical certificate Form 1A must be uploaded in PDF format; keep the physical original ready."
+      }
+    },
+    "faqs": [
+      {
+        "question": "What is the validity of a Learner's License?",
+        "answer": "A Learner's License is valid for 6 months from the date of issue. You can apply for a permanent Driving License after 30 days and within 180 days of getting the LL."
+      },
+      {
+        "question": "What happens if I fail the LL computer test?",
+        "answer": "If you fail, you can pay a retest fee of ₹50 online and book another slot to re-take the test from the next day onwards."
+      },
+      {
+        "question": "Can I drive alone with a Learner's License?",
+        "answer": "No. You must have a person holding a valid permanent Driving License sitting in the front seat next to you, and you must display red 'L' stickers (height 9cm) on the front and rear of the vehicle."
+      }
+    ]
+  },
+  {
+    "id": "driving_license",
+    "name": "Permanent Driving License (DL)",
+    "category": "Driving License Services",
+    "description": "Permanent license issued after proving driving competency on RTO test track. Valid for up to 20 years or until age 40 (whichever is earlier).",
+    "prerequisites": "Must hold an active Learner's License (LL) for a minimum of 30 days, and apply within 180 days from the date of LL issue.",
+    "common_steps": [
+      "Fill DL application form online on Sarathi Parivahan, entering your active LL number.",
+      "Select the vehicle class (e.g. LMV for cars, MCWG for geared bikes) matching your LL.",
+      "Upload required documents (LL copy, Address/Age proof if updated, and Form 5 if trained via a driving school).",
+      "Pay the DL application fee and driving test fee online.",
+      "Book a driving test slot at the nearest automated or manual RTO test track.",
+      "Appear at the test track with your own vehicle of the selected class, accompanied by a DL holder.",
+      "Pass the physical driving test (e.g., '8' track, 'H' track, gradient start).",
+      "Complete biometric photo capture at the RTO window after the test.",
+      "The DL smart card is printed and dispatched to your registered address via Speed Post."
+    ],
+    "state_variations": {
+      "DL": {
+        "state_name": "Delhi",
+        "contactless": false,
+        "fee_breakdown": "DL Issue: ₹200, Smart Card Fee: ₹200, Driving Test Fee: ₹300, Total: ₹700",
+        "test_format": "Automated Driving Test Track (ADTT) with video-based sensor tracking. Strict evaluation.",
+        "special_note": "Delhi uses highly automated tracks. Ensure you practice reversing and gradient parking before booking."
+      },
+      "MH": {
+        "state_name": "Maharashtra",
+        "contactless": false,
+        "fee_breakdown": "DL Issue: ₹200, Smart Card: ₹200, Driving Test: ₹300, Total: ₹700",
+        "test_format": "Combination of automated tracks in tier-1 cities and manual tracks in tier-2/3 cities.",
+        "special_note": "A hard copy of your LL and fee receipt is required at the time of the test."
+      },
+      "KA": {
+        "state_name": "Karnataka",
+        "contactless": false,
+        "fee_breakdown": "DL Issue: ₹200, Smart Card: ₹200, Driving Test: ₹300, Total: ₹700",
+        "test_format": "Automated tracks (like Jayanagar/Electronic City RTOs) and manual inspector tests in other areas.",
+        "special_note": "Requires presenting original LL, application form, and vehicle PUCC certificate to the inspector."
+      }
+    },
+    "applicant_requirements": {
+      "General": {
+        "documents": [
+          "Active Learner's License (LL) Original",
+          "Form 4 (Application for license to drive)",
+          "Vehicle Registration Certificate (RC), valid PUCC, and Insurance of the vehicle used for the test"
+        ],
+        "additional_notes": "Make sure the vehicle has L-plates installed during the test."
+      },
+      "Senior": {
+        "documents": [
+          "Active Learner's License (LL) Original",
+          "Form 4 (Application)",
+          "Form 1A (Medical Certificate) - Mandatorily required if the applicant is above 40 years of age",
+          "Vehicle documents (RC, Insurance, PUCC) for the test vehicle"
+        ],
+        "additional_notes": "Ensure your Form 1A is verified by the doctor online or carries a clear signature and stamp."
+      }
+    },
+    "faqs": [
+      {
+        "question": "Can I use someone else's vehicle for my driving test?",
+        "answer": "Yes, you can use any vehicle of the class you applied for (e.g. a friend's car for LMV), provided it has a valid Registration Certificate (RC), active insurance, and a valid Pollution Under Control Certificate (PUCC)."
+      },
+      {
+        "question": "What happens if I fail the driving test?",
+        "answer": "If you fail the test, you can pay the test re-appearance fee of ₹300 online and book a new slot. You can retake the test after 7 days."
+      },
+      {
+        "question": "How long does it take to receive the physical license card?",
+        "answer": "Once the RTO inspector approves your test online, the DL is generated. The physical smart card is printed and dispatched via Speed Post, taking about 7 to 15 days depending on the state and postal speed."
+      }
+    ]
+  },
+  {
+    "id": "dl_renewal",
+    "name": "Driving License Renewal",
+    "category": "Driving License Services",
+    "description": "Renewal of an expired or expiring driving license. Can be applied for 1 year before expiry or up to 1 year after expiry without having to retake the driving test.",
+    "prerequisites": "Must hold an existing driving license. If expired for more than 1 year, you must apply for a fresh Learner's License and retake the driving test.",
+    "common_steps": [
+      "Fill the DL Renewal Form (Form 9) online on Sarathi Parivahan.",
+      "Upload the original expired/expiring Driving License.",
+      "If you are over 40 years old, upload a signed Form 1A Medical Certificate.",
+      "If changing your address during renewal, upload updated Address Proof.",
+      "Pay the renewal fee online.",
+      "Submit the physical application file and old DL card at the RTO (in states where fully contactless is not enabled).",
+      "Track status online; the renewed DL smart card is dispatched via Speed Post."
+    ],
+    "state_variations": {
+      "DL": {
+        "state_name": "Delhi",
+        "contactless": true,
+        "fee_breakdown": "Renewal Fee: ₹200, Smart Card Fee: ₹200, Total: ₹400 (if applied within 30 days of expiry). Late fee: +₹1000 per year.",
+        "test_format": "Fully contactless. Verification is done online based on uploaded documents. RTO visit is not required.",
+        "special_note": "Aadhaar verification is required to verify identity and enable contactless processing."
+      },
+      "MH": {
+        "state_name": "Maharashtra",
+        "contactless": false,
+        "fee_breakdown": "Renewal Fee: ₹200, Smart Card: ₹200, Total: ₹400. Late fee: ₹1000 plus ₹1000 per year of delay.",
+        "test_format": "Semi-contactless. Form is submitted online, but physical submission of the old DL card is requested by most RTO offices.",
+        "special_note": "Bring the physical printout of the application and original DL to the RTO counter."
+      },
+      "KA": {
+        "state_name": "Karnataka",
+        "contactless": false,
+        "fee_breakdown": "Renewal Fee: ₹200, Smart Card: ₹200, Total: ₹400. Plus late fee if expired > 30 days.",
+        "test_format": "Semi-contactless. Requires submitting the physical application folder with the old DL card to the RTO.",
+        "special_note": "Ensure your biometrics are updated if your old DL is very old or manual."
+      }
+    },
+    "applicant_requirements": {
+      "General": {
+        "documents": [
+          "Original Driving License (DL)",
+          "Form 9 (Renewal Application)",
+          "Form 1 (Physical Fitness Self-Declaration) - If age is under 40"
+        ],
+        "additional_notes": "If DL is from another state, you must also apply for an Address Change / Change of RTO."
+      },
+      "Senior": {
+        "documents": [
+          "Original Driving License (DL)",
+          "Form 9 (Renewal Application)",
+          "Form 1A (Medical Certificate) - Mandatorily required for all applicants over 40 years of age"
+        ],
+        "additional_notes": "The Form 1A must be signed by a registered practitioner with a visible registration number."
+      }
+    },
+    "faqs": [
+      {
+        "question": "What is the grace period for DL renewal?",
+        "answer": "You can renew your DL starting from 1 year before its expiry date up to 1 year after. However, if you renew after 30 days from expiry, there is a late fee penalty, and driving with an expired DL is illegal."
+      },
+      {
+        "question": "What if my DL is expired for more than 1 year?",
+        "answer": "If your DL has been expired for more than 1 year, you must apply for a Learner's License, pay fees, and retake the driving test at the RTO to obtain a valid DL again."
+      }
+    ]
+  },
+  {
+    "id": "duplicate_dl_rc",
+    "name": "Issue of Duplicate Driving License / Vehicle RC",
+    "category": "Driving License & Vehicle Services",
+    "description": "Service to re-issue a duplicate Driving License or Vehicle Registration Certificate in the event of loss, theft, tearing, or physical damage.",
+    "prerequisites": "Must have an existing registered DL or RC record in Parivahan database and an FIR/Police Acknowledgement report for lost items.",
+    "common_steps": [
+      "File an online Police FIR / Lost Article Report detailing lost DL/RC number.",
+      "Access Sarathi (for DL) or Vahan (for RC) portal on parivahan.gov.in.",
+      "Select 'Apply for Duplicate DL/RC' and enter DL/Vehicle registration number.",
+      "Upload Police FIR copy, Form 26 (Application for Duplicate RC/DL), and ID proof.",
+      "In case of damaged card, upload photo of torn/damaged physical smart card.",
+      "Pay application fee and smart card issue charges online.",
+      "Book slot for document verification at RTO (or submit via Aadhaar e-KYC where contactless is enabled).",
+      "Receive duplicate smart card via registered speed post."
+    ],
+    "state_variations": {
+      "DL": {
+        "state_name": "Delhi",
+        "contactless": true,
+        "fee_breakdown": "Duplicate DL/RC Fee: ₹200, Smart Card Fee: ₹200, Total: ₹400",
+        "test_format": "Contactless e-KYC using Aadhaar and online Delhi Police e-FIR copy upload.",
+        "special_note": "Delhi Police e-FIR report reference number must be verified online."
+      },
+      "MH": {
+        "state_name": "Maharashtra",
+        "contactless": false,
+        "fee_breakdown": "Duplicate Fee: ₹200, Smart Card: ₹200, Postal Fee: ₹50, Total: ₹450",
+        "test_format": "Online application + physical submission of FIR copy at local RTO.",
+        "special_note": "Requires physical FIR copy stamped by local Maharashtra police station."
+      },
+      "KA": {
+        "state_name": "Karnataka",
+        "contactless": false,
+        "fee_breakdown": "Duplicate Fee: ₹150, Smart Card Fee: ₹137, Total: ₹287",
+        "test_format": "Online application with slot booking for verification.",
+        "special_note": "E-Lost report from Karnataka Police portal (KSP app) is accepted."
+      },
+      "UP": {
+        "state_name": "Uttar Pradesh",
+        "contactless": true,
+        "fee_breakdown": "Duplicate Fee: ₹200, Smart Card: ₹200, Total: ₹400",
+        "test_format": "Online Aadhaar e-KYC with UP Police Lost Article Report.",
+        "special_note": "Damaged smart card must be surrendered physically if applicable."
+      },
+      "TN": {
+        "state_name": "Tamil Nadu",
+        "contactless": false,
+        "fee_breakdown": "Duplicate Fee: ₹250, Card Fee: ₹200, Total: ₹450",
+        "test_format": "RTO counter document submission required.",
+        "special_note": "Non-traceable certificate from Inspector of Police required if lost."
+      },
+      "TS": {
+        "state_name": "Telangana",
+        "contactless": true,
+        "fee_breakdown": "Duplicate Fee: ₹200, Card Fee: ₹200, Total: ₹400",
+        "test_format": "Online RTA portal Aadhaar authentication.",
+        "special_note": "Telangana Police HawkEye lost report accepted online."
+      },
+      "GJ": {
+        "state_name": "Gujarat",
+        "contactless": true,
+        "fee_breakdown": "Duplicate Fee: ₹200, Card Fee: ₹150, Total: ₹350",
+        "test_format": "Digital Gujarat portal contactless submission.",
+        "special_note": "Gujarat e-Cop report reference number verified automatically."
+      }
+    },
+    "applicant_requirements": {
+      "General": {
+        "documents": [
+          "Police FIR / Lost Report Copy (or Damaged Smart Card)",
+          "Form 26 (Application for Duplicate Certificate of Registration / License)",
+          "Aadhaar Card / ID Proof",
+          "Valid Insurance & PUC Certificate (for RC duplicate)"
+        ],
+        "additional_notes": "Ensure vehicle chassis number matches existing Vahan records exactly."
+      },
+      "Senior": {
+        "documents": [
+          "Police FIR Copy / Damaged Smart Card",
+          "Form 26 & Form 1A Medical Certificate (if DL renewal due)",
+          "Aadhaar Card"
+        ],
+        "additional_notes": "Priority counter processing at physical RTO desks."
+      },
+      "Commercial": {
+        "documents": [
+          "Police Lost FIR Report",
+          "Form 26 signed by Financier/Bank (if vehicle under loan)",
+          "Commercial Permit & Fitness Certificate copy",
+          "Tax Clearance Certificate"
+        ],
+        "additional_notes": "Bank clearance required if vehicle has active hypothecation."
+      }
+    },
+    "faqs": [
+      {
+        "question": "Can I drive while my application for Duplicate DL is under processing?",
+        "answer": "Yes, you can carry the official Parivahan Application Acknowledgement receipt and a digital copy stored on DigiLocker or mParivahan mobile app."
+      },
+      {
+        "question": "What should I do if my lost DL/RC is found after applying for duplicate?",
+        "answer": "Surrender the old recovered card to your local RTO to prevent unauthorized duplicate usage and keep your record updated."
+      }
+    ]
+  },
+  {
+    "id": "international_driving_permit",
+    "name": "International Driving Permit (IDP)",
+    "category": "Driving License Services",
+    "description": "Official legal document issued to permanent Indian driving license holders allowing them to drive motor vehicles in foreign countries adhering to the 1949 Geneva Road Traffic Convention.",
+    "prerequisites": "Must hold a valid Permanent Indian Driving License, valid Passport, and active overseas Travel Visa / Air Ticket.",
+    "common_steps": [
+      "Log in to Sarathi Parivahan portal and select 'Apply for International Driving Permit (IDP)'.",
+      "Enter permanent Indian DL number and Date of Birth.",
+      "Upload valid Passport copy (with visa page or travel ticket).",
+      "Upload Form 1A (Medical Certificate signed by registered MBBS doctor).",
+      "Upload valid Indian Driving License copy and recent passport-size photos.",
+      "Pay IDP application fee online (₹1,000 fixed national fee).",
+      "Book slot for physical verification at local RTO (or submit via Aadhaar e-KYC where enabled).",
+      "Collect printed IDP booklet from RTO."
+    ],
+    "state_variations": {
+      "DL": {
+        "state_name": "Delhi",
+        "contactless": false,
+        "fee_breakdown": "IDP Fee: ₹1,000, Postal/Handling Charges: ₹50, Total: ₹1,050",
+        "test_format": "Online application + physical document verification at Zonal RTO Office.",
+        "special_note": "Passport address must match or be verified against Indian DL details."
+      },
+      "MH": {
+        "state_name": "Maharashtra",
+        "contactless": false,
+        "fee_breakdown": "IDP Statutory Fee: ₹1,000, Postal Fee: ₹50, Total: ₹1,050",
+        "test_format": "Physical document audit & original passport inspection at RTO counter.",
+        "special_note": "Original passport and valid visa copy must be presented during verification."
+      },
+      "KA": {
+        "state_name": "Karnataka",
+        "contactless": false,
+        "fee_breakdown": "IDP Statutory Fee: ₹1,000, User Fee: ₹100, Total: ₹1,100",
+        "test_format": "Online slot booking for physical document verification at RTO.",
+        "special_note": "IDP issued for countries signatory to the 1949 Geneva Convention."
+      },
+      "UP": {
+        "state_name": "Uttar Pradesh",
+        "contactless": false,
+        "fee_breakdown": "IDP Fee: ₹1,000, Total: ₹1,000",
+        "test_format": "Online filing + physical passport verification at RTO.",
+        "special_note": "Form 1A medical certificate mandatory for all age groups."
+      },
+      "TN": {
+        "state_name": "Tamil Nadu",
+        "contactless": false,
+        "fee_breakdown": "IDP Fee: ₹1,000, Handling: ₹50, Total: ₹1,050",
+        "test_format": "RTO counter document submission required.",
+        "special_note": "Visa and flight ticket copy mandatory."
+      },
+      "TS": {
+        "state_name": "Telangana",
+        "contactless": false,
+        "fee_breakdown": "IDP Fee: ₹1,000, Service Fee: ₹100, Total: ₹1,100",
+        "test_format": "Online filing + physical verification at RTA counter.",
+        "special_note": "Original passport inspection compulsory."
+      },
+      "GJ": {
+        "state_name": "Gujarat",
+        "contactless": false,
+        "fee_breakdown": "IDP Fee: ₹1,000, Total: ₹1,000",
+        "test_format": "Digital Gujarat application + RTO verification.",
+        "special_note": "Valid for 1 year from date of issue."
+      }
+    },
+    "applicant_requirements": {
+      "General": {
+        "documents": [
+          "Valid Permanent Indian Driving License",
+          "Valid Indian Passport (with minimum 6 months validity remaining)",
+          "Valid Visa / Entry Permit for destination country",
+          "Confirmed Air Ticket / Flight Reservation copy",
+          "Form 1A (Medical Certificate signed by a registered MBBS Doctor)",
+          "3 passport-sized photographs (35mm x 45mm)"
+        ],
+        "additional_notes": "IDP is issued with a maximum validity of 1 year or DL expiry, whichever is earlier."
+      }
+    },
+    "faqs": [
+      {
+        "question": "Can an International Driving Permit (IDP) be renewed from outside India?",
+        "answer": "MoRTH has introduced a provision allowing Indian citizens abroad to apply for IDP renewal through official Indian Embassy / Consulate portals, which forward verified requests to home RTOs on Parivahan."
+      },
+      {
+        "question": "Do I need a separate driving test for getting an International Driving Permit?",
+        "answer": "No separate driving test is required, provided you hold an active permanent Indian Driving License for the respective vehicle class."
+      }
+    ]
+  }
+]

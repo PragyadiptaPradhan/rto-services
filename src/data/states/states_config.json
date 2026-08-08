@@ -1,0 +1,62 @@
+{
+  "states_supported": [
+    "DL",
+    "MH",
+    "KA",
+    "UP",
+    "TN",
+    "TS",
+    "GJ"
+  ],
+  "states": {
+    "DL": {
+      "code": "DL",
+      "name": "Delhi",
+      "region": "North",
+      "capital": "New Delhi",
+      "portal": "https://transport.delhi.gov.in"
+    },
+    "MH": {
+      "code": "MH",
+      "name": "Maharashtra",
+      "region": "West",
+      "capital": "Mumbai",
+      "portal": "https://transport.maharashtra.gov.in"
+    },
+    "KA": {
+      "code": "KA",
+      "name": "Karnataka",
+      "region": "South",
+      "capital": "Bengaluru",
+      "portal": "https://transport.karnataka.gov.in"
+    },
+    "UP": {
+      "code": "UP",
+      "name": "Uttar Pradesh",
+      "region": "North",
+      "capital": "Lucknow",
+      "portal": "https://uptransport.upsdc.gov.in"
+    },
+    "TN": {
+      "code": "TN",
+      "name": "Tamil Nadu",
+      "region": "South",
+      "capital": "Chennai",
+      "portal": "https://tnsta.gov.in"
+    },
+    "TS": {
+      "code": "TS",
+      "name": "Telangana",
+      "region": "South",
+      "capital": "Hyderabad",
+      "portal": "https://transport.telangana.gov.in"
+    },
+    "GJ": {
+      "code": "GJ",
+      "name": "Gujarat",
+      "region": "West",
+      "capital": "Gandhinagar",
+      "portal": "https://portals.gujarat.gov.in/transport"
+    }
+  }
+}

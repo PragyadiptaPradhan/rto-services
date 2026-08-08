@@ -236,6 +236,203 @@
       ]
     },
     {
+      "id": "duplicate_dl_rc",
+      "name": "Issue of Duplicate Driving License / Vehicle RC",
+      "category": "Driving License & Vehicle Services",
+      "description": "Service to re-issue a duplicate Driving License or Vehicle Registration Certificate in the event of loss, theft, tearing, or physical damage.",
+      "prerequisites": "Must have an existing registered DL or RC record in Parivahan database and an FIR/Police Acknowledgement report for lost items.",
+      "common_steps": [
+        "File an online Police FIR / Lost Article Report detailing lost DL/RC number.",
+        "Access Sarathi (for DL) or Vahan (for RC) portal on parivahan.gov.in.",
+        "Select 'Apply for Duplicate DL/RC' and enter DL/Vehicle registration number.",
+        "Upload Police FIR copy, Form 26 (Application for Duplicate RC/DL), and ID proof.",
+        "In case of damaged card, upload photo of torn/damaged physical smart card.",
+        "Pay application fee and smart card issue charges online.",
+        "Book slot for document verification at RTO (or submit via Aadhaar e-KYC where contactless is enabled).",
+        "Receive duplicate smart card via registered speed post."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": true,
+          "fee_breakdown": "Duplicate DL/RC Fee: ₹200, Smart Card Fee: ₹200, Total: ₹400",
+          "test_format": "Contactless e-KYC using Aadhaar and online Delhi Police e-FIR copy upload.",
+          "special_note": "Delhi Police e-FIR report reference number must be verified online."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "Duplicate Fee: ₹200, Smart Card: ₹200, Postal Fee: ₹50, Total: ₹450",
+          "test_format": "Online application + physical submission of FIR copy at local RTO.",
+          "special_note": "Requires physical FIR copy stamped by local Maharashtra police station."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "Duplicate Fee: ₹150, Smart Card Fee: ₹137, Total: ₹287",
+          "test_format": "Online application with slot booking for verification.",
+          "special_note": "E-Lost report from Karnataka Police portal (KSP app) is accepted."
+        },
+        "UP": {
+          "state_name": "Uttar Pradesh",
+          "contactless": true,
+          "fee_breakdown": "Duplicate Fee: ₹200, Smart Card: ₹200, Total: ₹400",
+          "test_format": "Online Aadhaar e-KYC with UP Police Lost Article Report.",
+          "special_note": "Damaged smart card must be surrendered physically if applicable."
+        },
+        "TN": {
+          "state_name": "Tamil Nadu",
+          "contactless": false,
+          "fee_breakdown": "Duplicate Fee: ₹250, Card Fee: ₹200, Total: ₹450",
+          "test_format": "RTO counter document submission required.",
+          "special_note": "Non-traceable certificate from Inspector of Police required if lost."
+        },
+        "TS": {
+          "state_name": "Telangana",
+          "contactless": true,
+          "fee_breakdown": "Duplicate Fee: ₹200, Card Fee: ₹200, Total: ₹400",
+          "test_format": "Online RTA portal Aadhaar authentication.",
+          "special_note": "Telangana Police HawkEye lost report accepted online."
+        },
+        "GJ": {
+          "state_name": "Gujarat",
+          "contactless": true,
+          "fee_breakdown": "Duplicate Fee: ₹200, Card Fee: ₹150, Total: ₹350",
+          "test_format": "Digital Gujarat portal contactless submission.",
+          "special_note": "Gujarat e-Cop report reference number verified automatically."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Police FIR / Lost Report Copy (or Damaged Smart Card)",
+            "Form 26 (Application for Duplicate Certificate of Registration / License)",
+            "Aadhaar Card / ID Proof",
+            "Valid Insurance & PUC Certificate (for RC duplicate)"
+          ],
+          "additional_notes": "Ensure vehicle chassis number matches existing Vahan records exactly."
+        },
+        "Senior": {
+          "documents": [
+            "Police FIR Copy / Damaged Smart Card",
+            "Form 26 & Form 1A Medical Certificate (if DL renewal due)",
+            "Aadhaar Card"
+          ],
+          "additional_notes": "Priority counter processing at physical RTO desks."
+        },
+        "Commercial": {
+          "documents": [
+            "Police Lost FIR Report",
+            "Form 26 signed by Financier/Bank (if vehicle under loan)",
+            "Commercial Permit & Fitness Certificate copy",
+            "Tax Clearance Certificate"
+          ],
+          "additional_notes": "Bank clearance required if vehicle has active hypothecation."
+        }
+      },
+      "faqs": [
+        {
+          "question": "Can I drive while my application for Duplicate DL is under processing?",
+          "answer": "Yes, you can carry the official Parivahan Application Acknowledgement receipt and a digital copy stored on DigiLocker or mParivahan mobile app."
+        },
+        {
+          "question": "What should I do if my lost DL/RC is found after applying for duplicate?",
+          "answer": "Surrender the old recovered card to your local RTO to prevent unauthorized duplicate usage and keep your record updated."
+        }
+      ]
+    },
+    {
+      "id": "international_driving_permit",
+      "name": "International Driving Permit (IDP)",
+      "category": "Driving License Services",
+      "description": "Official legal document issued to permanent Indian driving license holders allowing them to drive motor vehicles in foreign countries adhering to the 1949 Geneva Road Traffic Convention.",
+      "prerequisites": "Must hold a valid Permanent Indian Driving License, valid Passport, and active overseas Travel Visa / Air Ticket.",
+      "common_steps": [
+        "Log in to Sarathi Parivahan portal and select 'Apply for International Driving Permit (IDP)'.",
+        "Enter permanent Indian DL number and Date of Birth.",
+        "Upload valid Passport copy (with visa page or travel ticket).",
+        "Upload Form 1A (Medical Certificate signed by registered MBBS doctor).",
+        "Upload valid Indian Driving License copy and recent passport-size photos.",
+        "Pay IDP application fee online (₹1,000 fixed national fee).",
+        "Book slot for physical verification at local RTO (or submit via Aadhaar e-KYC where enabled).",
+        "Collect printed IDP booklet from RTO."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Postal/Handling Charges: ₹50, Total: ₹1,050",
+          "test_format": "Online application + physical document verification at Zonal RTO Office.",
+          "special_note": "Passport address must match or be verified against Indian DL details."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "IDP Statutory Fee: ₹1,000, Postal Fee: ₹50, Total: ₹1,050",
+          "test_format": "Physical document audit & original passport inspection at RTO counter.",
+          "special_note": "Original passport and valid visa copy must be presented during verification."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "IDP Statutory Fee: ₹1,000, User Fee: ₹100, Total: ₹1,100",
+          "test_format": "Online slot booking for physical document verification at RTO.",
+          "special_note": "IDP issued for countries signatory to the 1949 Geneva Convention."
+        },
+        "UP": {
+          "state_name": "Uttar Pradesh",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Total: ₹1,000",
+          "test_format": "Online filing + physical passport verification at RTO.",
+          "special_note": "Form 1A medical certificate mandatory for all age groups."
+        },
+        "TN": {
+          "state_name": "Tamil Nadu",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Handling: ₹50, Total: ₹1,050",
+          "test_format": "RTO counter document submission required.",
+          "special_note": "Visa and flight ticket copy mandatory."
+        },
+        "TS": {
+          "state_name": "Telangana",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Service Fee: ₹100, Total: ₹1,100",
+          "test_format": "Online filing + physical verification at RTA counter.",
+          "special_note": "Original passport inspection compulsory."
+        },
+        "GJ": {
+          "state_name": "Gujarat",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Total: ₹1,000",
+          "test_format": "Digital Gujarat application + RTO verification.",
+          "special_note": "Valid for 1 year from date of issue."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Valid Permanent Indian Driving License",
+            "Valid Indian Passport (with minimum 6 months validity remaining)",
+            "Valid Visa / Entry Permit for destination country",
+            "Confirmed Air Ticket / Flight Reservation copy",
+            "Form 1A (Medical Certificate signed by a registered MBBS Doctor)",
+            "3 passport-sized photographs (35mm x 45mm)"
+          ],
+          "additional_notes": "IDP is issued with a maximum validity of 1 year or DL expiry, whichever is earlier."
+        }
+      },
+      "faqs": [
+        {
+          "question": "Can an International Driving Permit (IDP) be renewed from outside India?",
+          "answer": "MoRTH has introduced a provision allowing Indian citizens abroad to apply for IDP renewal through official Indian Embassy / Consulate portals, which forward verified requests to home RTOs on Parivahan."
+        },
+        {
+          "question": "Do I need a separate driving test for getting an International Driving Permit?",
+          "answer": "No separate driving test is required, provided you hold an active permanent Indian Driving License for the respective vehicle class."
+        }
+      ]
+    },
+    {
       "id": "ownership_transfer",
       "name": "Vehicle Ownership Transfer",
       "category": "Vehicle Registration Services",
@@ -404,112 +601,6 @@
         {
           "question": "Do I need a new Smart Card when updating my address?",
           "answer": "Yes. Once the address change is approved, a fresh smart card embedded with updated microchip data is issued and posted to your new address."
-        }
-      ]
-    },
-    {
-      "id": "duplicate_dl_rc",
-      "name": "Issue of Duplicate Driving License / Vehicle RC",
-      "category": "Driving License & Vehicle Services",
-      "description": "Service to re-issue a duplicate Driving License or Vehicle Registration Certificate in the event of loss, theft, tearing, or physical damage.",
-      "prerequisites": "Must have an existing registered DL or RC record in Parivahan database and an FIR/Police Acknowledgement report for lost items.",
-      "common_steps": [
-        "File an online Police FIR / Lost Article Report detailing lost DL/RC number.",
-        "Access Sarathi (for DL) or Vahan (for RC) portal on parivahan.gov.in.",
-        "Select 'Apply for Duplicate DL/RC' and enter DL/Vehicle registration number.",
-        "Upload Police FIR copy, Form 26 (Application for Duplicate RC/DL), and ID proof.",
-        "In case of damaged card, upload photo of torn/damaged physical smart card.",
-        "Pay application fee and smart card issue charges online.",
-        "Book slot for document verification at RTO (or submit via Aadhaar e-KYC where contactless is enabled).",
-        "Receive duplicate smart card via registered speed post."
-      ],
-      "state_variations": {
-        "DL": {
-          "state_name": "Delhi",
-          "contactless": true,
-          "fee_breakdown": "Duplicate DL/RC Fee: ₹200, Smart Card Fee: ₹200, Total: ₹400",
-          "test_format": "Contactless e-KYC using Aadhaar and online Delhi Police e-FIR copy upload.",
-          "special_note": "Delhi Police e-FIR report reference number must be verified online."
-        },
-        "MH": {
-          "state_name": "Maharashtra",
-          "contactless": false,
-          "fee_breakdown": "Duplicate Fee: ₹200, Smart Card: ₹200, Postal Fee: ₹50, Total: ₹450",
-          "test_format": "Online application + physical submission of FIR copy at local RTO.",
-          "special_note": "Requires physical FIR copy stamped by local Maharashtra police station."
-        },
-        "KA": {
-          "state_name": "Karnataka",
-          "contactless": false,
-          "fee_breakdown": "Duplicate Fee: ₹150, Smart Card Fee: ₹137, Total: ₹287",
-          "test_format": "Online application with slot booking for verification.",
-          "special_note": "E-Lost report from Karnataka Police portal (KSP app) is accepted."
-        },
-        "UP": {
-          "state_name": "Uttar Pradesh",
-          "contactless": true,
-          "fee_breakdown": "Duplicate Fee: ₹200, Smart Card: ₹200, Total: ₹400",
-          "test_format": "Online Aadhaar e-KYC with UP Police Lost Article Report.",
-          "special_note": "Damaged smart card must be surrendered physically if applicable."
-        },
-        "TN": {
-          "state_name": "Tamil Nadu",
-          "contactless": false,
-          "fee_breakdown": "Duplicate Fee: ₹250, Card Fee: ₹200, Total: ₹450",
-          "test_format": "RTO counter document submission required.",
-          "special_note": "Non-traceable certificate from Inspector of Police required if lost."
-        },
-        "TS": {
-          "state_name": "Telangana",
-          "contactless": true,
-          "fee_breakdown": "Duplicate Fee: ₹200, Card Fee: ₹200, Total: ₹400",
-          "test_format": "Online RTA portal Aadhaar authentication.",
-          "special_note": "Telangana Police HawkEye lost report accepted online."
-        },
-        "GJ": {
-          "state_name": "Gujarat",
-          "contactless": true,
-          "fee_breakdown": "Duplicate Fee: ₹200, Card Fee: ₹150, Total: ₹350",
-          "test_format": "Digital Gujarat portal contactless submission.",
-          "special_note": "Gujarat e-Cop report reference number verified automatically."
-        }
-      },
-      "applicant_requirements": {
-        "General": {
-          "documents": [
-            "Police FIR / Lost Report Copy (or Damaged Smart Card)",
-            "Form 26 (Application for Duplicate Certificate of Registration / License)",
-            "Aadhaar Card / ID Proof",
-            "Valid Insurance & PUC Certificate (for RC duplicate)"
-          ],
-          "additional_notes": "Ensure vehicle chassis number matches existing Vahan records exactly."
-        },
-        "Senior": {
-          "documents": [
-            "Police FIR Copy / Damaged Smart Card",
-            "Form 26 & Form 1A Medical Certificate (if DL renewal due)",
-            "Aadhaar Card"
-          ],
-          "additional_notes": "Priority counter processing at physical RTO desks."
-        },
-        "Commercial": {
-          "documents": [
-            "Police Lost FIR Report",
-            "Form 26 signed by Financier/Bank (if vehicle under loan)",
-            "Commercial Permit & Fitness Certificate copy",
-            "Tax Clearance Certificate"
-          ],
-          "additional_notes": "Bank clearance required if vehicle has active hypothecation."
-        }
-      },
-      "faqs": [
-        {
-          "question": "Can I drive while my application for Duplicate DL is under processing?",
-          "answer": "Yes, you can carry the official Parivahan Application Acknowledgement receipt and a digital copy stored on DigiLocker or mParivahan mobile app."
-        },
-        {
-          "question": "What should I do if my lost DL/RC is found after applying for duplicate?",
-          "answer": "Surrender the old recovered card to your local RTO to prevent unauthorized duplicate usage and keep your record updated."
         }
       ]
     },
@@ -708,97 +799,6 @@
       ]
     },
     {
-      "id": "international_driving_permit",
-      "name": "International Driving Permit (IDP)",
-      "category": "Driving License Services",
-      "description": "Official legal document issued to permanent Indian driving license holders allowing them to drive motor vehicles in foreign countries adhering to the 1949 Geneva Road Traffic Convention.",
-      "prerequisites": "Must hold a valid Permanent Indian Driving License, valid Passport, and active overseas Travel Visa / Air Ticket.",
-      "common_steps": [
-        "Log in to Sarathi Parivahan portal and select 'Apply for International Driving Permit (IDP)'.",
-        "Enter permanent Indian DL number and Date of Birth.",
-        "Upload valid Passport copy (with visa page or travel ticket).",
-        "Upload Form 1A (Medical Certificate signed by registered MBBS doctor).",
-        "Upload valid Indian Driving License copy and recent passport-size photos.",
-        "Pay IDP application fee online (₹1,000 fixed national fee).",
-        "Book slot for physical verification at local RTO (or submit via Aadhaar e-KYC where enabled).",
-        "Collect printed IDP booklet from RTO."
-      ],
-      "state_variations": {
-        "DL": {
-          "state_name": "Delhi",
-          "contactless": false,
-          "fee_breakdown": "IDP Fee: ₹1,000, Postal/Handling Charges: ₹50, Total: ₹1,050",
-          "test_format": "Online application + physical document verification at Zonal RTO Office.",
-          "special_note": "Passport address must match or be verified against Indian DL details."
-        },
-        "MH": {
-          "state_name": "Maharashtra",
-          "contactless": false,
-          "fee_breakdown": "IDP Statutory Fee: ₹1,000, Postal Fee: ₹50, Total: ₹1,050",
-          "test_format": "Physical document audit & original passport inspection at RTO counter.",
-          "special_note": "Original passport and valid visa copy must be presented during verification."
-        },
-        "KA": {
-          "state_name": "Karnataka",
-          "contactless": false,
-          "fee_breakdown": "IDP Statutory Fee: ₹1,000, User Fee: ₹100, Total: ₹1,100",
-          "test_format": "Online slot booking for physical document verification at RTO.",
-          "special_note": "IDP issued for countries signatory to the 1949 Geneva Convention."
-        },
-        "UP": {
-          "state_name": "Uttar Pradesh",
-          "contactless": false,
-          "fee_breakdown": "IDP Fee: ₹1,000, Total: ₹1,000",
-          "test_format": "Online filing + physical passport verification at RTO.",
-          "special_note": "Form 1A medical certificate mandatory for all age groups."
-        },
-        "TN": {
-          "state_name": "Tamil Nadu",
-          "contactless": false,
-          "fee_breakdown": "IDP Fee: ₹1,000, Handling: ₹50, Total: ₹1,050",
-          "test_format": "RTO counter document submission required.",
-          "special_note": "Visa and flight ticket copy mandatory."
-        },
-        "TS": {
-          "state_name": "Telangana",
-          "contactless": false,
-          "fee_breakdown": "IDP Fee: ₹1,000, Service Fee: ₹100, Total: ₹1,100",
-          "test_format": "Online filing + physical verification at RTA counter.",
-          "special_note": "Original passport inspection compulsory."
-        },
-        "GJ": {
-          "state_name": "Gujarat",
-          "contactless": false,
-          "fee_breakdown": "IDP Fee: ₹1,000, Total: ₹1,000",
-          "test_format": "Digital Gujarat application + RTO verification.",
-          "special_note": "Valid for 1 year from date of issue."
-        }
-      },
-      "applicant_requirements": {
-        "General": {
-          "documents": [
-            "Valid Permanent Indian Driving License",
-            "Valid Indian Passport (with minimum 6 months validity remaining)",
-            "Valid Visa / Entry Permit for destination country",
-            "Confirmed Air Ticket / Flight Reservation copy",
-            "Form 1A (Medical Certificate signed by a registered MBBS Doctor)",
-            "3 passport-sized photographs (35mm x 45mm)"
-          ],
-          "additional_notes": "IDP is issued with a maximum validity of 1 year or DL expiry, whichever is earlier."
-        }
-      },
-      "faqs": [
-        {
-          "question": "Can an International Driving Permit (IDP) be renewed from outside India?",
-          "answer": "MoRTH has introduced a provision allowing Indian citizens abroad to apply for IDP renewal through official Indian Embassy / Consulate portals, which forward verified requests to home RTOs on Parivahan."
-        },
-        {
-          "question": "Do I need a separate driving test for getting an International Driving Permit?",
-          "answer": "No separate driving test is required, provided you hold an active permanent Indian Driving License for the respective vehicle class."
-        }
-      ]
-    },
-    {
       "id": "fitness_certificate",
       "name": "Vehicle Fitness Certificate & Renewal",
       "category": "Vehicle Registration & Transfer",
@@ -890,44 +890,9 @@
   ],
   "general_faqs": [
     {
-      "category": "E-Challan",
-      "question": "How do I check and pay my pending traffic challans?",
-      "answer": "You can check pending traffic challans online via the official Echallan Parivahan website (echallan.parivahan.gov.in) by entering your vehicle registration number, chassis number, or license number. Payments can be made online via credit card, net banking, or UPI through the portal."
-    },
-    {
-      "category": "E-Challan",
-      "question": "What is a Lok Adalat and how can it help with traffic challans?",
-      "answer": "Lok Adalat is an alternative dispute redressal system organized by the government periodically. Pending traffic challans (especially minor ones or those with pending disputes) can often be settled or waived at massive discounts (sometimes up to 100% or standard minor fines) by booking a slot and appearing online or physically before the Lok Adalat panel."
-    },
-    {
-      "category": "E-Challan",
-      "question": "What happens if I don't pay a traffic challan for a long time?",
-      "answer": "If a challan remains unpaid, the RTO will block services for your vehicle, such as RC renewal, address change, or ownership transfer. Eventually, the challan is sent to the court, and you may receive a court summons to appear before a magistrate."
-    },
-    {
-      "category": "Appointments",
-      "question": "How do I prepare for my physical visit to the RTO?",
-      "answer": "1. Keep all documents organized in a physical file folder. 2. Print two copies of the slot confirmation slip and fee payment receipt. 3. Carry the original physical documents corresponding to all uploaded scans for verification. 4. Bring the exact vehicle class (along with a DL holder) if appearing for a driving test. 5. Arrive at least 30 minutes before your slot."
-    },
-    {
-      "category": "Grievance",
-      "question": "What should I do if my application is stuck or there is a grievance?",
-      "answer": "You can lodge a complaint online through the national CPGRAMS portal (pgportal.gov.in) or use the specific state transport department's grievance cell. For Parivahan-related technical errors, you can mail helpdesk-vahan@gov.in or helpdesk-sarathi@gov.in with your application number and screenshots."
-    },
-    {
       "category": "Driving Licence",
       "question": "Give me an overview of Driving Licence in India.",
       "answer": "In India, a driving licence is an official document that authorises its holder to operate various types of motor vehicles on highways and some other roads to which the public has access. In various Indian states, they are administered by the Regional Transport Offices/Authorities (RTO/RTA). A driving licence is required in India by any person driving a vehicle on any highway or other road defined in the Motor Vehicles Act, 1988. This act sets limits on the minimum age for vehicle operation ranging from 16 to 20, depending on specific circumstances. A modern photo of the driving licence can also serve many of the purposes of an identity card in non-driving contexts, such as proof of identity (e.g. when opening a bank account) or age (e.g. when applying for a mobile connection). ==Background== Application for a provisional driving licence can be made from the age of 16. Provisional licences allow the holder to drive a moped or gearless motorcycle from age 16, or a motorcycle/scooter with manual transmission, three wheeler, car, or any motor vehicle with a maximum of four wheels and less than 7500 kilograms, from age 18. Licenses issued by one RTO allows the licensee to drive throughout the country. This permits the holder to drive non-transports vehicle (white registration plates with black letters; green registration plates with white letters for electric vehicles) or self-drive vehicles (black registration plates with yellow letters.) For driving commercial vehicles with any tyre count or weight (yellow registration plates with black letters; green registration plates with yellow letters for electric vehicles), one should obtain an endorsement (and a minimum age of 20 years, in some states) in the driving licence to effect under s.3(1) of The Motor Vehicles Act, 1988. U"
-    },
-    {
-      "category": "Vehicle Registration",
-      "question": "Give me an overview of Vehicle Registration in India.",
-      "answer": "Motor vehicle registration is the registration of a motor vehicle with a government authority, either compulsory or otherwise. The purpose of motor vehicle registration is to establish a link between a vehicle and an owner or user of the vehicle. While almost all motor vehicles are uniquely identified by a vehicle identification number, only registered vehicles display a vehicle registration plate and carry a vehicle registration certificate. Motor vehicle registration is different from motor vehicle licensing and roadworthiness certification. new 2022 motor vehicle registration sticker (bottom, foreground) about to be applied to the license plate over the previous 2021 sticker (top, background) Motor vehicles may also be registered with property owners or managers to gain benefits. For example, organisations with parking facilities may require registration of a vehicle with them to allow authorised users to park there. ==Australia== In Australia, all motor vehicles are required to be registered before being driven on public roads. Registration can be with one of the registration authorities set up by each state or territory. These authorities also issue registration plates (commonly known as number plates), which are affixed to the vehicle when it is first registered, and registration certificates for the vehicle. Registration must be renewed annually, with the payment of a fee. A compulsory third party insurance policy is required to renew the vehicle, as well as inspections for older or commercial vehicles. Increasingly, many registration functions can be performed online. Some vehicles are registered with the federal government, e.g. military vehicles or through the Federal Interstate Registration Scheme (FIRS) via state or territory agencies. Registration certific"
-    },
-    {
-      "category": "Vehicle Registration",
-      "question": "Can you explain \"Pakistan\" in the context of Vehicle Registration?",
-      "answer": "In Pakistan, there are three different types of vehicle registration process. The most popular is \"Vehicle verification via SMS Services\" launched by the Excise Department of Pakistan in Punjab and separately in the capital Islamabad in 2013. In Sindh or KPK, new or used vehicles are verified online by the Motor Transport Information Management System (MTMIS) using sites: * * * * There is also doorstep verification of vehicles, especially in Islamabad. The government of Pakistan launched this process of verification."
     },
     {
       "category": "International Driving Permit",
@@ -983,6 +948,56 @@
       "category": "International Driving Permit",
       "question": "Can you explain \"Implementation\" in the context of International Driving Permit?",
       "answer": "The American Association of Motor Vehicle Administrators' provides a standard for the design of driving permits and identification cards issued by its member jurisdictions, which include all 50 US states, the District of Columbia, and Canadian territories and provinces. The newest standard released is the 2025 AAMVA DL/ID Card Design Standard (CDS) which generally follows part 1 and part 2 of ISO/IEC 18013-1 (ISO compliant driving licence)."
+    },
+    {
+      "category": "Driving License Services",
+      "question": "What is the validity of an International Driving Permit (IDP) issued in India?",
+      "answer": "An International Driving Permit (IDP) issued by Indian RTOs is valid for maximum 1 year from the date of issue, or until the expiry of your permanent Indian Driving License, whichever is earlier. It cannot be renewed online while residing abroad."
+    },
+    {
+      "category": "Driving License Services",
+      "question": "Can I drive a commercial transport vehicle with a private Light Motor Vehicle (LMV) license?",
+      "answer": "As per the Supreme Court ruling and CMVR rules, an LMV license holder can drive non-transport cars and light commercial vehicles having unladen weight up to 7,500 kg. However, for heavy transport vehicles or hazardous goods carriers, a specific Transport Badge endorsement is required."
+    },
+    {
+      "category": "Driving License Services",
+      "question": "What medical certificate Form 1A is needed for driving license application or renewal?",
+      "answer": "Form 1A is a physical fitness medical certificate issued and signed by a registered MBBS medical practitioner. It is mandatory for applicants above 40 years of age and for all commercial transport license applicants."
+    },
+    {
+      "category": "E-Challan",
+      "question": "How do I check and pay my pending traffic challans?",
+      "answer": "You can check pending traffic challans online via the official Echallan Parivahan website (echallan.parivahan.gov.in) by entering your vehicle registration number, chassis number, or license number. Payments can be made online via credit card, net banking, or UPI through the portal."
+    },
+    {
+      "category": "E-Challan",
+      "question": "What is a Lok Adalat and how can it help with traffic challans?",
+      "answer": "Lok Adalat is an alternative dispute redressal system organized by the government periodically. Pending traffic challans (especially minor ones or those with pending disputes) can often be settled or waived at massive discounts (sometimes up to 100% or standard minor fines) by booking a slot and appearing online or physically before the Lok Adalat panel."
+    },
+    {
+      "category": "E-Challan",
+      "question": "What happens if I don't pay a traffic challan for a long time?",
+      "answer": "If a challan remains unpaid, the RTO will block services for your vehicle, such as RC renewal, address change, or ownership transfer. Eventually, the challan is sent to the court, and you may receive a court summons to appear before a magistrate."
+    },
+    {
+      "category": "Appointments",
+      "question": "How do I prepare for my physical visit to the RTO?",
+      "answer": "1. Keep all documents organized in a physical file folder. 2. Print two copies of the slot confirmation slip and fee payment receipt. 3. Carry the original physical documents corresponding to all uploaded scans for verification. 4. Bring the exact vehicle class (along with a DL holder) if appearing for a driving test. 5. Arrive at least 30 minutes before your slot."
+    },
+    {
+      "category": "Grievance",
+      "question": "What should I do if my application is stuck or there is a grievance?",
+      "answer": "You can lodge a complaint online through the national CPGRAMS portal (pgportal.gov.in) or use the specific state transport department's grievance cell. For Parivahan-related technical errors, you can mail helpdesk-vahan@gov.in or helpdesk-sarathi@gov.in with your application number and screenshots."
+    },
+    {
+      "category": "Vehicle Registration",
+      "question": "Give me an overview of Vehicle Registration in India.",
+      "answer": "Motor vehicle registration is the registration of a motor vehicle with a government authority, either compulsory or otherwise. The purpose of motor vehicle registration is to establish a link between a vehicle and an owner or user of the vehicle. While almost all motor vehicles are uniquely identified by a vehicle identification number, only registered vehicles display a vehicle registration plate and carry a vehicle registration certificate. Motor vehicle registration is different from motor vehicle licensing and roadworthiness certification. new 2022 motor vehicle registration sticker (bottom, foreground) about to be applied to the license plate over the previous 2021 sticker (top, background) Motor vehicles may also be registered with property owners or managers to gain benefits. For example, organisations with parking facilities may require registration of a vehicle with them to allow authorised users to park there. ==Australia== In Australia, all motor vehicles are required to be registered before being driven on public roads. Registration can be with one of the registration authorities set up by each state or territory. These authorities also issue registration plates (commonly known as number plates), which are affixed to the vehicle when it is first registered, and registration certificates for the vehicle. Registration must be renewed annually, with the payment of a fee. A compulsory third party insurance policy is required to renew the vehicle, as well as inspections for older or commercial vehicles. Increasingly, many registration functions can be performed online. Some vehicles are registered with the federal government, e.g. military vehicles or through the Federal Interstate Registration Scheme (FIRS) via state or territory agencies. Registration certific"
+    },
+    {
+      "category": "Vehicle Registration",
+      "question": "Can you explain \"Pakistan\" in the context of Vehicle Registration?",
+      "answer": "In Pakistan, there are three different types of vehicle registration process. The most popular is \"Vehicle verification via SMS Services\" launched by the Excise Department of Pakistan in Punjab and separately in the capital Islamabad in 2013. In Sindh or KPK, new or used vehicles are verified online by the Motor Transport Information Management System (MTMIS) using sites: * * * * There is also doorstep verification of vehicles, especially in Islamabad. The government of Pakistan launched this process of verification."
     },
     {
       "category": "Legal Framework",
@@ -1338,21 +1353,6 @@
       "category": "Parivahan Technical Support",
       "question": "Why does Aadhaar e-KYC authentication fail during contactless Learner's License test?",
       "answer": "Aadhaar e-KYC face authentication fails if your mobile number is not linked with Aadhaar, if the camera quality is low, or if the photo on Aadhaar is outdated. In case of repeated failures, opt for non-Aadhaar mode and book a physical slot at your local RTO."
-    },
-    {
-      "category": "Driving License Services",
-      "question": "What is the validity of an International Driving Permit (IDP) issued in India?",
-      "answer": "An International Driving Permit (IDP) issued by Indian RTOs is valid for maximum 1 year from the date of issue, or until the expiry of your permanent Indian Driving License, whichever is earlier. It cannot be renewed online while residing abroad."
-    },
-    {
-      "category": "Driving License Services",
-      "question": "Can I drive a commercial transport vehicle with a private Light Motor Vehicle (LMV) license?",
-      "answer": "As per the Supreme Court ruling and CMVR rules, an LMV license holder can drive non-transport cars and light commercial vehicles having unladen weight up to 7,500 kg. However, for heavy transport vehicles or hazardous goods carriers, a specific Transport Badge endorsement is required."
-    },
-    {
-      "category": "Driving License Services",
-      "question": "What medical certificate Form 1A is needed for driving license application or renewal?",
-      "answer": "Form 1A is a physical fitness medical certificate issued and signed by a registered MBBS medical practitioner. It is mandatory for applicants above 40 years of age and for all commercial transport license applicants."
     },
     {
       "category": "Vehicle Registration & Transfer",

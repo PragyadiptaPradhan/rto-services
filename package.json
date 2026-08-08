@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "build:data": "node src/data/build.js",
     "scrape": "node scraper/run.js",
     "scrape:dry": "node scraper/run.js --dry-run"
   },
