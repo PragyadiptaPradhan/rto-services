@@ -28,7 +28,13 @@ export const WizardForm = ({
             <option value="learners_license">Learner's License (LL)</option>
             <option value="driving_license">Permanent Driving License (DL)</option>
             <option value="dl_renewal">Driving License Renewal</option>
-            <option value="ownership_transfer">Vehicle Ownership Transfer</option>
+            <option value="rc_transfer">Vehicle Ownership Transfer</option>
+            <option value="change_of_address">Change of Address in DL / RC</option>
+            <option value="duplicate_dl_rc">Duplicate DL / Vehicle RC Issue</option>
+            <option value="noc_issue">No Objection Certificate (NOC)</option>
+            <option value="hypothecation_cancellation">Hypothecation Deletion / Addition</option>
+            <option value="international_driving_permit">International Driving Permit (IDP)</option>
+            <option value="fitness_certificate">Vehicle Fitness Certificate & Renewal</option>
           </select>
         </div>
 
@@ -43,6 +49,10 @@ export const WizardForm = ({
             <option value="DL">Delhi (DL)</option>
             <option value="MH">Maharashtra (MH)</option>
             <option value="KA">Karnataka (KA)</option>
+            <option value="UP">Uttar Pradesh (UP)</option>
+            <option value="TN">Tamil Nadu (TN)</option>
+            <option value="TS">Telangana (TS)</option>
+            <option value="GJ">Gujarat (GJ)</option>
           </select>
         </div>
 
@@ -57,6 +67,7 @@ export const WizardForm = ({
             <option value="General">General Applicant</option>
             <option value="Under18">Under 18 Years (Non-geared up to 50cc)</option>
             <option value="Senior">Senior Citizen (Age 40+ with medical form)</option>
+            <option value="Commercial">Commercial / Transport Drivers</option>
           </select>
         </div>
 

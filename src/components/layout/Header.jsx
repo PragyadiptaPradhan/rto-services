@@ -36,6 +36,10 @@ export const Header = ({
             <option value="DL">Delhi (DL)</option>
             <option value="MH">Maharashtra (MH)</option>
             <option value="KA">Karnataka (KA)</option>
+            <option value="UP">Uttar Pradesh (UP)</option>
+            <option value="TN">Tamil Nadu (TN)</option>
+            <option value="TS">Telangana (TS)</option>
+            <option value="GJ">Gujarat (GJ)</option>
           </select>
         </div>
 
