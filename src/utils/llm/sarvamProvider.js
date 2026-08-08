@@ -17,7 +17,7 @@ export class SarvamProvider extends BaseLLMProvider {
       
     this.apiKey = config.apiKey || config.apiSubscriptionKey || envKey || null;
     this.baseURL = config.baseURL || "https://api.sarvam.ai/v1";
-    this.modelName = config.modelName || "sarvam-30b";
+    this.modelName = config.modelName || "sarvam-105b";
   }
 
   /**
