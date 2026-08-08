@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import rtoDatabase from './data/index.js';
 import { RAGEngine } from './utils/ragEngine';
 import { IntelligenceEngine } from './utils/intelligenceEngine';
+import { AudioRecorder } from './utils/stt/audioRecorder.js';
+import { SarvamSttService } from './utils/stt/sarvamSttService.js';
 
 // Shared Layout Components
 import Sidebar from './components/layout/Sidebar';
@@ -32,10 +34,22 @@ function App() {
   const [queryInput, setQueryInput] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
   
-  // Voice Simulation States
+  // Voice & STT States
   const [isRecording, setIsRecording] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [speakingText, setSpeakingText] = useState('');
+
+  // STT Service & Audio Recorder References
+  const audioRecorderRef = useRef(null);
+  const sarvamSttRef = useRef(null);
+
+  if (!audioRecorderRef.current) {
+    audioRecorderRef.current = new AudioRecorder();
+  }
+  if (!sarvamSttRef.current) {
+    sarvamSttRef.current = new SarvamSttService();
+  }
   
   // Pipeline & RAG Details
   const [pipelineData, setPipelineData] = useState(null);
@@ -131,8 +145,8 @@ function App() {
     setChatMessages(prev => [...prev, userMsg]);
     setQueryInput('');
     
-    // Simulate thinking...
-    setTimeout(() => {
+    // Simulate thinking & execute async LLM provider (Sarvam AI / Local Fallback)
+    setTimeout(async () => {
       const stateNames = {
         DL: 'Delhi',
         MH: 'Maharashtra',
@@ -151,7 +165,7 @@ function App() {
         language
       };
       
-      const result = intelEngine.generate(query, ctx);
+      const result = await intelEngine.generateAsync(query, ctx);
       
       // Update Pipeline Inspector data
       setPipelineData({
@@ -186,28 +200,58 @@ function App() {
     }, 600);
   };
 
-  // Mock voice commands (Saaras simulator)
-  const triggerVoiceRecording = () => {
-    if (isRecording) {
-      setIsRecording(false);
+  // Real Microphone Recording & Sarvam Speech-to-Text (STT) Integration
+  const triggerVoiceRecording = async () => {
+    // If currently recording, stop recording and send audio to Sarvam STT
+    if (audioRecorderRef.current && audioRecorderRef.current.isRecording()) {
+      try {
+        setIsRecording(false);
+        setIsTranscribing(true);
+        
+        const audioBlob = await audioRecorderRef.current.stop();
+        
+        // Transcribe audio using Sarvam STT Service (saaras:v3)
+        if (sarvamSttRef.current && sarvamSttRef.current.isAvailable()) {
+          const sttResult = await sarvamSttRef.current.transcribeAudio(audioBlob, {
+            model: "saaras:v3",
+            language_code: language === 'hi' ? 'hi-IN' : 'unknown'
+          });
+          
+          if (sttResult && sttResult.transcript) {
+            setQueryInput(sttResult.transcript);
+          } else {
+            console.warn("Sarvam STT returned empty transcript.");
+          }
+        } else {
+          console.warn("Sarvam STT API Key not configured. Using fallback simulation.");
+          let voiceText = language === 'hi' ? 'दिल्ली में लर्नर लाइसेंस का टेस्ट कैसे पास करें?' : 'How do I renew my license after it expires?';
+          setQueryInput(voiceText);
+        }
+      } catch (err) {
+        console.error("Voice recording / STT transcription error:", err.message);
+        alert(`Voice Transcription Error: ${err.message}`);
+      } finally {
+        setIsRecording(false);
+        setIsTranscribing(false);
+      }
       return;
     }
 
-    setIsRecording(true);
-    setIsSpeaking(false);
-    
-    setTimeout(() => {
-      let voiceText = '';
-      if (language === 'hi') {
-        voiceText = 'दिल्ली में लर्नर लाइसेंस का टेस्ट कैसे पास करें?';
-      } else if (language === 'hinglish') {
-        voiceText = 'MH me ownership transfer ki papers kya lagti hai?';
-      } else {
-        voiceText = 'How do I renew my license after it expires?';
-      }
-      setQueryInput(voiceText);
-      setIsRecording(false);
-    }, 2500);
+    // Start Recording from Browser Microphone
+    try {
+      setIsSpeaking(false);
+      await audioRecorderRef.current.start();
+      setIsRecording(true);
+    } catch (err) {
+      console.warn("Could not start microphone recording:", err.message);
+      // Fallback for non-microphone / blocked environment
+      setIsRecording(true);
+      setTimeout(() => {
+        let voiceText = language === 'hi' ? 'दिल्ली में लर्नर लाइसेंस का टेस्ट कैसे पास करें?' : 'How do I renew my license after it expires?';
+        setQueryInput(voiceText);
+        setIsRecording(false);
+      }, 2000);
+    }
   };
 
   // Mock TTS speaker (Bulbul simulator)
@@ -317,6 +361,7 @@ function App() {
             handleSendMessage={handleSendMessage}
             triggerVoiceRecording={triggerVoiceRecording}
             isRecording={isRecording}
+            isTranscribing={isTranscribing}
             isSpeaking={isSpeaking}
             speakingText={speakingText}
             handleFeedback={handleFeedback}

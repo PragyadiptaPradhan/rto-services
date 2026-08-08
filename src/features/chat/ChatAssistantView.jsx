@@ -13,6 +13,7 @@ export const ChatAssistantView = ({
   handleSendMessage,
   triggerVoiceRecording,
   isRecording,
+  isTranscribing,
   isSpeaking,
   speakingText,
   handleFeedback,
@@ -30,6 +31,7 @@ export const ChatAssistantView = ({
         handleSendMessage={handleSendMessage}
         triggerVoiceRecording={triggerVoiceRecording}
         isRecording={isRecording}
+        isTranscribing={isTranscribing}
         isSpeaking={isSpeaking}
         speakingText={speakingText}
         handleFeedback={handleFeedback}

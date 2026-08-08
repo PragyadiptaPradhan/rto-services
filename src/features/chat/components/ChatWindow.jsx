@@ -11,6 +11,7 @@ export const ChatWindow = ({
   handleSendMessage,
   triggerVoiceRecording,
   isRecording,
+  isTranscribing,
   isSpeaking,
   speakingText,
   handleFeedback
@@ -24,15 +25,19 @@ export const ChatWindow = ({
           <span className="badge-live">Online Guidance</span>
         </div>
         
-        {/* Voice Simulators Indicators */}
+        {/* Voice Indicators & Buttons */}
         <div style={{ display: 'flex', gap: '12px' }}>
           <button 
             onClick={triggerVoiceRecording} 
-            className={`nav-link ${isRecording ? 'active' : ''}`}
+            disabled={isTranscribing}
+            className={`nav-link ${isRecording || isTranscribing ? 'active' : ''}`}
             style={{ padding: '6px 12px', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--border-light)' }}
+            title="Click to speak your RTO query via Sarvam STT"
           >
-            <Mic size={14} className={isRecording ? "text-red-400 animate-pulse" : "text-gray-400"} />
-            <span>{isRecording ? "Listening (Saaras)..." : "Voice Query"}</span>
+            <Mic size={14} className={isRecording ? "text-red-400 animate-pulse" : isTranscribing ? "text-cyan-400 animate-spin" : "text-gray-400"} />
+            <span>
+              {isRecording ? "Stop & Transcribe (Recording...)" : isTranscribing ? "Transcribing (Sarvam Saaras)..." : "Voice Query (Mic)"}
+            </span>
           </button>
 
           {isSpeaking && (
@@ -140,6 +145,15 @@ export const ChatWindow = ({
           onChange={(e) => setQueryInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
         />
+        <button 
+          className={`action-btn ${isRecording ? 'recording' : ''}`}
+          onClick={triggerVoiceRecording}
+          disabled={isTranscribing}
+          title={isRecording ? "Stop & Transcribe Audio" : "Record Voice via Sarvam STT"}
+          style={{ background: isRecording ? 'rgba(239, 68, 68, 0.2)' : 'rgba(255, 255, 255, 0.05)', color: isRecording ? '#ef4444' : 'var(--text-muted)', border: '1px solid var(--border-light)' }}
+        >
+          <Mic size={18} className={isRecording ? "animate-pulse" : ""} />
+        </button>
         <button className="action-btn" onClick={() => handleSendMessage()}>
           <Send size={18} />
         </button>
