@@ -15,19 +15,21 @@ export const Header = ({
   return (
     <header className="top-bar">
       <div>
-        <h2 className="gradient-text" style={{ fontSize: '20px', fontWeight: 'bold' }}>
+        <h2 className="gradient-text" style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-dark)' }}>
           {activeTab === 'chat' && "Conversational AI Assistant"}
           {activeTab === 'wizard' && "State & Category Step Builder"}
           {activeTab === 'compare' && "State-by-State Comparison Matrix"}
           {activeTab === 'inspector' && "5-Layer Dev Inspector"}
           {activeTab === 'analytics' && "Helpdesk Insights & Analytics"}
         </h2>
-        <p className="context-label">Setup context variables below to personalize the AI engine dynamically</p>
+        <p className="context-label" style={{ marginTop: '2px' }}>
+          Select context parameters below to personalize the AI engine dynamically
+        </p>
       </div>
 
       <div className="context-pill-group">
         <div className="context-select-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <MapPin size={14} className="text-indigo-400" />
+          <MapPin size={15} style={{ color: '#d97706' }} />
           <select 
             className="context-select" 
             value={stateCode} 
@@ -64,7 +66,7 @@ export const Header = ({
         </select>
 
         <div className="context-select-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Globe2 size={14} className="text-cyan-400" />
+          <Globe2 size={15} style={{ color: '#059669' }} />
           <select 
             className="context-select" 
             value={language} 

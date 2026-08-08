@@ -11,8 +11,8 @@ export const WizardForm = ({
   handleGenerateWizardChecklist
 }) => {
   return (
-    <div className="glass-panel" style={{ padding: '24px', height: 'fit-content' }}>
-      <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: '600', marginBottom: '16px', color: 'var(--secondary)' }}>
+    <div className="glass-panel" style={{ padding: '24px', height: 'fit-content', background: '#ffffff' }}>
+      <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: '700', marginBottom: '16px', color: 'var(--text-dark)' }}>
         Step Builder Configuration
       </h3>
       

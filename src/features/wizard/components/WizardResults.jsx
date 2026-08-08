@@ -9,27 +9,27 @@ export const WizardResults = ({
   toggleChecklistItem
 }) => {
   return (
-    <div className="glass-panel" style={{ padding: '24px', overflowY: 'auto' }}>
+    <div className="glass-panel" style={{ padding: '24px', overflowY: 'auto', background: '#ffffff' }}>
       {!wizardResult ? (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)' }}>
-          <CheckSquare size={48} style={{ opacity: 0.3, marginBottom: '12px' }} />
-          <p>Configure details on the left and click **Build Steps & Checklists** to generate your customized RTO preparation map.</p>
+          <CheckSquare size={48} style={{ opacity: 0.25, marginBottom: '12px', color: '#64748b' }} />
+          <p>Configure details on the left and click <strong>Build Steps & Checklists</strong> to generate your customized RTO preparation map.</p>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div style={{ borderBottom: '1px solid var(--border-light)', paddingBottom: '12px' }}>
-            <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--primary)', fontWeight: 'bold' }}>Grounded Output Map</span>
-            <h2 style={{ fontSize: '22px', fontWeight: '700' }}>{wizardResult.serviceName} Roadmap</h2>
+            <span style={{ fontSize: '11px', textTransform: 'uppercase', color: '#059669', fontWeight: '800', letterSpacing: '0.5px' }}>Grounded Output Map</span>
+            <h2 style={{ fontSize: '22px', fontWeight: '800', color: 'var(--text-dark)' }}>{wizardResult.serviceName} Roadmap</h2>
             <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
               Personalized for <strong>{stateCode === 'DL' ? 'Delhi' : stateCode === 'MH' ? 'Maharashtra' : 'Karnataka'}</strong> | <strong>{applicantType}</strong> Category
             </p>
           </div>
 
-          {/* Warning alert */}
-          <div style={{ background: 'rgba(245, 158, 11, 0.08)', border: '1px solid rgba(245, 158, 11, 0.2)', padding: '12px 16px', borderRadius: '8px', fontSize: '12px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-            <AlertTriangle size={18} className="text-amber-500" style={{ flexShrink: 0, marginTop: '2px' }} />
+          {/* Warning alert: Soft pastel yellow alert */}
+          <div style={{ background: '#fffbeb', border: '1px solid #fef08a', padding: '12px 16px', borderRadius: '10px', fontSize: '12.5px', color: '#92400e', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+            <AlertTriangle size={18} style={{ color: '#d97706', flexShrink: 0, marginTop: '2px' }} />
             <div>
-              <strong>Guidance Disclaimer:</strong> This list has been generated dynamically based on official guidance sources. Always check details on the official <a href="https://parivahan.gov.in" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--secondary)', textDecoration: 'underline' }}>Sarathi / Vahan Portal</a> before payment.
+              <strong>Guidance Disclaimer:</strong> This list has been generated dynamically based on official guidance sources. Always check details on the official <a href="https://parivahan.gov.in" target="_blank" rel="noopener noreferrer" style={{ color: '#0284c7', textDecoration: 'underline', fontWeight: '600' }}>Sarathi / Vahan Portal</a> before payment.
             </div>
           </div>
 
@@ -43,7 +43,15 @@ export const WizardResults = ({
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {wizardResult.rawRequirements.map((doc, idx) => (
-                  <div key={idx} className="checklist-card" style={{ padding: '12px', background: checklistItems[doc] ? 'rgba(16, 185, 129, 0.05)' : 'rgba(255,255,255,0.01)' }}>
+                  <div 
+                    key={idx} 
+                    className="checklist-card" 
+                    style={{ 
+                      padding: '12px 14px', 
+                      background: checklistItems[doc] ? '#f0fdf4' : '#ffffff',
+                      borderColor: checklistItems[doc] ? '#bbf7d0' : 'var(--border-light)'
+                    }}
+                  >
                     <label className="checklist-item" style={{ fontSize: '13px', fontWeight: '500' }}>
                       <input 
                         type="checkbox" 
@@ -51,7 +59,7 @@ export const WizardResults = ({
                         onChange={() => toggleChecklistItem(doc)}
                         style={{ width: '16px', height: '16px' }}
                       />
-                      <span style={{ color: checklistItems[doc] ? 'var(--text-muted)' : 'var(--text-primary)' }}>
+                      <span style={{ color: checklistItems[doc] ? '#166534' : 'var(--text-primary)' }}>
                         {doc}
                       </span>
                     </label>
@@ -60,7 +68,7 @@ export const WizardResults = ({
               </div>
 
               {wizardResult.requirementsNote && (
-                <div style={{ fontSize: '11px', color: 'var(--text-muted)', background: 'rgba(255,255,255,0.02)', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
+                <div style={{ fontSize: '11.5px', color: 'var(--text-muted)', background: '#f8fafc', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--border-light)' }}>
                   <strong>Note:</strong> {wizardResult.requirementsNote}
                 </div>
               )}
@@ -74,8 +82,8 @@ export const WizardResults = ({
 
               {/* State Specific Rule Callout */}
               {wizardResult.stateNotes && (
-                <div style={{ background: 'rgba(99, 102, 241, 0.08)', border: '1px solid rgba(99, 102, 241, 0.2)', padding: '12px 16px', borderRadius: '8px', fontSize: '13px' }}>
-                  <span style={{ fontWeight: 'bold', color: 'var(--primary)', display: 'block', marginBottom: '4px' }}>
+                <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', padding: '12px 16px', borderRadius: '10px', fontSize: '13px', color: '#166534' }}>
+                  <span style={{ fontWeight: '800', color: '#15803d', display: 'block', marginBottom: '6px' }}>
                     📍 {wizardResult.stateNotes.state_name} Jurisdiction Info:
                   </span>
                   <ul style={{ paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -94,19 +102,19 @@ export const WizardResults = ({
                       width: '24px', 
                       height: '24px', 
                       borderRadius: '50%', 
-                      background: 'var(--primary-glow)', 
-                      border: '1px solid var(--primary)', 
-                      color: 'var(--text-primary)',
+                      background: '#fef08a', 
+                      border: '1px solid #facc15', 
+                      color: '#1e293b',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontSize: '11px',
-                      fontWeight: 'bold',
+                      fontWeight: '800',
                       flexShrink: 0
                     }}>
                       {idx + 1}
                     </div>
-                    <div style={{ fontSize: '13px', paddingTop: '3px' }}>
+                    <div style={{ fontSize: '13.5px', paddingTop: '2px', color: 'var(--text-primary)' }}>
                       {step}
                     </div>
                   </div>
