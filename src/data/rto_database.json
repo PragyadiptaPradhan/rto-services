@@ -1,0 +1,324 @@
+{
+  "metadata": {
+    "project": "Transport and RTO Services AI Guidance Prototype",
+    "version": "1.0.0",
+    "states_supported": ["DL", "MH", "KA"],
+    "source_scope": "Public standard guidelines (MORTH / Parivahan Sewa 2026) - Mock Status for fee variations"
+  },
+  "services": [
+    {
+      "id": "learners_license",
+      "name": "Learner's License (LL) Application",
+      "category": "Driving License Services",
+      "description": "Initial temporary license valid for 6 months, allowing candidates to practice driving under the supervision of a permanent DL holder.",
+      "prerequisites": "Minimum age of 16 for non-geared motorcycle (<50cc) with parental consent; 18 for light motor vehicles (cars/geared motorcycles).",
+      "common_steps": [
+        "Fill LL application form online on Sarathi Parivahan portal.",
+        "Upload required documents (Age proof, Address proof, Photo, and Signature).",
+        "Upload Form 1 (Physical Fitness Self-Declaration). For applicants < 18, upload parent consent form.",
+        "Pay the application fee online.",
+        "Book a slot for the Learner's License Test (if applicable in the state).",
+        "Take the computer-based/online test covering traffic signs, rules of the road, and safety guidelines. Score minimum 60% to pass.",
+        "Download and print the digital LL instantly upon passing."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": true,
+          "fee_breakdown": "Application Fee: ₹150, Test Fee: ₹50, Total: ₹200",
+          "test_format": "Contactless Online Test from home (using Aadhaar e-KYC face authentication). No RTO visit needed.",
+          "special_note": "Aadhaar e-KYC is mandatory for the contactless home-based test."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "Application Fee: ₹150, Test Fee: ₹50, Total: ₹200",
+          "test_format": "Computer Screen Test at the local RTO. Requires slot booking and physical visit.",
+          "special_note": "Biometrics verification will be done at the RTO prior to the test."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "Application Fee: ₹150, Test/LL Card Fee: ₹100, Total: ₹250",
+          "test_format": "Computer Screen Test at the local RTO. Requires slot booking and physical visit.",
+          "special_note": "Requires visiting the RTO with original documents for verification before taking the test."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Aadhaar Card (serves as Age and Address proof)",
+            "Form 1 (Self-declaration of Physical Fitness)",
+            "Recent Passport Size Photograph & Signature scan"
+          ],
+          "additional_notes": "Aadhaar e-KYC is highly recommended to speed up the approval process."
+        },
+        "Under18": {
+          "documents": [
+            "Aadhaar Card or School Leaving Certificate",
+            "Form 1 (Self-declaration of Physical Fitness)",
+            "Parent / Guardian Consent Declaration (Form 1 signed by parent)",
+            "Parent's ID proof (Aadhaar/Voter ID)"
+          ],
+          "additional_notes": "Only valid for non-geared motorcycles up to 50cc displacement."
+        },
+        "Senior": {
+          "documents": [
+            "Aadhaar Card / Passport",
+            "Form 1A (Medical Certificate signed by a registered Government Doctor) - Mandatory for age above 40",
+            "Recent Passport Size Photograph"
+          ],
+          "additional_notes": "Medical certificate Form 1A must be uploaded in PDF format; keep the physical original ready."
+        }
+      },
+      "faqs": [
+        {
+          "question": "What is the validity of a Learner's License?",
+          "answer": "A Learner's License is valid for 6 months from the date of issue. You can apply for a permanent Driving License after 30 days and within 180 days of getting the LL."
+        },
+        {
+          "question": "What happens if I fail the LL computer test?",
+          "answer": "If you fail, you can pay a retest fee of ₹50 online and book another slot to re-take the test from the next day onwards."
+        },
+        {
+          "question": "Can I drive alone with a Learner's License?",
+          "answer": "No. You must have a person holding a valid permanent Driving License sitting in the front seat next to you, and you must display red 'L' stickers (height 9cm) on the front and rear of the vehicle."
+        }
+      ]
+    },
+    {
+      "id": "driving_license",
+      "name": "Permanent Driving License (DL)",
+      "category": "Driving License Services",
+      "description": "Permanent license issued after proving driving competency on RTO test track. Valid for up to 20 years or until age 40 (whichever is earlier).",
+      "prerequisites": "Must hold an active Learner's License (LL) for a minimum of 30 days, and apply within 180 days from the date of LL issue.",
+      "common_steps": [
+        "Fill DL application form online on Sarathi Parivahan, entering your active LL number.",
+        "Select the vehicle class (e.g. LMV for cars, MCWG for geared bikes) matching your LL.",
+        "Upload required documents (LL copy, Address/Age proof if updated, and Form 5 if trained via a driving school).",
+        "Pay the DL application fee and driving test fee online.",
+        "Book a driving test slot at the nearest automated or manual RTO test track.",
+        "Appear at the test track with your own vehicle of the selected class, accompanied by a DL holder.",
+        "Pass the physical driving test (e.g., '8' track, 'H' track, gradient start).",
+        "Complete biometric photo capture at the RTO window after the test.",
+        "The DL smart card is printed and dispatched to your registered address via Speed Post."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": false,
+          "fee_breakdown": "DL Issue: ₹200, Smart Card Fee: ₹200, Driving Test Fee: ₹300, Total: ₹700",
+          "test_format": "Automated Driving Test Track (ADTT) with video-based sensor tracking. Strict evaluation.",
+          "special_note": "Delhi uses highly automated tracks. Ensure you practice reversing and gradient parking before booking."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "DL Issue: ₹200, Smart Card: ₹200, Driving Test: ₹300, Total: ₹700",
+          "test_format": "Combination of automated tracks in tier-1 cities and manual tracks in tier-2/3 cities.",
+          "special_note": "A hard copy of your LL and fee receipt is required at the time of the test."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "DL Issue: ₹200, Smart Card: ₹200, Driving Test: ₹300, Total: ₹700",
+          "test_format": "Automated tracks (like Jayanagar/Electronic City RTOs) and manual inspector tests in other areas.",
+          "special_note": "Requires presenting original LL, application form, and vehicle PUCC certificate to the inspector."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Active Learner's License (LL) Original",
+            "Form 4 (Application for license to drive)",
+            "Vehicle Registration Certificate (RC), valid PUCC, and Insurance of the vehicle used for the test"
+          ],
+          "additional_notes": "Make sure the vehicle has L-plates installed during the test."
+        },
+        "Senior": {
+          "documents": [
+            "Active Learner's License (LL) Original",
+            "Form 4 (Application)",
+            "Form 1A (Medical Certificate) - Mandatorily required if the applicant is above 40 years of age",
+            "Vehicle documents (RC, Insurance, PUCC) for the test vehicle"
+          ],
+          "additional_notes": "Ensure your Form 1A is verified by the doctor online or carries a clear signature and stamp."
+        }
+      },
+      "faqs": [
+        {
+          "question": "Can I use someone else's vehicle for my driving test?",
+          "answer": "Yes, you can use any vehicle of the class you applied for (e.g. a friend's car for LMV), provided it has a valid Registration Certificate (RC), active insurance, and a valid Pollution Under Control Certificate (PUCC)."
+        },
+        {
+          "question": "What happens if I fail the driving test?",
+          "answer": "If you fail the test, you can pay the test re-appearance fee of ₹300 online and book a new slot. You can retake the test after 7 days."
+        },
+        {
+          "question": "How long does it take to receive the physical license card?",
+          "answer": "Once the RTO inspector approves your test online, the DL is generated. The physical smart card is printed and dispatched via Speed Post, taking about 7 to 15 days depending on the state and postal speed."
+        }
+      ]
+    },
+    {
+      "id": "dl_renewal",
+      "name": "Driving License Renewal",
+      "category": "Driving License Services",
+      "description": "Renewal of an expired or expiring driving license. Can be applied for 1 year before expiry or up to 1 year after expiry without having to retake the driving test.",
+      "prerequisites": "Must hold an existing driving license. If expired for more than 1 year, you must apply for a fresh Learner's License and retake the driving test.",
+      "common_steps": [
+        "Fill the DL Renewal Form (Form 9) online on Sarathi Parivahan.",
+        "Upload the original expired/expiring Driving License.",
+        "If you are over 40 years old, upload a signed Form 1A Medical Certificate.",
+        "If changing your address during renewal, upload updated Address Proof.",
+        "Pay the renewal fee online.",
+        "Submit the physical application file and old DL card at the RTO (in states where fully contactless is not enabled).",
+        "Track status online; the renewed DL smart card is dispatched via Speed Post."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": true,
+          "fee_breakdown": "Renewal Fee: ₹200, Smart Card Fee: ₹200, Total: ₹400 (if applied within 30 days of expiry). Late fee: +₹1000 per year.",
+          "test_format": "Fully contactless. Verification is done online based on uploaded documents. RTO visit is not required.",
+          "special_note": "Aadhaar verification is required to verify identity and enable contactless processing."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "Renewal Fee: ₹200, Smart Card: ₹200, Total: ₹400. Late fee: ₹1000 plus ₹1000 per year of delay.",
+          "test_format": "Semi-contactless. Form is submitted online, but physical submission of the old DL card is requested by most RTO offices.",
+          "special_note": "Bring the physical printout of the application and original DL to the RTO counter."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "Renewal Fee: ₹200, Smart Card: ₹200, Total: ₹400. Plus late fee if expired > 30 days.",
+          "test_format": "Semi-contactless. Requires submitting the physical application folder with the old DL card to the RTO.",
+          "special_note": "Ensure your biometrics are updated if your old DL is very old or manual."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Original Driving License (DL)",
+            "Form 9 (Renewal Application)",
+            "Form 1 (Physical Fitness Self-Declaration) - If age is under 40"
+          ],
+          "additional_notes": "If DL is from another state, you must also apply for an Address Change / Change of RTO."
+        },
+        "Senior": {
+          "documents": [
+            "Original Driving License (DL)",
+            "Form 9 (Renewal Application)",
+            "Form 1A (Medical Certificate) - Mandatorily required for all applicants over 40 years of age"
+          ],
+          "additional_notes": "The Form 1A must be signed by a registered practitioner with a visible registration number."
+        }
+      },
+      "faqs": [
+        {
+          "question": "What is the grace period for DL renewal?",
+          "answer": "You can renew your DL starting from 1 year before its expiry date up to 1 year after. However, if you renew after 30 days from expiry, there is a late fee penalty, and driving with an expired DL is illegal."
+        },
+        {
+          "question": "What if my DL is expired for more than 1 year?",
+          "answer": "If your DL has been expired for more than 1 year, you must apply for a Learner's License, pay fees, and retake the driving test at the RTO to obtain a valid DL again."
+        }
+      ]
+    },
+    {
+      "id": "ownership_transfer",
+      "name": "Vehicle Ownership Transfer",
+      "category": "Vehicle Registration Services",
+      "description": "Transfer of vehicle registration from the seller to the buyer. Required by law within 14 days of vehicle sale within the same state.",
+      "prerequisites": "Vehicle must have active insurance and active PUCC. If there is an active loan, NOC from the bank (Form 35) is mandatory.",
+      "common_steps": [
+        "Obtain a No Objection Certificate (NOC) from the seller's RTO if the buyer resides in a different RTO jurisdiction.",
+        "Fill out Form 29 (Notice of Transfer) and Form 30 (Application for Transfer) online on Vahan Parivahan.",
+        "Upload scanned documents: Original RC, signed Form 29 & 30, Valid Insurance, PUCC, Buyer's address proof, and Bank NOC (Form 35) if applicable.",
+        "Pay the ownership transfer fee online.",
+        "Submit the physical application file (original RC, physical Form 29 & 30, chassis pencil print, insurance/PUCC copies) to the RTO.",
+        "The RTO verifies the records and issues a new Registration Certificate (RC) smart card in the buyer's name."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": true,
+          "fee_breakdown": "Transfer Fee: ₹300 (Motorcycle) or ₹500 (Car). Smart Card Fee: ₹200. Total: ₹500 - ₹700.",
+          "test_format": "Contactless. Signed Forms 29 and 30 are verified via e-sign/Aadhaar OTP of both seller and buyer. No RTO visit needed.",
+          "special_note": "Aadhaar linked mobile numbers are required for both seller and buyer for contactless validation."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "Transfer Fee: ₹150 (Motorcycle), ₹300 (Car). Smart Card: ₹200. Transfer tax check applies.",
+          "test_format": "Physical submission. Online application is done, but the original RC and pencil impression of the chassis number must be submitted physically at the RTO.",
+          "special_note": "Ensure the chassis print is clearly readable on Form 30 using a pencil rub."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "Transfer Fee: ₹150 (Motorcycle), ₹300 (Car). Smart Card: ₹200. Urban cess and checkpost taxes might apply.",
+          "test_format": "Physical file submission. Buyer and seller signatures on Forms 29 & 30 must match the RTO signatures database.",
+          "special_note": "If signatures mismatch, both buyer and seller might be called to RTO for verification."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Original Registration Certificate (RC)",
+            "Form 29 (Notice of Transfer - 2 copies, signed by seller & buyer)",
+            "Form 30 (Application for Transfer - 1 copy, signed)",
+            "Valid Pollution Under Control Certificate (PUCC)",
+            "Active Vehicle Insurance Certificate",
+            "Buyer's Address Proof (Aadhaar, Voter ID, or Passport)",
+            "Pencil print of the Chassis Number (rubbed onto a piece of paper and stuck on the form)"
+          ],
+          "additional_notes": "If the vehicle is financed by a bank, you must provide Form 35 (NOC for hypothecation termination) signed by the bank."
+        }
+      },
+      "faqs": [
+        {
+          "question": "What is Form 29 and Form 30?",
+          "answer": "Form 29 is the 'Notice of Transfer of Ownership' which declares that the seller has handed over the vehicle. Form 30 is the 'Application for Transfer of Ownership' which requests the RTO to transfer the RC to the buyer's name."
+        },
+        {
+          "question": "Is NOC required if I transfer the vehicle within the same state?",
+          "answer": "An NOC is only required if the buyer's address falls under a different RTO jurisdiction than the seller's RTO. If within the same local RTO, no NOC is needed."
+        },
+        {
+          "question": "Who is liable for accidents/fines after selling the vehicle but before RTO transfer?",
+          "answer": "Legally, the registered owner (the seller) remains liable until the RTO records are updated. Therefore, sellers should ensure ownership transfer is completed immediately after sale."
+        }
+      ]
+    }
+  ],
+  "general_faqs": [
+    {
+      "category": "E-Challan",
+      "question": "How do I check and pay my pending traffic challans?",
+      "answer": "You can check pending traffic challans online via the official Echallan Parivahan website (echallan.parivahan.gov.in) by entering your vehicle registration number, chassis number, or license number. Payments can be made online via credit card, net banking, or UPI through the portal."
+    },
+    {
+      "category": "E-Challan",
+      "question": "What is a Lok Adalat and how can it help with traffic challans?",
+      "answer": "Lok Adalat is an alternative dispute redressal system organized by the government periodically. Pending traffic challans (especially minor ones or those with pending disputes) can often be settled or waived at massive discounts (sometimes up to 100% or standard minor fines) by booking a slot and appearing online or physically before the Lok Adalat panel."
+    },
+    {
+      "category": "E-Challan",
+      "question": "What happens if I don't pay a traffic challan for a long time?",
+      "answer": "If a challan remains unpaid, the RTO will block services for your vehicle, such as RC renewal, address change, or ownership transfer. Eventually, the challan is sent to the court, and you may receive a court summons to appear before a magistrate."
+    },
+    {
+      "category": "Appointments",
+      "question": "How do I prepare for my physical visit to the RTO?",
+      "answer": "1. Keep all documents organized in a physical file folder. 2. Print two copies of the slot confirmation slip and fee payment receipt. 3. Carry the original physical documents corresponding to all uploaded scans for verification. 4. Bring the exact vehicle class (along with a DL holder) if appearing for a driving test. 5. Arrive at least 30 minutes before your slot."
+    },
+    {
+      "category": "Grievance",
+      "question": "What should I do if my application is stuck or there is a grievance?",
+      "answer": "You can lodge a complaint online through the national CPGRAMS portal (pgportal.gov.in) or use the specific state transport department's grievance cell. For Parivahan-related technical errors, you can mail helpdesk-vahan@gov.in or helpdesk-sarathi@gov.in with your application number and screenshots."
+    }
+  ]
+}
