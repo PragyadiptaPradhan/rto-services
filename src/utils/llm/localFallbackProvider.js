@@ -4,7 +4,7 @@
  * with zero external API dependencies.
  */
 
-import BaseLLMProvider from './baseProvider';
+import BaseLLMProvider from './baseProvider.js';
 
 export class LocalFallbackProvider extends BaseLLMProvider {
   constructor(config = {}) {

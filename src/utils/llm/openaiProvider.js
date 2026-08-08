@@ -3,7 +3,7 @@
  * Connects to OpenAI or local Ollama / VLLM endpoint when configured.
  */
 
-import BaseLLMProvider from './baseProvider';
+import BaseLLMProvider from './baseProvider.js';
 
 export class OpenAIProvider extends BaseLLMProvider {
   constructor(config = {}) {

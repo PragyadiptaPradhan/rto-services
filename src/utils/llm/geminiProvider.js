@@ -3,7 +3,7 @@
  * Connects to Google Gemini API when apiKey is provided in config.
  */
 
-import BaseLLMProvider from './baseProvider';
+import BaseLLMProvider from './baseProvider.js';
 
 export class GeminiProvider extends BaseLLMProvider {
   constructor(config = {}) {

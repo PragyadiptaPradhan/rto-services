@@ -5,7 +5,7 @@
  */
 
 import { evaluateGrounding } from './hallucinationGuard.js';
-import { LocalFallbackProvider } from './llm/localFallbackProvider.js';
+import { LocalFallbackProvider, SarvamProvider, GeminiProvider, OpenAIProvider } from './llm/index.js';
 
 // Simple language detector
 export const detectLanguage = (query) => {
@@ -63,8 +63,16 @@ export const TRANSLATIONS = {
 export class IntelligenceEngine {
   constructor(ragEngine, llmProvider = null) {
     this.rag = ragEngine;
-    // Default to LocalFallbackProvider if no LLM provider is configured
-    this.llmProvider = llmProvider || new LocalFallbackProvider();
+    if (llmProvider) {
+      this.llmProvider = llmProvider;
+    } else {
+      const sarvam = new SarvamProvider();
+      if (sarvam.isAvailable()) {
+        this.llmProvider = sarvam;
+      } else {
+        this.llmProvider = new LocalFallbackProvider();
+      }
+    }
   }
 
   setLLMProvider(provider) {
@@ -143,7 +151,7 @@ export class IntelligenceEngine {
       hallucinationCheck,
       language: lang,
       prompt,
-      providerUsed: this.llmProvider.name,
+      providerUsed: llmResult.model === "LocalRuleSynthesizer" ? "LocalFallbackProvider" : this.llmProvider.name,
       modelUsed: llmResult.model || "default"
     };
   }
