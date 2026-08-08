@@ -2,11 +2,10 @@ import React from 'react';
 import { 
   MessageSquare, 
   CheckSquare, 
-  Layers, 
   FileText, 
-  Award, 
   Database, 
-  BarChart3 
+  BarChart3,
+  Sparkles
 } from 'lucide-react';
 
 export const Sidebar = ({ activeTab, setActiveTab }) => {
@@ -14,11 +13,11 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
     <aside className="sidebar">
       <div className="brand">
         <div className="brand-icon">
-          <Layers size={20} />
+          <Sparkles size={20} className="text-amber-700" />
         </div>
         <div>
-          <h1 className="brand-title gradient-text-accent">RTO Services AI</h1>
-          <p className="context-label" style={{ fontSize: '10px' }}>GUIDANCE PROTOTYPE</p>
+          <h1 className="brand-title">RTO Services AI</h1>
+          <p className="context-label" style={{ fontSize: '10px', letterSpacing: '0.5px' }}>GUIDANCE PROTOTYPE</p>
         </div>
       </div>
 
@@ -59,31 +58,6 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
           <span>Helpdesk Trends & Analytics</span>
         </div>
       </nav>
-
-      {/* Responsible AI Panel in Sidebar footer */}
-      <div className="glass-panel" style={{ padding: '16px', marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', fontWeight: 'bold' }}>
-          <Award size={16} className="text-emerald-400" />
-          <span>AI Trust Center</span>
-        </div>
-        <div className="metrics-row">
-          <div className="metric-card" style={{ padding: '4px' }}>
-            <div className="metric-val" style={{ fontSize: '12px', color: '#10b981' }}>Grounded</div>
-            <div className="metric-label" style={{ fontSize: '8px' }}>Logic</div>
-          </div>
-          <div className="metric-card" style={{ padding: '4px' }}>
-            <div className="metric-val" style={{ fontSize: '12px', color: '#06b6d4' }}>Delhi/MH/KA</div>
-            <div className="metric-label" style={{ fontSize: '8px' }}>State Scope</div>
-          </div>
-          <div className="metric-card" style={{ padding: '4px' }}>
-            <div className="metric-val" style={{ fontSize: '12px', color: '#f59e0b' }}>MORTH</div>
-            <div className="metric-label" style={{ fontSize: '8px' }}>Reference</div>
-          </div>
-        </div>
-        <p style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: '1.3' }}>
-          All responses are strictly grounded in our RTO Knowledge Base with verification safeguards.
-        </p>
-      </div>
     </aside>
   );
 };

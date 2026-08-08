@@ -4,15 +4,15 @@ import rtoDatabase from '../../data/index.js';
 
 export const PipelineInspectorView = ({ pipelineData }) => {
   return (
-    <div className="glass-panel tab-content" style={{ overflowY: 'auto' }}>
+    <div className="glass-panel tab-content" style={{ overflowY: 'auto', background: '#ffffff' }}>
       <div style={{ borderBottom: '1px solid var(--border-light)', paddingBottom: '12px' }}>
-        <h2 style={{ fontSize: '20px', fontWeight: '700' }}>5-Layer AI Execution Details</h2>
-        <p className="context-label">Developer logs showing the data ingestion pipeline, text chunk indexes, similarity scores, and grounded prompts.</p>
+        <h2 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-dark)' }}>5-Layer AI Execution Details</h2>
+        <p className="context-label" style={{ marginTop: '2px' }}>Developer logs showing the data ingestion pipeline, text chunk indexes, similarity scores, and grounded prompts.</p>
       </div>
 
       {!pipelineData ? (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '300px', color: 'var(--text-muted)' }}>
-          <Layers size={48} style={{ opacity: 0.3, marginBottom: '12px' }} />
+          <Layers size={48} style={{ opacity: 0.25, marginBottom: '12px', color: '#64748b' }} />
           <p>Send a message in the chat assistant first to view its execution logs here.</p>
         </div>
       ) : (
@@ -20,11 +20,11 @@ export const PipelineInspectorView = ({ pipelineData }) => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '10px' }}>
             
             {/* Layer 1 & 2 Details */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
                 <div className="inspector-step">
                   <span>1. DATA LAYER (Clean Database Schema)</span>
-                  <span style={{ color: '#10b981' }}>OK</span>
+                  <span style={{ color: '#16a34a' }}>OK</span>
                 </div>
                 <div className="inspector-card">
 {`Database Scope: दिल्ली (DL), महाराष्ट्र (MH), कर्नाटक (KA)
@@ -37,7 +37,7 @@ Metadata Keys: state, category, applicantType, source_scope`}
               <div>
                 <div className="inspector-step">
                   <span>2. RAG LAYER (Search Similarity Index)</span>
-                  <span style={{ color: '#10b981' }}>Retrieved {pipelineData.retrievedChunks.length} chunks</span>
+                  <span style={{ color: '#16a34a' }}>Retrieved {pipelineData.retrievedChunks.length} chunks</span>
                 </div>
                 <div className="inspector-card">
 {`User Query: "${pipelineData.query}"
@@ -53,11 +53,11 @@ Ranked Retrieval Results:
             </div>
 
             {/* Layer 3 & 5 Details */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
                 <div className="inspector-step">
                   <span>3. INTELLIGENCE LAYER (Prompt Grounding & Personalization)</span>
-                  <span style={{ color: '#10b981' }}>Active</span>
+                  <span style={{ color: '#16a34a' }}>Active</span>
                 </div>
                 <div className="inspector-card">
 {`Simulated LLM Grounded Prompt:
@@ -70,7 +70,7 @@ Ranked Retrieval Results:
                 <div className="inspector-step">
                   <span>5. RESPONSIBLE AI LAYER (Safeguards Audit)</span>
                   <span style={{ 
-                    color: pipelineData.hallucinationCheck.status === 'PASSED' ? '#10b981' : '#f59e0b' 
+                    color: pipelineData.hallucinationCheck.status === 'PASSED' ? '#16a34a' : '#d97706' 
                   }}>
                     {pipelineData.hallucinationCheck.status}
                   </span>

@@ -3,10 +3,10 @@ import { HelpCircle } from 'lucide-react';
 
 export const QuickScenarios = ({ handleSendMessage }) => {
   return (
-    <div className="glass-panel" style={{ padding: '20px' }}>
+    <div className="glass-panel" style={{ padding: '20px', background: '#ffffff' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-        <HelpCircle size={18} className="text-cyan-400" />
-        <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '15px', fontWeight: '600' }}>Mock Citizen Scenarios</h3>
+        <HelpCircle size={18} style={{ color: '#d97706' }} />
+        <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '15px', fontWeight: '700', color: 'var(--text-dark)' }}>Mock Citizen Scenarios</h3>
       </div>
       <div className="scenarios-grid">
         <div 
