@@ -2,7 +2,15 @@
   "metadata": {
     "project": "Transport and RTO Services AI Guidance Prototype",
     "version": "1.0.0",
-    "states_supported": ["DL", "MH", "KA"],
+    "states_supported": [
+      "DL",
+      "MH",
+      "KA",
+      "UP",
+      "TN",
+      "TS",
+      "GJ"
+    ],
     "source_scope": "Public standard guidelines (MORTH / Parivahan Sewa 2026) - Mock Status for fee variations"
   },
   "services": [
@@ -228,6 +236,203 @@
       ]
     },
     {
+      "id": "duplicate_dl_rc",
+      "name": "Issue of Duplicate Driving License / Vehicle RC",
+      "category": "Driving License & Vehicle Services",
+      "description": "Service to re-issue a duplicate Driving License or Vehicle Registration Certificate in the event of loss, theft, tearing, or physical damage.",
+      "prerequisites": "Must have an existing registered DL or RC record in Parivahan database and an FIR/Police Acknowledgement report for lost items.",
+      "common_steps": [
+        "File an online Police FIR / Lost Article Report detailing lost DL/RC number.",
+        "Access Sarathi (for DL) or Vahan (for RC) portal on parivahan.gov.in.",
+        "Select 'Apply for Duplicate DL/RC' and enter DL/Vehicle registration number.",
+        "Upload Police FIR copy, Form 26 (Application for Duplicate RC/DL), and ID proof.",
+        "In case of damaged card, upload photo of torn/damaged physical smart card.",
+        "Pay application fee and smart card issue charges online.",
+        "Book slot for document verification at RTO (or submit via Aadhaar e-KYC where contactless is enabled).",
+        "Receive duplicate smart card via registered speed post."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": true,
+          "fee_breakdown": "Duplicate DL/RC Fee: ₹200, Smart Card Fee: ₹200, Total: ₹400",
+          "test_format": "Contactless e-KYC using Aadhaar and online Delhi Police e-FIR copy upload.",
+          "special_note": "Delhi Police e-FIR report reference number must be verified online."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "Duplicate Fee: ₹200, Smart Card: ₹200, Postal Fee: ₹50, Total: ₹450",
+          "test_format": "Online application + physical submission of FIR copy at local RTO.",
+          "special_note": "Requires physical FIR copy stamped by local Maharashtra police station."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "Duplicate Fee: ₹150, Smart Card Fee: ₹137, Total: ₹287",
+          "test_format": "Online application with slot booking for verification.",
+          "special_note": "E-Lost report from Karnataka Police portal (KSP app) is accepted."
+        },
+        "UP": {
+          "state_name": "Uttar Pradesh",
+          "contactless": true,
+          "fee_breakdown": "Duplicate Fee: ₹200, Smart Card: ₹200, Total: ₹400",
+          "test_format": "Online Aadhaar e-KYC with UP Police Lost Article Report.",
+          "special_note": "Damaged smart card must be surrendered physically if applicable."
+        },
+        "TN": {
+          "state_name": "Tamil Nadu",
+          "contactless": false,
+          "fee_breakdown": "Duplicate Fee: ₹250, Card Fee: ₹200, Total: ₹450",
+          "test_format": "RTO counter document submission required.",
+          "special_note": "Non-traceable certificate from Inspector of Police required if lost."
+        },
+        "TS": {
+          "state_name": "Telangana",
+          "contactless": true,
+          "fee_breakdown": "Duplicate Fee: ₹200, Card Fee: ₹200, Total: ₹400",
+          "test_format": "Online RTA portal Aadhaar authentication.",
+          "special_note": "Telangana Police HawkEye lost report accepted online."
+        },
+        "GJ": {
+          "state_name": "Gujarat",
+          "contactless": true,
+          "fee_breakdown": "Duplicate Fee: ₹200, Card Fee: ₹150, Total: ₹350",
+          "test_format": "Digital Gujarat portal contactless submission.",
+          "special_note": "Gujarat e-Cop report reference number verified automatically."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Police FIR / Lost Report Copy (or Damaged Smart Card)",
+            "Form 26 (Application for Duplicate Certificate of Registration / License)",
+            "Aadhaar Card / ID Proof",
+            "Valid Insurance & PUC Certificate (for RC duplicate)"
+          ],
+          "additional_notes": "Ensure vehicle chassis number matches existing Vahan records exactly."
+        },
+        "Senior": {
+          "documents": [
+            "Police FIR Copy / Damaged Smart Card",
+            "Form 26 & Form 1A Medical Certificate (if DL renewal due)",
+            "Aadhaar Card"
+          ],
+          "additional_notes": "Priority counter processing at physical RTO desks."
+        },
+        "Commercial": {
+          "documents": [
+            "Police Lost FIR Report",
+            "Form 26 signed by Financier/Bank (if vehicle under loan)",
+            "Commercial Permit & Fitness Certificate copy",
+            "Tax Clearance Certificate"
+          ],
+          "additional_notes": "Bank clearance required if vehicle has active hypothecation."
+        }
+      },
+      "faqs": [
+        {
+          "question": "Can I drive while my application for Duplicate DL is under processing?",
+          "answer": "Yes, you can carry the official Parivahan Application Acknowledgement receipt and a digital copy stored on DigiLocker or mParivahan mobile app."
+        },
+        {
+          "question": "What should I do if my lost DL/RC is found after applying for duplicate?",
+          "answer": "Surrender the old recovered card to your local RTO to prevent unauthorized duplicate usage and keep your record updated."
+        }
+      ]
+    },
+    {
+      "id": "international_driving_permit",
+      "name": "International Driving Permit (IDP)",
+      "category": "Driving License Services",
+      "description": "Official legal document issued to permanent Indian driving license holders allowing them to drive motor vehicles in foreign countries adhering to the 1949 Geneva Road Traffic Convention.",
+      "prerequisites": "Must hold a valid Permanent Indian Driving License, valid Passport, and active overseas Travel Visa / Air Ticket.",
+      "common_steps": [
+        "Log in to Sarathi Parivahan portal and select 'Apply for International Driving Permit (IDP)'.",
+        "Enter permanent Indian DL number and Date of Birth.",
+        "Upload valid Passport copy (with visa page or travel ticket).",
+        "Upload Form 1A (Medical Certificate signed by registered MBBS doctor).",
+        "Upload valid Indian Driving License copy and recent passport-size photos.",
+        "Pay IDP application fee online (₹1,000 fixed national fee).",
+        "Book slot for physical verification at local RTO (or submit via Aadhaar e-KYC where enabled).",
+        "Collect printed IDP booklet from RTO."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Postal/Handling Charges: ₹50, Total: ₹1,050",
+          "test_format": "Online application + physical document verification at Zonal RTO Office.",
+          "special_note": "Passport address must match or be verified against Indian DL details."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "IDP Statutory Fee: ₹1,000, Postal Fee: ₹50, Total: ₹1,050",
+          "test_format": "Physical document audit & original passport inspection at RTO counter.",
+          "special_note": "Original passport and valid visa copy must be presented during verification."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "IDP Statutory Fee: ₹1,000, User Fee: ₹100, Total: ₹1,100",
+          "test_format": "Online slot booking for physical document verification at RTO.",
+          "special_note": "IDP issued for countries signatory to the 1949 Geneva Convention."
+        },
+        "UP": {
+          "state_name": "Uttar Pradesh",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Total: ₹1,000",
+          "test_format": "Online filing + physical passport verification at RTO.",
+          "special_note": "Form 1A medical certificate mandatory for all age groups."
+        },
+        "TN": {
+          "state_name": "Tamil Nadu",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Handling: ₹50, Total: ₹1,050",
+          "test_format": "RTO counter document submission required.",
+          "special_note": "Visa and flight ticket copy mandatory."
+        },
+        "TS": {
+          "state_name": "Telangana",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Service Fee: ₹100, Total: ₹1,100",
+          "test_format": "Online filing + physical verification at RTA counter.",
+          "special_note": "Original passport inspection compulsory."
+        },
+        "GJ": {
+          "state_name": "Gujarat",
+          "contactless": false,
+          "fee_breakdown": "IDP Fee: ₹1,000, Total: ₹1,000",
+          "test_format": "Digital Gujarat application + RTO verification.",
+          "special_note": "Valid for 1 year from date of issue."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Valid Permanent Indian Driving License",
+            "Valid Indian Passport (with minimum 6 months validity remaining)",
+            "Valid Visa / Entry Permit for destination country",
+            "Confirmed Air Ticket / Flight Reservation copy",
+            "Form 1A (Medical Certificate signed by a registered MBBS Doctor)",
+            "3 passport-sized photographs (35mm x 45mm)"
+          ],
+          "additional_notes": "IDP is issued with a maximum validity of 1 year or DL expiry, whichever is earlier."
+        }
+      },
+      "faqs": [
+        {
+          "question": "Can an International Driving Permit (IDP) be renewed from outside India?",
+          "answer": "MoRTH has introduced a provision allowing Indian citizens abroad to apply for IDP renewal through official Indian Embassy / Consulate portals, which forward verified requests to home RTOs on Parivahan."
+        },
+        {
+          "question": "Do I need a separate driving test for getting an International Driving Permit?",
+          "answer": "No separate driving test is required, provided you hold an active permanent Indian Driving License for the respective vehicle class."
+        }
+      ]
+    },
+    {
       "id": "ownership_transfer",
       "name": "Vehicle Ownership Transfer",
       "category": "Vehicle Registration Services",
@@ -292,9 +497,473 @@
           "answer": "Legally, the registered owner (the seller) remains liable until the RTO records are updated. Therefore, sellers should ensure ownership transfer is completed immediately after sale."
         }
       ]
+    },
+    {
+      "id": "change_of_address",
+      "name": "Change of Address in DL / Vehicle RC",
+      "category": "Driving License & Vehicle Services",
+      "description": "Official procedure to update residential address on Driving License (DL) or Vehicle Registration Certificate (RC) within 30 days of relocating.",
+      "prerequisites": "Must hold an active DL or RC smart card and possess verified address proof for the new location.",
+      "common_steps": [
+        "Log in to Parivahan Sewa portal (Sarathi for DL / Vahan for RC) using Aadhaar e-KYC.",
+        "Select 'Apply for Change of Address' and enter DL/RC number.",
+        "Upload valid address proof (Aadhaar Card, Passport, Utility Bill, or Voter ID).",
+        "Upload Form 33 (Notice of Change of Address) for vehicle RC updates.",
+        "Pay processing fee and smart card issue charges online.",
+        "Submit application via Aadhaar contactless mode or book an RTO slot for physical verification.",
+        "Receive updated smart card by speed post or view digital card on DigiLocker / mParivahan."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": true,
+          "fee_breakdown": "Address Change: ₹200, Smart Card Fee: ₹200, Total: ₹400",
+          "test_format": "Contactless Online e-KYC via Aadhaar. Document verification completed digitally.",
+          "special_note": "Aadhaar address must match the target Delhi address for instant online approval."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "Application Fee: ₹150, Smart Card: ₹200, Postal Fee: ₹50, Total: ₹400",
+          "test_format": "Online application followed by physical document submission at local RTO.",
+          "special_note": "Original physical RC/DL smart card must be surrendered at the RTO counter."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "Application Fee: ₹150, Smart Card Fee: ₹137, Total: ₹287",
+          "test_format": "Online slot booking required for physical verification at local RTO.",
+          "special_note": "Requires NOC from prior RTO if moving across different RTO zones within Karnataka."
+        },
+        "UP": {
+          "state_name": "Uttar Pradesh",
+          "contactless": true,
+          "fee_breakdown": "Address Change: ₹200, Smart Card: ₹200, Total: ₹400",
+          "test_format": "Contactless Aadhaar mode enabled across major RTOs (Noida, Ghaziabad, Lucknow).",
+          "special_note": "Form 33 copy must be uploaded in PDF format for vehicle RC address changes."
+        },
+        "TN": {
+          "state_name": "Tamil Nadu",
+          "contactless": false,
+          "fee_breakdown": "Application Fee: ₹250, Smart Card: ₹200, Total: ₹450",
+          "test_format": "Online application with mandatory RTO visit for physical verification.",
+          "special_note": "Requires local municipal address proof if Aadhaar bears an out-of-state address."
+        },
+        "TS": {
+          "state_name": "Telangana",
+          "contactless": true,
+          "fee_breakdown": "Application Fee: ₹200, Card Fee: ₹200, Total: ₹400",
+          "test_format": "T-App Folio and RTA Citizen Portal e-KYC integrated.",
+          "special_note": "Instant processing available for Aadhaar linked TS residents."
+        },
+        "GJ": {
+          "state_name": "Gujarat",
+          "contactless": true,
+          "fee_breakdown": "Application Fee: ₹150, Smart Card: ₹200, Total: ₹350",
+          "test_format": "Digital Gujarat RTO portal Aadhaar e-KYC process.",
+          "special_note": "Physical card delivered by India Post speed post within 10 working days."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Aadhaar Card (with updated address)",
+            "Form 33 (Application for Notice of Change of Address)",
+            "Original Driving License or RC Smart Card",
+            "Valid Insurance Certificate & PUC Certificate"
+          ],
+          "additional_notes": "Must be filed within 30 days of address change to avoid late fee penalties."
+        },
+        "Senior": {
+          "documents": [
+            "Aadhaar Card / Passport",
+            "Form 33 (for vehicle RC)",
+            "Recent Passport Photograph",
+            "Original DL or RC"
+          ],
+          "additional_notes": "Senior citizens can request priority queue processing at physical RTO counters."
+        },
+        "Commercial": {
+          "documents": [
+            "Aadhaar Card of Commercial License Holder",
+            "Commercial Transport License Badge",
+            "Fitness Certificate & Road Tax clearance receipt",
+            "Form 33 signed by Fleet Owner / Transport Authority"
+          ],
+          "additional_notes": "Commercial vehicle address updates require clearance from the regional transport authority."
+        }
+      },
+      "faqs": [
+        {
+          "question": "What is the penalty for delay in reporting address change on vehicle RC?",
+          "answer": "Failing to report address change within 30 days incurs a monthly penalty fee of ₹300 for two-wheelers and ₹500 for cars under Section 177 of the Motor Vehicles Act."
+        },
+        {
+          "question": "Do I need a new Smart Card when updating my address?",
+          "answer": "Yes. Once the address change is approved, a fresh smart card embedded with updated microchip data is issued and posted to your new address."
+        }
+      ]
+    },
+    {
+      "id": "noc_issue",
+      "name": "No Objection Certificate (NOC) for Vehicle Transfer",
+      "category": "Vehicle Registration & Transfer",
+      "description": "Official clearance certificate issued by the home RTO permitting the re-registration of a vehicle in another state or RTO jurisdiction.",
+      "prerequisites": "Vehicle must have clear title with no pending traffic challans, crime records, or bank loan defaults.",
+      "common_steps": [
+        "Apply online on Vahan Parivahan portal under 'Application for NOC'.",
+        "Enter vehicle registration number and chassis number.",
+        "Pay NOC processing fee online.",
+        "Obtain Police Crime Record Clearance Certificate from local Traffic/Crime Branch.",
+        "Pencil print of vehicle Chassis Number on physical Form 28 (3 copies).",
+        "Submit Form 28, Original RC, Insurance, PUC, and Police Clearance at the issuing RTO.",
+        "Upon verification, RTO issues NOC document valid for re-registration in target state."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": false,
+          "fee_breakdown": "NOC Fee: ₹100 per vehicle class, Postal Fee: ₹50, Total: ₹150",
+          "test_format": "Online application submission followed by physical document audit at RTO.",
+          "special_note": "Delhi NCR 10-year diesel / 15-year petrol de-registered vehicles must obtain NOC for outside states."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "NOC Application Fee: ₹100, Service Fee: ₹50, Total: ₹150",
+          "test_format": "Physical chassis pencil imprint verification required at RTO counter.",
+          "special_note": "NCRB and local police crime branch NOC clearance required."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "NOC Fee: ₹100, Processing Fee: ₹100, Total: ₹200",
+          "test_format": "Slot booking for RTO verification required.",
+          "special_note": "Karnataka requires road tax clearance certificate before granting NOC."
+        },
+        "UP": {
+          "state_name": "Uttar Pradesh",
+          "contactless": false,
+          "fee_breakdown": "NOC Fee: ₹100, Total: ₹100",
+          "test_format": "Online portal filing with physical RTO verification.",
+          "special_note": "Clearance of all UP traffic e-challans is strictly enforced."
+        },
+        "TN": {
+          "state_name": "Tamil Nadu",
+          "contactless": false,
+          "fee_breakdown": "NOC Fee: ₹150, Total: ₹150",
+          "test_format": "RTO counter submission of Form 28 imprints.",
+          "special_note": "Police clearance required from Greater Chennai Police / District Crime Branch."
+        },
+        "TS": {
+          "state_name": "Telangana",
+          "contactless": false,
+          "fee_breakdown": "NOC Fee: ₹100, Total: ₹100",
+          "test_format": "Online filing on RTA portal + physical document verification.",
+          "special_note": "Clearance of Telangana e-Challans mandatory."
+        },
+        "GJ": {
+          "state_name": "Gujarat",
+          "contactless": false,
+          "fee_breakdown": "NOC Fee: ₹100, Total: ₹100",
+          "test_format": "Digital Gujarat upload + physical RTO inspection.",
+          "special_note": "Pencil chassis imprint mandatory on 3 Form 28 copies."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Form 28 (Application & Grant of NOC - 3 copies with pencil chassis imprints)",
+            "Original Registration Certificate (RC)",
+            "Valid Insurance Policy Certificate & PUC Certificate",
+            "Police Clearance Certificate (PCC) / Crime Branch NOC",
+            "Receipt of up-to-date Road Tax payment"
+          ],
+          "additional_notes": "Ensure all pending e-challans are paid before applying."
+        },
+        "Commercial": {
+          "documents": [
+            "Form 28 (3 copies with chassis imprints)",
+            "Permit Surrender Certificate & Fitness Certificate",
+            "Bank NOC (Form 35 if hypothecated)",
+            "State Transport Authority Tax Clearance"
+          ],
+          "additional_notes": "Commercial vehicles must surrender state goods/passenger permits."
+        }
+      },
+      "faqs": [
+        {
+          "question": "What is the validity period of an RTO NOC?",
+          "answer": "An RTO NOC does not have a strict expiry date on paper, but it is expected to be submitted for re-registration in the target state within 6 months. Delay may require a re-validation certificate from the issuing RTO."
+        },
+        {
+          "question": "Can an issued NOC be cancelled if I decide not to sell/transfer the vehicle?",
+          "answer": "Yes. You must obtain a 'Non-Utilization Certificate' (NUC) from the target state RTO confirming the vehicle was not registered there, and submit it back to the original home RTO to cancel the NOC."
+        }
+      ]
+    },
+    {
+      "id": "hypothecation_cancellation",
+      "name": "Hypothecation Deletion / Addition (Bank Loan Closure)",
+      "category": "Vehicle Registration & Transfer",
+      "description": "Procedure to add bank lien when taking a vehicle loan or remove hypothecation from the RC smart card after full loan repayment.",
+      "prerequisites": "Must have closed the vehicle bank loan and received official Bank NOC & Form 35.",
+      "common_steps": [
+        "Collect Bank NOC letter and 2 signed copies of Form 35 from lending bank.",
+        "Access Vahan Parivahan portal under 'Hypothecation Deletion'.",
+        "Enter Vehicle Registration Number and last 5 digits of Chassis Number.",
+        "Upload Bank NOC, Form 35 (signed by bank & owner), PUC, and Insurance.",
+        "Pay Hypothecation Deletion Fee online.",
+        "Submit application via Aadhaar e-KYC contactless mode or visit local RTO with original documents.",
+        "Receive updated clear RC Smart Card without bank endorsement."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": true,
+          "fee_breakdown": "HP Deletion Fee: ₹100 (2-Wheeler) / ₹200 (Car), Smart Card: ₹200, Total: ₹300-₹400",
+          "test_format": "Contactless Aadhaar e-KYC mode enabled.",
+          "special_note": "Bank NOC digital verification integrated for major nationalized banks."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "HP Deletion: ₹500, Smart Card: ₹200, Postal Fee: ₹50, Total: ₹750",
+          "test_format": "Online filing followed by physical submission of original Form 35 at RTO.",
+          "special_note": "Both copies of Form 35 must bear original official bank seal."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "HP Deletion: ₹100 (2W) / ₹200 (4W), Smart Card Fee: ₹137, Total: ₹237-₹337",
+          "test_format": "Online slot booking for document verification at RTO.",
+          "special_note": "Bank NOC validity must be within 3 months of application date."
+        },
+        "UP": {
+          "state_name": "Uttar Pradesh",
+          "contactless": true,
+          "fee_breakdown": "HP Deletion Fee: ₹200, Smart Card: ₹200, Total: ₹400",
+          "test_format": "Contactless mode available with digital Form 35 upload.",
+          "special_note": "Ensure bank loan account number matches NOC letter."
+        },
+        "TN": {
+          "state_name": "Tamil Nadu",
+          "contactless": false,
+          "fee_breakdown": "HP Deletion: ₹250, Smart Card: ₹200, Total: ₹450",
+          "test_format": "RTO counter submission of original Form 35.",
+          "special_note": "Original RC smart card must be surrendered for card printing."
+        },
+        "TS": {
+          "state_name": "Telangana",
+          "contactless": true,
+          "fee_breakdown": "HP Deletion: ₹200, Card Fee: ₹200, Total: ₹400",
+          "test_format": "Online RTA portal Aadhaar authentication.",
+          "special_note": "Digital verification with major regional bank portals."
+        },
+        "GJ": {
+          "state_name": "Gujarat",
+          "contactless": true,
+          "fee_breakdown": "HP Deletion: ₹200, Card Fee: ₹150, Total: ₹350",
+          "test_format": "Digital Gujarat portal contactless submission.",
+          "special_note": "Speed post delivery of clean RC smart card."
+        }
+      },
+      "applicant_requirements": {
+        "General": {
+          "documents": [
+            "Bank No-Objection Certificate (NOC) for loan closure",
+            "Form 35 (Notice of Termination of Hypothecation - 2 copies signed by bank)",
+            "Original Registration Certificate (RC Smart Card)",
+            "Valid Insurance Certificate & PUC Certificate"
+          ],
+          "additional_notes": "Bank NOC letter is generally valid for 3 months from date of issue."
+        },
+        "Commercial": {
+          "documents": [
+            "Bank NOC & Form 35 (2 copies)",
+            "Commercial Vehicle Fitness & Road Tax Clearance",
+            "Original RC & Permit copy"
+          ],
+          "additional_notes": "Financier endorsement must be cancelled before renewing commercial state permit."
+        }
+      },
+      "faqs": [
+        {
+          "question": "What happens if bank NOC expires before submitting HP deletion application?",
+          "answer": "You must request your bank to issue a re-validated NOC letter or fresh NOC with an updated issue date before applying on Parivahan."
+        },
+        {
+          "question": "Is HP deletion mandatory after finishing car loan payments?",
+          "answer": "Yes. Until HP deletion is recorded in RTO Vahan database, the bank remains registered as legal hypothecator, preventing vehicle sale, RC transfer, or scrap clearance."
+        }
+      ]
+    },
+    {
+      "id": "fitness_certificate",
+      "name": "Vehicle Fitness Certificate & Renewal",
+      "category": "Vehicle Registration & Transfer",
+      "description": "Mandatory statutory inspection and certification confirming commercial transport vehicles (or private vehicles older than 15 years) comply with safety and emission roadworthiness standards.",
+      "prerequisites": "Vehicle must be presented physically at the automated vehicle testing station / RTO track with valid PUC and Insurance.",
+      "common_steps": [
+        "Apply online on Vahan Parivahan portal under 'Application for Fitness Certificate'.",
+        "Enter vehicle registration number and pay fitness inspection fee & smart card charges.",
+        "Book an appointment slot at the designated RTO Inspection Track / Automated Testing Station (ATS).",
+        "Ensure vehicle has working brakes, lights, speed governor, reflector strips, and valid PUC.",
+        "Present vehicle physically for inspector evaluation and chassis number verification.",
+        "Upon passing inspection, Fitness Certificate (Form 38) is granted online and endorsed on RC."
+      ],
+      "state_variations": {
+        "DL": {
+          "state_name": "Delhi",
+          "contactless": false,
+          "fee_breakdown": "Inspection Fee: ₹600 (3-Wheeler) / ₹1,000 (Cab/LMV) / ₹1,500 (Heavy), Smart Card: ₹200",
+          "test_format": "Automated Testing Station (ATS) computerised track inspection.",
+          "special_note": "Speed governor and FASTag verification mandatory before testing."
+        },
+        "MH": {
+          "state_name": "Maharashtra",
+          "contactless": false,
+          "fee_breakdown": "Inspection Fee: ₹600-₹1,000, Grant Fee: ₹200, Total: ₹800-₹1,200",
+          "test_format": "Physical inspection track testing by Motor Vehicle Inspector (MVI).",
+          "special_note": "Reflector strips (yellow/red) and emergency exit check enforced for passenger buses."
+        },
+        "KA": {
+          "state_name": "Karnataka",
+          "contactless": false,
+          "fee_breakdown": "Inspection Fee: ₹600 (LMV) / ₹1,000 (HMV), User Fee: ₹100, Total: ₹700-₹1,100",
+          "test_format": "RTO inspection track test by senior MVI inspector.",
+          "special_note": "Strict check on vehicle body dimensions and emission PUC levels."
+        },
+        "UP": {
+          "state_name": "Uttar Pradesh",
+          "contactless": false,
+          "fee_breakdown": "Inspection Fee: ₹600-₹1,000, Total: ₹600-₹1,000",
+          "test_format": "Automated track testing at regional ATS centers.",
+          "special_note": "Vehicle body paint and commercial lettering standards checked."
+        },
+        "TN": {
+          "state_name": "Tamil Nadu",
+          "contactless": false,
+          "fee_breakdown": "Inspection Fee: ₹600-₹1,000, Certificate Fee: ₹200, Total: ₹800-₹1,200",
+          "test_format": "MVI track physical inspection.",
+          "special_note": "Fire extinguisher and first aid box mandatory for commercial cabs."
+        },
+        "TS": {
+          "state_name": "Telangana",
+          "contactless": false,
+          "fee_breakdown": "Inspection Fee: ₹600-₹1,000, Total: ₹600-₹1,000",
+          "test_format": "Automated testing track inspection.",
+          "special_note": "GPS vehicle tracking device check for commercial passenger cabs."
+        },
+        "GJ": {
+          "state_name": "Gujarat",
+          "contactless": false,
+          "fee_breakdown": "Inspection Fee: ₹600-₹1,000, Total: ₹600-₹1,000",
+          "test_format": "RTO track test by Motor Vehicle Inspector.",
+          "special_note": "Reflective tape stickers mandatory as per CMVR rules."
+        }
+      },
+      "applicant_requirements": {
+        "Commercial": {
+          "documents": [
+            "Original Registration Certificate (RC)",
+            "Valid Pollution Under Control (PUC) Certificate",
+            "Valid Third-Party / Comprehensive Commercial Insurance",
+            "Receipt of paid Road Tax & State Transport Permit",
+            "Calibration Certificate for Speed Limiting Device (SLD)",
+            "Form 38 (Inspection Report for Vehicle Fitness)"
+          ],
+          "additional_notes": "Commercial vehicle fitness is valid for 2 years for vehicles up to 8 years old, and 1 year thereafter."
+        }
+      },
+      "faqs": [
+        {
+          "question": "What is the penalty for driving a commercial vehicle without a valid Fitness Certificate?",
+          "answer": "Under Section 192 of the Motor Vehicles Act, driving an un-fit vehicle attracts a fine of ₹2,000 to ₹5,000 for first offence, and up to ₹10,000 for subsequent offences, along with impounding of the vehicle."
+        },
+        {
+          "question": "How long is a private vehicle fitness valid?",
+          "answer": "Private vehicles receive fitness approval for 15 years upon initial registration. After 15 years, private vehicle fitness must be renewed every 5 years."
+        }
+      ]
     }
   ],
   "general_faqs": [
+    {
+      "category": "Driving Licence",
+      "question": "Give me an overview of Driving Licence in India.",
+      "answer": "In India, a driving licence is an official document that authorises its holder to operate various types of motor vehicles on highways and some other roads to which the public has access. In various Indian states, they are administered by the Regional Transport Offices/Authorities (RTO/RTA). A driving licence is required in India by any person driving a vehicle on any highway or other road defined in the Motor Vehicles Act, 1988. This act sets limits on the minimum age for vehicle operation ranging from 16 to 20, depending on specific circumstances. A modern photo of the driving licence can also serve many of the purposes of an identity card in non-driving contexts, such as proof of identity (e.g. when opening a bank account) or age (e.g. when applying for a mobile connection). ==Background== Application for a provisional driving licence can be made from the age of 16. Provisional licences allow the holder to drive a moped or gearless motorcycle from age 16, or a motorcycle/scooter with manual transmission, three wheeler, car, or any motor vehicle with a maximum of four wheels and less than 7500 kilograms, from age 18. Licenses issued by one RTO allows the licensee to drive throughout the country. This permits the holder to drive non-transports vehicle (white registration plates with black letters; green registration plates with white letters for electric vehicles) or self-drive vehicles (black registration plates with yellow letters.) For driving commercial vehicles with any tyre count or weight (yellow registration plates with black letters; green registration plates with yellow letters for electric vehicles), one should obtain an endorsement (and a minimum age of 20 years, in some states) in the driving licence to effect under s.3(1) of The Motor Vehicles Act, 1988. U"
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Give me an overview of International Driving Permit in India.",
+      "answer": "on 29 March 2023 in Prince Albert, Saskatchewan An International Driving Permit (IDP), often referred to as an international driving licence, is a translation of a domestic driving licence that allows the holder to drive a private motor vehicle in any country or jurisdiction that recognizes the document. The term International Driving Permit was first mentioned in the document prescribed in the International Convention relative to Motor Traffic that was signed at Paris in 1926, and is a translation of the French \"permis de conduire international\", or \"international driving licence\". The Paris treaty, and all subsequent, use the word \"permit\" exclusively in relation to all kinds of driving licence. International Driving Permits are governed by three international conventions: the 1926 Paris International Convention relative to Motor Traffic, the 1949 Geneva Convention on Road Traffic, and the 1968 Vienna Convention on Road Traffic. When a state is contracted to more than one convention, the newest one terminates and replaces previous ones. The IDP, whose A6 size () is slightly larger than a passport, has a grey cover and white inside pages. The outside and inside of the front cover shall be printed in (at least one of) the national language(s) of the issuing State. The last two inside pages shall be printed in French, and pages preceding those two pages shall repeat the first of them in several languages, which must include English, Russian and Spanish. IDPs are issued by a national government directly, or through a network of AIT/FIA organizations or by any association duly empowered thereto by such other Contracting Party. For the latter case those issuing organizations are mostly automobile associations, such as American Automobile Association in the United States, No"
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"1968 convention (as amended in 2011)\" in the context of International Driving Permit?",
+      "answer": "The convention has been ratified by 83 countries/jurisdictions. The main regulations about driving licences are in Annex 6 (domestic driving permit) and Annex 7 (International Driving Permit). The currently active version of those is in force in each contracting party since no later than 29 March 2011 (Article 43). According to the 1968 Vienna Convention, an IDP must have an expiration date of no more than three years from its issue date or until the expiration date of national driving permit, whichever is earlier, and it is valid for a period of one year upon the arrival in the foreign country. Article 41 of the convention describes requirements for driving licences. Key of those are: * every driver of a motor vehicle must hold a driving licence; * driving permits can be issued only after passing theoretical and practical exams, which are regulated by each country or jurisdiction; * Contracting parties shall recognize as valid for driving in their territories: ** domestic driving permit conforming to the provisions of annex 6 to the convention; ** International Driving Permit conforms to the provisions of annex 7 to the convention, on condition that it is presented with the corresponding domestic driving permit; * driving permits issued by a contracting party shall be recognized in the territory of another contracting party until this territory becomes the place of normal residence of their holder; * all of the above does not apply to learner-driver licences; * the period of validity of an international driving permit shall be either no more than three years after the date of issue or until the date of expiry of the domestic driving licence, whichever is earlier; * Contracting parties may refuse to recognize the validity of driving licences for persons under eighteen o"
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"1968 convention (original)\" in the context of International Driving Permit?",
+      "answer": "The convention had amendments on 3 September 1993 and 28 March 2006. There is a European Agreement supplementing the Convention on Road Traffic (1968), which was concluded in Geneva, on 1 May 1971. Note that before 29 March 2011 the convention demanded contracting parties to recognize as valid for driving in their territories: * any domestic driver's permit drawn up in their national language or in one of their national languages, or, if not drawn up in such a language, accompanied by a certified translation; * any domestic driver's permit conforming to the provisions of annex 6 to the convention; and * any international driver permit conforming to the provisions of annex 7 to the convention. Prior to 29 March 2011, annex 6 and annex 7 defined forms of driving licences that are different from those defined after that date. Driving licences issued before 29 March 2011 that match older edition of the annexes are valid until their expiration dates (article 43)."
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"1949 convention\" in the context of International Driving Permit?",
+      "answer": "there are 102 states that are party to the 1949 Geneva Convention on Road Traffic by ratification, accession or succession. The 1949 Convention's description of a driving permit and international driving permit are located in Annexes 9 and 10. Switzerland signed but did not ratify the convention. The 1949 Geneva Convention states that an IDP remains valid for one year from the date of issue, with a grace period of six months. Article 24 of the convention describes requirements for drivers of motor vehicles in international traffic. Key of those are: * Drivers with a valid driving permit are allowed to drive motor vehicles for which the permit has been issued. * A Contracting state may require that the driver carries an international driving permit conforming to the model contained in Annex 10 ** especially if the domestic permit does not conform to the model contained in Annex 9, or if the driver comes from a country where a domestic driving permit is not required * The right to use a domestic or international driving permit may be refused the conditions of issue are no longer fulfilled. There is a European Agreement supplementing the 1949 Convention on Road Traffic, in addition to the 1949 Protocol on Road Signs and Signals, concluded in Geneva on 16 September 1950. * \"Permissible maximum weight\" of a vehicle means the weight of the vehicle and its maximum load when the vehicle is ready for road. * \"Maximum load\" means the weight of the load declared permissible by the competent authority of the country(or jurisdiction) of registration of the vehicle. * \"Light trailers\" shall be those of permissible maximum weight not exceeding ."
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"1926 convention\" in the context of International Driving Permit?",
+      "answer": "The 1926 International Convention relative to Motor Traffic is the older IDP Convention. It is only required in Somalia. International Driving Permits according to the 1926 Convention on Motor Traffic might also still be valid in Liechtenstein and Mexico. However, both are parties of the above-mentioned later conventions, thus the most recent signed convention is the valid one. Mexico also recognizes the Inter-American Driving Permit according to the convention on the Regulation of Inter-American Automotive Traffic 1943."
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"Validity\" in the context of International Driving Permit?",
+      "answer": "According to the 1968 Vienna Convention, an IDP must have an expiration date of no more than three years from its issue date or until the expiration date of national driving permit, whichever is earlier, and it is valid for a period of one year upon the arrival in the foreign country. The previous convention (1949 Geneva Convention) stated that an IDP remains valid for one year from the date of issue. The IDP is not valid for driving in the country or jurisdiction where it was issued, it can only be used in foreign countries, and it must be shown with the carrier's original driving licence."
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"Countries and jurisdictions that recognize IDP\" in the context of International Driving Permit?",
+      "answer": "** IDP must be exchanged for a local driving licence. * In relations between the Contracting States, the 1949 Geneva Convention terminated and replaced the International Convention relative to Motor Traffic and the International Convention relative to Road Traffic signed at Paris on 24 April 1926, and the convention on the Regulation of Inter- American Automotive Traffic opened for signature at Washington on 15 December 1943. * In relations between the Contracting States, the 1968 Vienna Convention terminated and replaced the International Convention relative to Motor Traffic and the International Convention relative to Road Traffic, signed at Paris on 24 April 1926, the convention on the Regulation of Inter-American Automotive Traffic, opened for signature at Washington on 15 December 1943, and the Convention on Road Traffic, opened for signature at Geneva on 19 September 1949."
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"ISO compliant driving licence\" in the context of International Driving Permit?",
+      "answer": "ISO/IEC 18013 establishes guidelines for the design format and data content of an ISO-compliant driving licence (IDL). The design approach is to establish a secure domestic driving permit (DDP) and accompanying booklet for international use, instead of the international driving permit (IDP) paper document. The ISO standard specifies requirements for a card that is aligned with the UN Conventions on Road Traffic. This standard however has no official mandate or recognition from the WP.1 of UNECE as a replacement for the current IDP standards as described in the 1949 and 1968 Conventions."
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"Card design\" in the context of International Driving Permit?",
+      "answer": "The requirements with regards to content and layout of the data elements is contained in Annex A of ISO/IEC 18013-1:2018. While the main ideology is a minimum acceptable set of requirements, sufficient freedom is afforded to the issuing authorities of driving licences to meet domestic needs such as existing standards, data contents and security elements."
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"Booklet layout\" in the context of International Driving Permit?",
+      "answer": "The specifications of the layout of the booklet is defined in Annex G of ISO/IEC 18013-1:2018. There are two options; a booklet with some personalization or a booklet with no personalization. The booklet shall be marginally larger than an ID-1 size driving licence card, with an insert pocket for storage of the card, and for convenient carrying of the booklet. The front cover should include the logo of the UN or the issuing country and the words \"Translation of Driving Licence\" and ."
+    },
+    {
+      "category": "International Driving Permit",
+      "question": "Can you explain \"Implementation\" in the context of International Driving Permit?",
+      "answer": "The American Association of Motor Vehicle Administrators' provides a standard for the design of driving permits and identification cards issued by its member jurisdictions, which include all 50 US states, the District of Columbia, and Canadian territories and provinces. The newest standard released is the 2025 AAMVA DL/ID Card Design Standard (CDS) which generally follows part 1 and part 2 of ISO/IEC 18013-1 (ISO compliant driving licence)."
+    },
+    {
+      "category": "Driving License Services",
+      "question": "What is the validity of an International Driving Permit (IDP) issued in India?",
+      "answer": "An International Driving Permit (IDP) issued by Indian RTOs is valid for maximum 1 year from the date of issue, or until the expiry of your permanent Indian Driving License, whichever is earlier. It cannot be renewed online while residing abroad."
+    },
+    {
+      "category": "Driving License Services",
+      "question": "Can I drive a commercial transport vehicle with a private Light Motor Vehicle (LMV) license?",
+      "answer": "As per the Supreme Court ruling and CMVR rules, an LMV license holder can drive non-transport cars and light commercial vehicles having unladen weight up to 7,500 kg. However, for heavy transport vehicles or hazardous goods carriers, a specific Transport Badge endorsement is required."
+    },
+    {
+      "category": "Driving License Services",
+      "question": "What medical certificate Form 1A is needed for driving license application or renewal?",
+      "answer": "Form 1A is a physical fitness medical certificate issued and signed by a registered MBBS medical practitioner. It is mandatory for applicants above 40 years of age and for all commercial transport license applicants."
+    },
     {
       "category": "E-Challan",
       "question": "How do I check and pay my pending traffic challans?",
@@ -319,6 +988,416 @@
       "category": "Grievance",
       "question": "What should I do if my application is stuck or there is a grievance?",
       "answer": "You can lodge a complaint online through the national CPGRAMS portal (pgportal.gov.in) or use the specific state transport department's grievance cell. For Parivahan-related technical errors, you can mail helpdesk-vahan@gov.in or helpdesk-sarathi@gov.in with your application number and screenshots."
+    },
+    {
+      "category": "Vehicle Registration",
+      "question": "Give me an overview of Vehicle Registration in India.",
+      "answer": "Motor vehicle registration is the registration of a motor vehicle with a government authority, either compulsory or otherwise. The purpose of motor vehicle registration is to establish a link between a vehicle and an owner or user of the vehicle. While almost all motor vehicles are uniquely identified by a vehicle identification number, only registered vehicles display a vehicle registration plate and carry a vehicle registration certificate. Motor vehicle registration is different from motor vehicle licensing and roadworthiness certification. new 2022 motor vehicle registration sticker (bottom, foreground) about to be applied to the license plate over the previous 2021 sticker (top, background) Motor vehicles may also be registered with property owners or managers to gain benefits. For example, organisations with parking facilities may require registration of a vehicle with them to allow authorised users to park there. ==Australia== In Australia, all motor vehicles are required to be registered before being driven on public roads. Registration can be with one of the registration authorities set up by each state or territory. These authorities also issue registration plates (commonly known as number plates), which are affixed to the vehicle when it is first registered, and registration certificates for the vehicle. Registration must be renewed annually, with the payment of a fee. A compulsory third party insurance policy is required to renew the vehicle, as well as inspections for older or commercial vehicles. Increasingly, many registration functions can be performed online. Some vehicles are registered with the federal government, e.g. military vehicles or through the Federal Interstate Registration Scheme (FIRS) via state or territory agencies. Registration certific"
+    },
+    {
+      "category": "Vehicle Registration",
+      "question": "Can you explain \"Pakistan\" in the context of Vehicle Registration?",
+      "answer": "In Pakistan, there are three different types of vehicle registration process. The most popular is \"Vehicle verification via SMS Services\" launched by the Excise Department of Pakistan in Punjab and separately in the capital Islamabad in 2013. In Sindh or KPK, new or used vehicles are verified online by the Motor Transport Information Management System (MTMIS) using sites: * * * * There is also doorstep verification of vehicles, especially in Islamabad. The government of Pakistan launched this process of verification."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Give me an overview of Legal Framework in India.",
+      "answer": "The Motor Vehicles Act is an Act of the Parliament of India which regulates all aspects of road transport vehicles. The Act provides in detail the legislative provisions regarding licensing of drivers/conductors, registration of motor vehicles, control of motor vehicles through permits, special provisions relating to state transport undertakings, traffic regulation, insurance, liability, offences and penalties. For exercising the legislative provisions of the Act, the Government of India made the Central Motor Vehicles Rules 1989. ==Purpose== The main reasons behind drafting and enacting this legislation include the rapidly increasing number of vehicles in the country and the need for encouraging adoption of higher technology in the automotive sector. There also existed a need for effectively tracking down traffic offenders and providing more deterrent punishment for certain offences. There was also a growing concern for the framing of standards around vehicle components and road safety, as well as measures for pollution control. Additionally, there was a necessity for improved regulation around the registration of drivers, with there being a need for stricter protocol around granting driving licences. The system of vehicular registration also merited change, with an updated system being brought in place for registration marks, as well as for the maintenance of State registers for driving licenses and vehicle registration. The Act was also brought in to liberalise the grant of permits for vehicles carrying goods, as well as to rationalise definitions for types of vehicles. ==History and amendments=="
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"Indian Motor Vehicles Act, 1914\" in the context of Legal Framework?",
+      "answer": "The \"Indian Motor Vehicles Act, 1914\" was a central legislation passed and applicable in British India. Some princely states followed suit, with local modifications. Motor vehicles were first introduced in India towards the end of the 19th century, and the 1914 Act was the first legislation to regulate their use. It had 18 sections, and gave local governments the responsibility of registering and licensing vehicles and motorists, and enforcing regulations. was amended by the \"Indian Motor Vehicles (Amendment) Act, 1920\" (Act No. XXVII of 1920) passed by the Imperial Legislative Council. It received assent from the Governor General of India on 2 September 1920. The Act amended sections 11 and 18 of the 1914 Act."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"Indian Motor Vehicles (Amendment) Act, 1924\" in the context of Legal Framework?",
+      "answer": "The Act was amended again by the \"Indian Motor Vehicles (Amendment) Act, 1924\" (Act No. XV of 1924). The Act received assent from the Governor General on 18 September 1924. It had the title, \"An Act further to amend the Indian Motor Vehicles Act, 1914, for certain purposes\" and amended section 11 of the 1914 Act by inserting the words \"and the duration for which\" after the words \"area in which\" in clause (a) of subsection (2) of section 11. It was replaced by the Motor Vehicles Act, 1939, which came into force in 1940. The motor vehicles act has again been replaced in 1988. The 1988 amendment was brought to address above mentioned statements of object and reasons."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"Motor Vehicles Act,1988\" in the context of Legal Framework?",
+      "answer": "The Motor Vehicles Act, 1988 came into force from 1 July 1989. It replaced Motor Vehicles Act, 1939 which earlier replaced the first such enactment Motor Vehicles Act, 1914. The Act provides in detail the legislative provisions regarding licensing of drivers/conductors, registration of motor vehicles, control of motor vehicles through permits, special provisions relating to state transport undertakings, traffic regulation, insurance, liability, offences and penalties, etc. For exercising the legislative provisions of the Act, the Government of India made the Central Motor Vehicles Rules 1989."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"Definitions\" in the context of Legal Framework?",
+      "answer": "* Motor vehicle: Any mechanically propelled vehicle adapted for use upon roads whether the power of propulsion is transmitted from an external or internal source of power. The Motor Vehicles Act, 1988, like the earlier Act of 1939, makes the insurance of motor vehicles compulsory. The owner of every motor vehicle is bound to insure his vehicle against third party risk. The insurance company, i.e, the insurer covers risk of loss to the third party by the use of the motor vehicle."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"Accident claims\" in the context of Legal Framework?",
+      "answer": "There is a provision to provide with no upper limit, as interim relief to the family of a victim of fatal accidents. The cases of road accident compensation claims are decided in the Motor Accident Claims Tribunal."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"<small>The Road Transport And Safety Bill</small>\" in the context of Legal Framework?",
+      "answer": "The Road Transport and Safety Bill, 2014 envisioned providing a framework for safer, faster, cost-effective and inclusive movement of passengers and freight in India, thus enabling the mission of 'Make In India' following the death of the union minister Gopinath Munde in 2014. The bill proposed to set up the Motor Vehicle Regulation & Road Safety Authority of India, an independent agency for vehicle regulation and road safety which would be legally empowered and accountable to Parliament. Later due to controversies listed down in the controversies section, The bill was subsequently replaced by the Motor Vehicles (Amendment) Bill, 2017."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"<small>Indian Motor Vehicles (Amendment) bill, 2017</small>\" in the context of Legal Framework?",
+      "answer": "A significant upgrade to the motor vehicle laws, it envisaged body cams on traffic cops and RTO officials to check corruption, 7-year imprisonment instead of current 2 years for drink-driving deaths, mandatory 3rd party insurance for all vehicles, and stiffer penalties for traffic violations to reduce the accident rates. The bill was passed by the Lok Sabha in April 2017 and sent to the Rajya Sabha, which referred it to a select committee in August 2017. The bill was again scrutinized by a joint standing committee composed of Transport ministers of 18 states of India. Due to frequent disruptions in Rajya Sabha and lack of support from Indian National Congress, the bill failed to turn into act and lapsed after the conclusion of interim budget session and on the account of general elections. ===Indian Motor Vehicles (Amendment) Act, 2019=== This is similar to the Indian Motor Vehicles (Amendment) bill, 2017, although, introduced later in 2019 so the name. The earlier bill has lapsed at the end of the last session of 16th Lok Sabha. The bill was re-introduced in the first session of 17th Lok Sabha by union transport minister Nitin Gadkari which is then passed by both the houses before the end of the session. It came in to force on 1 September 2019, providing higher penalties for traffic offences."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"Implementation of the Amended Law\" in the context of Legal Framework?",
+      "answer": "As per the official notification issued by the central government on 28 August 2019, the 63 clauses of the Motor Vehicles (Amendment) Act, 2019 to be implemented from 1 September 2019 as these clauses do not need any further modifications in the Central Motor Vehicles rules, 1989. These include higher penalties for various traffic offences, national transportation policy among others."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"Controversies\" in the context of Legal Framework?",
+      "answer": "Tamil Nadu Government opposed the Road Transport and Safety Bill and asked centre to redraft it as bill encroaches upon the financial, legislative and administrative powers of state governments. A nationwide strike was called by various transport unions on 30 April 2015 to protest against the bill. West Bengal's transport ministry informed the state assembly on 27 August 2019 that the amended Motor Vehicles act will not be implemented in West Bengal since the state government is against the hefty fines proposed in the act. ===Limited provisions for non-motorized and self-propelled vehicles=== The Motor Vehicles Act, 2019 implemented harsher penalties on motor vehicles for traffic violations. This led to an increase in sale and use of non-motorized and self-propelled forms of transport, such as bicycles, especially for short commutes. As per the Motor Vehicles Act, bicycles do not require licenses, registration, insurance, and road tax to ride. The non-requirement of license is also applicable to electric bicycles with power up to 250 watts or lesser and maximum speed upto 25 km/h(15.5 mph). The Motor Vehicles Act, while provides rights for cyclists as well as other non-motorized vehicles, however, neither mentions specific rules and regulations, nor states penalties for bicyclists on certain violations, although certain guidelines and recommendations exist for bicyclists to follow traffic signs, along with mandate for motor vehicles to give the right of way to bicyclists and pedestrians. Due to no specific rules and penalties, law enforcement in states and cities have made rules on their own against pedal-bicycles, some of which have earned negative reception by bicyclists, transport experts. and lawyers. Beginning in 2008, the Kolkata traffic police prohibited the entr"
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"2024 protests\" in the context of Legal Framework?",
+      "answer": "In January 2024, protests were organized against new law dealing with the hit-and-run cases in Bharatiya Nyaya Sanhita, which replaced the Indian Penal Code (IPC) in July 2024. It has a provision under Section 106 (2), that attracts punishment of up to 10 years for drivers and a fine of ₹7 lakh who cause a serious road accident by negligent driving and run away without informing the police or any official from the administration. Large-scale traffic congestion on roads caused by the protests caused inconvenience for citizens in many states, including Punjab, Uttar Pradesh, Maharashtra, Madhya Pradesh and West Bengal. In many locations, there were lengthy lines at gas stations as residents hurried to fill up their cars in anticipation of a possible gasoline shortage brought on by the protest. Approximately 2,000 gas stations, primarily in western and northern India, ran out of fuel during the truckers' associations' strike. In advance of the truckers' strike, state-owned oil companies topped off tanks at the majority of gas stations nationwide; nonetheless, excessive traffic caused several gas stations in Rajasthan, Madhya Pradesh, Maharashtra, and Punjab to run out of stock, according to industry authorities. On 2 January, Chandigarh imposed restrictions on the sale of petrol and diesel at fuel stations after a strike. According to Union estimates, there is a $12 million revenue loss daily due to the strike."
+    },
+    {
+      "category": "Legal Framework",
+      "question": "Can you explain \"Unsafe vehicles\" in the context of Legal Framework?",
+      "answer": "The Motor Vehicles Act does not have any regulations on the sales of any vehicles which have been rated as unsafe in crash tests, despite the legislation mandating some bare minimum safety features such as ABS and Airbags. While the implementation of crash testing under Bharat NCAP helps customers know safety ratings, the crash testing has not been made mandatory. This allows manufacturers to sell cars that have been rated unsafe to customers nationwide, which have been rated poorly in crash tests despite safety features."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Give me an overview of Government & Policy in India.",
+      "answer": "The Ministry of Road Transport and Highways (MoRTH) is a ministry of the Government of India, that is the apex body for formulation and administration of the rules, regulations and laws relating to road transport, transport research and in also to increase the mobility and efficiency of the road transport system in India. Through its officers of Central Engineering Services (Roads) cadre it is responsible for the development of National Highways of the country. Road transport is a critical infrastructure for economic development of the country. It influences the pace, structure and pattern of development. In India, roads are used to transport over 60 percent of the total goods and 85 percent of the passenger traffic. Hence, development of this sector is of paramount importance for India and accounts for a significant part in the budget."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Creation\" in the context of Government & Policy?",
+      "answer": "The Department of War Transport was formed in July, 1942, by the bifurcation of the then Department of Communications into two Departments: * Department of Posts * Department of War Transport. * Department of war The functions allocated to the Department of war Transport include Major Ports, Railways Priorities, utilization of road and water transport, Petrol rationing and Producer Gas. Broadly speaking, the functions of the War Transport Department were to coordinate the demands for transport in war time, Coastal Shipping and the administration and development of major ports. Later, the planning of export was undertaken as a corollary to the Departments control of transport priorities also."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Changes made over years\" in the context of Government & Policy?",
+      "answer": "* 1957: Department of War Transport was renamed as Ministry of Transport & Communications and Department of transport was placed under it. * 1966: On 25 January, under President's order the Department of Transport, Shipping & Tourism was placed under Ministry of Transport and Aviation. * 1967: On 13 March, the Ministry of Transport and Aviation was bifurcated into Ministry of Shipping and Transport and the Ministry of Tourism and Civil Aviation. * 1985: On 25 September, during reorganisation the Ministry of Transport and Shipping became the Department of Surface Transport under the Ministry of Transport. * 1986: On 22 October, the Department of Surface Transport under Ministry of Transport was renamed as Ministry of Surface Transport . * 1999: On 15 October, Ministry of Surface Transport was subsequently re-organized into departments, namely Department of Shipping and Department of Road Transport and Highways. * 2000: On 17 November, the Ministry of Surface Transport was bifurcated into two Ministries namely Ministry of Road Transport and Highways and Ministry of Shipping. * 2004: On 2 October, Ministry of Shipping and Ministry of Road Transport has again been merged and renamed as Ministry of Shipping and Road Transport and Highways * 2009: The Ministry of Shipping was again formed by bifurcating the Ministry Of Shipping, Road Transport, and Highways"
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Organisational structure\" in the context of Government & Policy?",
+      "answer": "* The Ministry of Road Transport Highways is structurally divided into the following wings: 1. Road wing 2. Road Transport Wing 3. Transport Research Wing 4. Highways Wing 5. Finance Wing 6. Administration Wing 7. International Cooperation Wing 8. Toll & Coordination Wing 9. Land Acquisition Wing 10. Parliament Wing Apart from these there is the Planning and Monitoring zone. * The Secretary (Road Transport & Highways) is assisted by Director General (Road Development) & Special Secretary, Joint Secretary (Road Transport), Financial Advisor, Advisor (Transport Research). *Director General (Road Development) is responsible for Development & Maintenance of National Highways. * Joint Secretary looks after transport administration, public grievances, vigilance road safety and coordination & public relations * Accounts Wing is headed by the Chief Controller of Accounts who is responsible for accounts budget, work and study. * Advisor (Transport Research Wing) renders necessary data support to various wings of the Ministry for policy planning, transport coordination, economic and statistical analysis on various modes of transport with which the ministry is concerned."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Regional Offices\" in the context of Government & Policy?",
+      "answer": "Following are the regional offices, each headed by a Regional Officer (RO): The ministry has following wings functioning under it"
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Roads Wing\" in the context of Government & Policy?",
+      "answer": "The road wing of the MoRTH is the backbone of the country's road network development programme. It is staffed by officers of the Central Engineering Services (Roads). It is headed by Director General (Road Development) and Special Secretary to the Government of India. The Road wing of MoRTH is further divided into five Project Zones. Each Project zone is generally vested with responsibility of four to five states for National highway development and development of road network. These five project Zones are headed by five Additional Director Generals (ADG) of Central Engineering Services (Roads) cadre who are assisted by Zonal Chief Engineer of Headquarter and Regional Officers. Regional officers are posted on ground in their respective states for development and maintenance of National Highways through State PWDs. Main responsibilities of the roads wing are: * Planning, development and maintenance of National Highways * Extends technical and financial support to the state government for development of state roads and roads of inter-state connectivity and national importance. * Setting standards for building and maintenance of roads and bridges. * Archiving important technical knowledge generated through projects and R&D. *Sanctioning of works related to construction, maintenance and operation of National Highways. *Sanctioning the estimates for various centrally sponsored schemes including CRF (Central Road Fund), Roads of Interstate Connectivity. *Dealing the matters related to road safety. * Administration of NH act 1956, The Highway Administration Rules 2005"
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Transport Wing\" in the context of Government & Policy?",
+      "answer": "Main responsibilities of the transport wing are: * Motor Vehicle Legislation * Taxation of motor vehicles * Compulsory insurance for vehicles * Promotion of Transport cooperatives in the field of motor transport. * Setting National road safety standards * Compiling data on road accidents and evolving a road safety culture among the people in the country * Providing grants to NGOs in accordance with laid down guidelines."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Planning and Monitoring Zone\" in the context of Government & Policy?",
+      "answer": "This zones are headed by two separate Chief Engineers of Central Engineering Services (Roads). Main responsibilities of this zone are: * Preparation of budgets and scheme wise allocation of funds maintaining records of expenditure. * Identification of stretches that may form probable network of National Highways. * Notification and de-notification of National Highways. * The Monitoring Zone deals with the monitoring and reviewing progress of ongoing NH works dealt by various executing Agencies of NH development."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Standards and Research (S&R) Zone\" in the context of Government & Policy?",
+      "answer": "This zones is headed by a Chief Engineers of Central Engineering Services (Roads). Main responsibilities of this zone is Preparation of standards/ rules / guidelines for NH development program and related activities."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Agencies\" in the context of Government & Policy?",
+      "answer": "===Autonomous bodies=== Following are the autonomous agencies under the MoRTH."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Acts\" in the context of Government & Policy?",
+      "answer": "Over years the ministry has passed several acts to maintain law and order in Road Transport in the country * Road Transport Corporations Act, 1950 * National Highways Act, 1956 * Motor Vehicles Act, 1988 * National Highways Authority of India Act, 1988"
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Statistics\" in the context of Government & Policy?",
+      "answer": "India has one of the largest road networks of over 4.885 million km consisting of : The total road length of India had grown more than 11 times in 60 years from 1951 to 2011; also the length of the surfaced roads had increased about 16 times over the same period. The connectivity in India has tremendously improved due to formation of new surface roads. For development of roads in the country the government has made an allocation of ₹19,423.88 crores under the Central Road Fund for 2013–2014 with the following breakup"
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"Government initiatives\" in the context of Government & Policy?",
+      "answer": "The government has provided various incentives for private and foreign investments in the roads sector. 100% FDI is allowed in the sectors of land transport to promote building of highway bridges, toll roads, and vehicular tunnels; services incidental to transport such as cargo handling is incidental to land transport; construction and maintenance of roads, bridges; and construction and maintenance of roads and highways offered on build-operate-transfer (BOT) basis, including collection of toll. A 10-year tax exemption under Section 80 IA has been granted to the highway building projects to attract private investors. The ministry has also framed a ‘Special Accelerated Road Development Programme in North Eastern Region' for improving road connectivity to remote places in this region. The estimated cost of the proposal is US$2.53 billion. The Union Budget 2012–13 proposed an increase of allocation of the Ministry of Road Transport and Highways by 14% to . The World Bank has approved a US$975 million loan for developing the first phase of the eastern arm of the US$17.21 billion Dedicated Freight Corridor Project in India. The Dedicated Freight Corridor Corporation of India Ltd. has tied up with the Japanese Bank of Industrial Cooperation for US$14.56 billion funding as loan for the first phase and it is likely to be commissioned in 2016. The Prime Minister Gram Sadak Yojana (PMGSY) is a scheme for development of rural roads in India. The Construction of Rural Roads Project (CRRP) is another initiative focused on rural development."
+    },
+    {
+      "category": "Government & Policy",
+      "question": "Can you explain \"National Green Highways Program\" in the context of Government & Policy?",
+      "answer": "Ministry of Transport and NHAI has launched the green highways programme in 2016."
+    },
+    {
+      "category": "Traffic Enforcement",
+      "question": "Give me an overview of Traffic Enforcement in India.",
+      "answer": "traffic officer directing traffic in Kuala Lumpur Traffic police (also known as traffic officers, traffic enforcement officer, traffic enforcement units, traffic cops, traffic monitors, or traffic enforcers) are units and agencies who enforce traffic laws and manage traffic. Traffic police help to assist in patrolling highways, directing traffic and address traffic infractions. They may be a separate agency from a main police agency, a unit or division within a police agency, or a type of assignment issued to officers; they can also be part of a transportation authority or highway authority. It has been noted that: ==History== officer directing traffic in downtown Seattle, 1922. Some early intersections featured concrete islands for traffic lights and traffic officers. Traffic police have existed in some form for nearly three centuries. Possibly the first traffic police force was established in London, England in 1722, when the Lord Mayor of London, in response to an increase in traffic during the 18th century, appointed three men to position themselves on London Bridge and ensure traffic kept to the left side of the road and did not stop in traffic, with the aim of ensuring traffic could continue to flow unabated. ==Enforcement methods=="
+    },
+    {
+      "category": "Traffic Enforcement",
+      "question": "Can you explain \"Traffic direction\" in the context of Traffic Enforcement?",
+      "answer": "officer directing traffic at a busy intersection One of the oldest and most basic forms of traffic policing is directing traffic. This is conducted by a traffic officer (usually only one) who stands in the middle of an intersection, using hand signals and occasionally also a whistle, a handheld traffic sign (usually a stop sign), or a handheld light stick to manage the flow of vehicles and pedestrians. The officer directing traffic is usually a foot patrol officer or an auxiliary officer, though officers with vehicles may also direct traffic, parking their vehicles out of the way. Officers directing traffic typically wear high-visibility clothing to provide visibility and avoid being struck by traffic, ranging from brightly colored uniforms (historically a white patrol cap or helmet with gloves) to neon-colored vests and coats with retroreflective strips. Though common worldwide before traffic signs and traffic lights became commonplace, traffic direction is now rare in places where traffic lights are the primary mode of traffic management, where it is mostly limited to incidents where roadways are closed or obstructed, traffic is heavier than usual, or traffic lights are disabled or otherwise unavailable, such as during a power outage or at the scene of a traffic collision. Traffic direction continues to be a mainstay in places where traffic lights and signs are not used, or where traffic is so dense that directing traffic is more effective than relying on lights and signs alone."
+    },
+    {
+      "category": "Traffic Enforcement",
+      "question": "Can you explain \"Vehicular enforcement\" in the context of Traffic Enforcement?",
+      "answer": "traffic unit conducting a traffic stop One of the most common forms of traffic policing in the modern day is vehicular enforcement. This is conducted by police officers using vehicles, typically cars or motorcycles but occasionally also aircraft or watercraft, who directly enforce vehicular traffic. Vehicular enforcement is often very similar to regular police patrols, and may be a standard police responsibility in some agencies. Vehicular enforcement usually consists of the enforcement of speed limits, registration and licensing, driving under the influence, commercial vehicle inspection, and other vehicle-related laws and crimes. The most common methods of vehicular enforcement are traffic stops, checkpoints, and \"watching traffic\" along the shoulder of roadways using radar speed guns. Some roads may be patrolled by aircraft, a declaration usually posted along such a roadway by the agency operating said aircraft. Though some motorists view this as mere deception used to promote slowing down, police aircraft actually do patrol some freeways, albeit rarely due to the costs in operating aircraft for lengthy periods. To measure a vehicle's speed, the pilots calculate the time it takes to travel between a set of road markings. Should the pilots determine the vehicle is speeding or violating a law, they follow it until a police unit in a land vehicle arrives to initiate a traffic stop."
+    },
+    {
+      "category": "Traffic Enforcement",
+      "question": "Can you explain \"Remote enforcement\" in the context of Traffic Enforcement?",
+      "answer": "used by the Nevada Department of Transportation and Nevada State Police to monitor highways Remote traffic enforcement is conducted using traffic enforcement cameras typically installed and managed by a transportation authority, highway authority, or police agency along roadways. These camera feeds are then monitored for visible crimes or incidents such as speeding, reckless driving, or traffic collisions, to which the proper services are then dispatched if needed. Some traffic cameras can automatically read plates to check for registration and licensing infractions or wants and warrants, or even fine the registered owner of the vehicle without having to dispatch a police unit to issue a ticket."
+    },
+    {
+      "category": "Traffic Enforcement",
+      "question": "Can you explain \"Automation\" in the context of Traffic Enforcement?",
+      "answer": "In the 2010s, the Congolese National Police deployed automated traffic police robots. Created by Thérèse Kirongozi, an engineer from the Democratic Republic of the Congo, the tall solar-powered aluminum robots are positioned in intersections and are able to rotate, but cannot actually move; rather, they contain closed-circuit television cameras in their \"eyes\" that record offenders for human traffic officers to handle. The robots also carry red and green lights to direct traffic, and can speak to pedestrians and help them cross roads. Five robots were installed in intersections in Kinshasa by 2015, with thirty more planned for highway patrol purposes. ==Enforcement agencies== motorcycle officer questioning a motorist during a traffic stop Traffic policing is, as its name implies, usually the responsibility of police. Traffic police are often either independent police agencies, units within police agencies, or an assignment given to police officers or auxiliaries. Separate units and agencies usually have the same or similar enforcement powers as regular police, such as arrest powers, though they may or may not lack firearms."
+    },
+    {
+      "category": "Traffic Enforcement",
+      "question": "Can you explain \"Non-police traffic enforcement\" in the context of Traffic Enforcement?",
+      "answer": "Some traffic officers are not part of police agencies, and are instead part of transportation authorities, highway authorities, or regulatory boards. They often work alongside police, and may call upon them to handle emergencies or road crimes. In the United Kingdom, England's National Highways employs traffic officers, as does the Welsh Government, who also employ traffic officers; both are responsible for traffic management and roadside assistance on trunk roads in their respective jurisdictions. In the Philippines, the Land Transportation Office (LTO) and Land Transportation Franchising and Regulatory Board (LTFRB), the agencies under the Department of Transportation and the Public Order and Safety Office of all local government units, enforces a range of vehicular laws. In the United States, some department of transportation (DOT) agencies are able to direct traffic, provide roadside assistance, and enforce traffic laws. In some instances, civilians and unsworn personnel may be enlisted by police for auxiliary purposes, including traffic policing, while others may take it upon themselves to direct traffic in the absence of the proper authorities. For example, during the Northeast blackout of 2003, citizens in Toronto and New York City directed traffic while traffic lights were disabled. However, in some jurisdictions such as Ontario, such practices are illegal, and only law enforcement and authorized personnel can direct traffic due to liability concerns. In the United States, there have been some efforts to transfer traffic stop authority to some DOTs as part of police reform initiatives, most prominently in Berkeley, California, which planned to establish \"BerkDOT\" to enforce minor traffic violations while still allowing the Berkeley Police Department to handle ma"
+    },
+    {
+      "category": "Road Safety",
+      "question": "Give me an overview of Road Safety in India.",
+      "answer": "curbs and traffic signals in Hagerstown, Maryland, United States s in different areas; here unusually with only a \"recommended\" limit (Richtgeschwindigkeit) of 130 km/h on the Autobahn in Germany guiding traffic on the Dutch A13 motorway or an emergency can stop in the emergency lane; these lanes may themselves present risks to traffic. , a 1923 cartoon published in St. Louis Star, criticizing the apparent acceptance by society of increasing automobile-related fatalities Road traffic safety refers to the methods and measures, such as traffic calming, to prevent road users from being killed or seriously injured. Typical road users include pedestrians, cyclists, motorists, passengers of vehicles, and passengers of on-road public transport, mainly buses and trams. Best practices in modern road safety strategy: As sustainable solutions for classes of road safety have not been identified, particularly low-traffic rural and remote roads, a hierarchy of control should be applied, similar to classifications used to improve occupational safety and health. At the highest level is sustainable prevention of serious injury and death crashes, with sustainable requiring all key result areas to be considered. At the second level is real-time risk reduction, which involves providing users at severe risk with a specific warning to enable them to take mitigating action. The third level is about reducing the crash risk which involves applying the road-design standards and guidelines (such as from AASHTO), improving driver behavior and enforcement. Drivers' traffic behaviors are significantly influenced by their perceptions and attitudes. Traffic safety has been studied as a science for more than 75 years. ==Background== s save a vehicle from a long fall c. 1920. Guard rails were only so"
+    },
+    {
+      "category": "Road Safety",
+      "question": "Can you explain \"History\" in the context of Road Safety?",
+      "answer": "Roadways originally carried all sorts of traffic indiscriminately - beasts of burden as well as pedestrians. Road behavior and rules have developed to prioritize certain types of traffic. Important people traversing crowded streets and alleys in ancient Rome (famous for its Roman roads) deployed minions to clear the way for their litters or (if allowed) carts and chariots. Even the mighty preferred not to trample the bystanders. In the 19th century the advent of powered vehicles inspired British road-safety law to impose speed limits and to require a person on foot carrying a red flag warning of the arrival of a frightening noisy mechanical contrivance. Subsequently, motoring lobby-groups pressed for the priority of motorized traffic, and safety laws drove playing children off the streets and ghettoized the likes of walkers, bicycles, wheel-chairs and scooters to the margins. Concepts like shared space, living streets and woonerven developed to counter this paradigm. ==Mortality == ===Mortality units=== According to the WHO/IRTAD: ===Mortality statistics=== * EU source: European institutions (EC): EU28 2013; EU27 2019 * Japan source: WHITE PAPER ON TRAFFIC SAFETY IN JAPAN 2018 * US Source: OECD * US Source, 2019: NHTSA ===Built-up areas=== , line markings and street furniture at a mid-block crosswalk has specially painted bicycle-only lanes. On neighborhood roads where many vulnerable road users, such as pedestrians and bicyclists can be found, traffic calming can be a tool for road safety. Though not strictly a traffic calming measure, mini-traffic circles implanted in normal intersections of neighbourhood streets have been shown to reduce collisions at intersections dramatically (see picture). Shared space schemes, which rely on human instincts and interactions, su"
+    },
+    {
+      "category": "Road Safety",
+      "question": "Can you explain \"Traveled distance effect\" in the context of Road Safety?",
+      "answer": "In some countries, the safety is computed mixing two metrics: the fatalities and the traveled distance, to establish fatalities by traveled distance. According to the BITRE, traveled distance has a limited impact on death trend from OECD countries."
+    },
+    {
+      "category": "Road Safety",
+      "question": "Can you explain \"Road traffic safety professional societies\" in the context of Road Safety?",
+      "answer": "Institute of Transportation Engineers: An international educational and scientific association of transportation professionals who are responsible for meeting mobility and safety needs. National Association of City Transportation Officials International Municipal Signal Association: A traffic standard organization."
+    },
+    {
+      "category": "Road Safety",
+      "question": "Can you explain \"Signalized Intersections Informational Guide\" in the context of Road Safety?",
+      "answer": "Published by the Federal Highway Association of the U.S. Department of Transportation."
+    },
+    {
+      "category": "Road Safety",
+      "question": "Can you explain \"Advocacy groups\" in the context of Road Safety?",
+      "answer": "The Automobile Association was established in 1905 in the United Kingdom to help motorists avoid police speed traps. They became involved in other safety issues and also erected thousands of roadside warning signs. Motoring advocacy groups including the Association of British Drivers (UK), Speed cameras.org (UK), National Motorists Association (US/Canada) argue that the strict enforcement of speed limits does not necessarily result in safer driving, and may even have negative effect on road safety in general. Safe Speed was a UK group set up specifically to campaign against the use of speed cameras. Together for Safer Roads (TSR) is a coalition that brings together global private sector companies, across industries, to collaborate on improving road safety. TSR brings together members' knowledge, data, technology, and global networks to focus on five road safety areas with the goal of bringing about the greatest impact globally and within local communities. In 1965, Ralph Nader put pressure on car manufacturers in his book Unsafe at Any Speed, detailing resistance by car manufacturers to the introduction of safety features such as seat belts, and their general reluctance to spend money on improving safety. The GM President James Roche was later forced to appear before a United States Senate subcommittee, and to apologize to Nader for the company's campaign of harassment and intimidation. Nader later successfully sued GM for excessive invasion of privacy. RoadPeace was formed in 1991 in the United Kingdom to advocate for better road safety and founded World Day of Remembrance for Road Traffic Victims in 1993 which received support from the United Nations General Assembly in 2005. ==See also== * (in the US) * * * * * * * * * * * * * * * * * * * * * *"
+    },
+    {
+      "category": "Vehicle Insurance",
+      "question": "Give me an overview of Vehicle Insurance in India.",
+      "answer": "Vehicle insurance (also known as car insurance, motor insurance, or auto insurance) is insurance for cars, trucks, motorcycles, and other road vehicles. Its primary use is to provide financial protection against physical damage or bodily injury resulting from traffic collisions and against liability that could also arise from incidents in a vehicle. Vehicle insurance may additionally offer financial protection against theft of the vehicle, and against damage to the vehicle sustained from events other than traffic collisions, such as vandalism, weather or natural disasters, and damage sustained by colliding with stationary objects. The specific terms of vehicle insurance vary with legal regulations in each region. ==History== Widespread use of the motor car began after the First World War in urban areas. Cars were relatively fast and dangerous by that stage, yet there was still no compulsory form of car insurance anywhere in the world. This meant that injured victims would rarely get any compensation in a crash, and drivers often faced considerable costs for damage to their car and property. A compulsory car insurance scheme was introduced in the United Kingdom with the Road Traffic Act 1930. This ensured that all vehicle owners and drivers had to be insured for their liability for injury or death to third parties while their vehicle was being used on a public road. Ireland replicated the obligation via the Road Traffic Act, 1933. The EU (then EEC) required mandatory insurance cover be mandated by all member states, from 1973. ===Australia=== In Australia, every state has its own Compulsory Third-Party (CTP) insurance scheme. CTP covers only personal injury liability in a vehicle crash. Comprehensive and Third-Party Property Damage, with or without Fire and Theft insuran"
+    },
+    {
+      "category": "Vehicle Insurance",
+      "question": "Can you explain \"Spain\" in the context of Vehicle Insurance?",
+      "answer": "Each motor vehicle on a public road is required to have third party insurance (called ). Police forces have the power to seize vehicles that do not have the necessary insurance in place, until the owner of the vehicle pays the fine and signs a new insurance policy. Driving without the necessary insurance for that vehicle is an offence that will be prosecuted by the police and will receive a penalty. The same provision is applied when the vehicle is standing on a public road. The minimum insurance policy covers only third parties (including the insured person and third parties carried with the vehicle, but not the driver, if the two do not coincide). Third parties, fire and theft is a common insurance policy. Victims of accidents caused by non-insured vehicles may be compensated by a Warranty Fund, which is covered by a fixed amount for each insurance premium. Since 2013 it is possible to contract an insurance by days as is possible in countries such as Germany and the UK."
+    },
+    {
+      "category": "Vehicle Insurance",
+      "question": "Can you explain \"Bulgaria\" in the context of Vehicle Insurance?",
+      "answer": "Liability insurance (called ) is compulsory for each motor vehicle driven on public roads and covers third parties for injuries up to 10 420 000 BGN and property damage up to 2 100 000 BGN per insured incident. ====Romania==== Romanian law mandates Răspundere Auto Civilă, a motor-vehicle liability insurance for all vehicle owners to cover damages to third parties. ===Indonesia=== s and temporary barriers nationwide. Third-party vehicle insurance is a mandatory requirement in Indonesia and each individual car and motorcycle must be insured or the vehicle will not be considered legal; this compulsory auto insurance is legally called the Road Traffic Accidents Compulsory Coverage Fund (, DPWKLLJ). Therefore, a motorist cannot drive the vehicle until it is insured. DPWKLLJ was introduced in 1964 and merely covers body injuries, and is operated by an SOE called . DPWKLLJ is included, through an annual premium called the Compulsory Donation to the Road Traffic Accident Fund (, SWDKLLJ), in the annual vehicle tax which is paid to the local Samsat (Sistem Administrasi Manunggal di bawah Satu Atap), which is responsible for cars and roads. *Two wheeler insurance – covers accidental insurance for the driver of the vehicle. The amount of premium depends on the current showroom price multiplied by the depreciation rate fixed by the Tariff Advisory Committee at the beginning of a policy period. *Commercial vehicle insurance – provides cover for all the vehicles which are not used for personal purposes like trucks and HMVs. The amount of premium depends on the showroom price of the vehicle at the commencement of the insurance period, make of the vehicle and the place of registration of the vehicle. ===Malaysia=== In Malaysia, renewing car insurances is a very common thing. In general"
+    },
+    {
+      "category": "Vehicle Insurance",
+      "question": "Can you explain \"Russian Federation\" in the context of Vehicle Insurance?",
+      "answer": "In Russia motor vehicle liability insurance is mandatory for all owners and known as OSAGO. Insurance of the vehicle itself (\"Casco\") is technically voluntary, but may be mandated in some circumstances, e.g. if the car is leased. ===South Africa=== South Africa allocates a percentage of the money from fuel into the Road Accident Fund, which goes towards compensating third parties in crashes."
+    },
+    {
+      "category": "Vehicle Insurance",
+      "question": "Can you explain \"Thailand\" in the context of Vehicle Insurance?",
+      "answer": "In Thailand, motor vehicle insurance is regulated by the Office of Insurance Commission (OIC), the government agency responsible for supervising the industry and establishing insurance regulation and policy standards. Under the Motor Victims Protection Act B.E. 1992, all vehicles are required to carry compulsory motor insurance (Por Ror Bor), which provides basic compensation for road accident victims, including coverage for medical expenses and third-party bodily injury liabilities. The renewal of compulsory motor insurance is a prerequisite for the annual vehicle tax and registration renewal process. Vehicle owners must maintain a valid Por Ror Bor policy in order to renew their vehicle tax and keep their vehicle legally registered. In addition, voluntary motor insurance is available and provides broader protection than Por Ror Bor. Policyholders may choose between named-driver policies, where specific drivers are listed on the policy, and any-driver policies, which provide coverage regardless of who is driving the vehicle. Under regulations introduced by the OIC in 2025, insurers may apply driver-based risk assessment for voluntary motor insurance, taking into account a named driver's claims history when determining premiums. ===United Arab Emirates=== When buying car insurance in the United Arab Emirates, the traffic department requires a 13-month insurance certificate each time a person registers or renews a vehicle registration. In Dubai, vehicle insurance is compulsory as per the UAE RTA law. There are two types of motor insurance policies in Dubai, Third-Party Liability Insurance and Comprehensive Motor Insurance. It is mandatory to have third-party liability insurance for every individual vehicle owner in Dubai. This insurance policy is the most basic form of"
+    },
+    {
+      "category": "Vehicle Insurance",
+      "question": "Can you explain \"Insurance write-off categories\" in the context of Vehicle Insurance?",
+      "answer": "In the United Kingdom, insurers classify vehicles that have been declared a total loss into standard “write-off” categories. These categories are set out in the Motor Vehicle Salvage Code of Practice published by the Association of British Insurers (ABI). The four main categories are: * Category A – vehicle must be scrapped with no parts reused. * Category B – body shell destroyed, but some parts can be salvaged. * Category S – structural damage, repairable and may return to the road. * Category N – non-structural damage, repairable and may return to the road. Write-off records are stored in the Motor Insurance Anti-Fraud and Theft Register (MIAFTR), which is managed by the Motor Insurers’ Bureau (MIB). Drivers cannot access MIAFTR directly, but commercial vehicle check services provide this information to the public. ===United States=== The regulations for vehicle insurance differ with each of the 50 US states and other territories, with each U.S. state having its own mandatory minimum coverage requirements (see separate main article). Forty-nine U.S. states and the District of Columbia require drivers to have insurance coverage for both bodily injury and property damage, with New Hampshire being the exception, but the minimum amount of coverage required by law varies by state. For example, minimum bodily injury liability coverage requirements range from $30,000 in Arizona to $100,000 in Alaska and Maine, while minimum property damage liability requirements range from $5,000 to $25,000 in most states. ==Coverage levels== Vehicle insurance can cover some or all of the following items: * The insured party (medical payments) * Property damage caused by the insured * The insured vehicle (physical damage) * Third parties (car and people, property damage and bodily inj"
+    },
+    {
+      "category": "Number Plates",
+      "question": "Give me an overview of Number Plates in India.",
+      "answer": "s, which are operated in Madrid by the same company. Note that both vehicle registration plates finish in MYF. This is due to the company buying these en masse. A vehicle registration plate, also known as a number plate (British, Indian, Pakistani, Australian, and New Zealand English), license plate (American English) or licence plate (Canadian English), is a metal or plastic plate attached to a motor vehicle or trailer for official identification purposes. All countries require registration plates for commercial road vehicles such as cars, trucks, and motorcycles, for hire. Whether they are required for other vehicles, such as bicycles, boats, or tractors, may vary by jurisdiction. The registration identifier is a numeric or alphanumeric ID that uniquely identifies the vehicle or vehicle owner within the issuing region's vehicle register. In some countries, the identifier is unique within the entire country, while in others it is unique within a state or province. Whether the identifier is associated with a vehicle or a person also varies by issuing agency. There are also electronic license plates."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Legal requirements\" in the context of Number Plates?",
+      "answer": "In Europe, most governments require a registration plate to be attached to both the front and rear of a vehicle, although certain jurisdictions or vehicle types, such as motorcycles, require only one plate, which is usually attached to the rear of the vehicle. Special vehicles, such as agricultural and construction equipment, might have the license plate attached to other parts of the vehicle. National databases relate this number to other information describing the vehicle, such as the make, model, colour, year of manufacture, engine size, type of fuel used, mileage recorded (and other similar data in jurisdictions where vehicles are regularly inspected for roadworthiness every year or two), vehicle identification number (chassis number), and the name and address of the vehicle's registered owner or keeper. one features holograms to deter numberplate cloning. In the vast majority of jurisdictions, the government holds a monopoly on the manufacturing of vehicle registration plates for that jurisdiction. Either a government agency or a private company with express contractual authorization from the government makes plates as needed, which are then mailed to, delivered to, or picked up by the vehicle owners. Thus, it is normally illegal for private citizens to make and affix their own plates, because such unauthorized private manufacturing is equivalent to forging an official document. Alternatively, the government will merely assign plate numbers, and it is the vehicle owner's responsibility to find an approved private supplier to make a plate with that number. Additionally, citizens can create custom plates, following specific guidelines and naming conventions approved by the relevant national authorities (such as the DVLA in the UK). In some jurisdictions, plates wil"
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Placement\" in the context of Number Plates?",
+      "answer": "Plates are usually fixed directly to a vehicle or to a plate frame that is fixed to the vehicle. Sometimes, the plate frames contain advertisements inserted by the vehicle service centre or the dealership from which the vehicle was purchased. Vehicle owners can also purchase customized frames to replace the original frames. In some jurisdictions registration plate frames are illegal or have design restrictions. For example, many states, like Texas, allow plate frames but prohibit plate frames from covering the name of the state, province, district, Native American tribe or country that issued the license plate (when that information appears on the plate). Plates are designed to conform to standards with regard to being read by eye in day or at night, or by electronic equipment. Some drivers purchase clear, smoke-colored or tinted covers that go over the registration plate to prevent electronic equipment from scanning the registration plate. Legality of these covers varies. Some cameras incorporate filter systems that make such avoidance attempts unworkable, usually with infra-red filters. Vehicles pulling trailers, such as caravans and semi-trailer trucks, are typically required to display a third registration plate on the rear of the trailer."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"History\" in the context of Number Plates?",
+      "answer": "France was the first country to introduce the registration plate with the enactment of the Paris Police Ordinance on 14 August 1893, followed by Germany in 1896. The Netherlands was the first country to introduce a national registration plate, called a \"driving permit\", in 1898. Initially these plates were just sequentially numbered, starting at 1, but this was changed in 1906. In the United States, where each state issues plates, New York State has required plates since 1903 (black numerals on a white background) after first requiring in 1901 only that the owner's initials be clearly visible on the back of the vehicle. At first, plates were not government-issued in most jurisdictions and motorists were obliged to make their own. In 1903, Massachusetts was the first state to issue plates. In 1928, Idaho was the first state to put a logo on the plate (the \"Idaho Potato\"). In Spain, the first law to define rules on non-animal vehicle traction was and the registration of vehicles was defined as a provincial task in the . The first Spanish registration plate, PM–1, was issued for a Clément-Talbot on 31 October 1900 in Palma de Mallorca. 256 vehicles were registered between 1901 and 1905."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"South Africa\" in the context of Number Plates?",
+      "answer": "number plate (1995) South African number plates are unique in each of the provinces. Each province has its own number plate design and colors, as well as numbering scheme."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Argentina\" in the context of Number Plates?",
+      "answer": "registration plate The history of registration plates in Argentina can be broken down in two major phases: the decentralized phase (until 1972) and the centralized one (since 1972). During the decentralized phase, registration plates were assigned by each municipality or by the provinces, while during the second phase, the national state took charge of standardizing and centralizing the design and style. Argentina has used the ABC 123 format since 1995. However, from 2016, new registration plates with the logo of Mercosur and the AB 123 CD format were implemented. Both formats coexist temporarily."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Brazil\" in the context of Number Plates?",
+      "answer": "Brazil Brazil adopted its former system in 1990, which uses the form ABC•1234, with a dot between the letters and the numbers. A combination given to a particular vehicle follows it from first issue to the scrapyard: it cannot be transferred to another vehicle. Above the combination there was a metallic band with the state abbreviation (SP = São Paulo, RJ = Rio de Janeiro, PR = Paraná, AM = Amazonas, etc.) and the name of the municipality in which the vehicle title owner resides. During the first registration of a new vehicle, the registering state issues a registration plate to the vehicle rather than owner, and the serial stays with the vehicle for its life. Brazil, as a member of Mercosur, from September 2018 on, began a new registration system where plates have a blue band at the top with the logo of Mercosur on the left, the country's name centered and country flag on the right. On the bottom left, there is the international vehicle registration code for Brazil: BR. The plates are always white: the letter coloring indicates the category (e.g., black on white: private; blue on white: official, police, fire departments, etc.; red on white: taxis, buses, paid freight, etc.). A new format based on the previous one, ABC1D23, was implemented. All used cars, when transferred to another owner, must change to the new format keeping their registration, where only its second number (the fifth position of the alphanumeric combination) shall change to a letter, following the pattern: 0=A, 1=B, 2=C, 3=D, ... 9=J. , both formats coexist for the time being."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Canada\" in the context of Number Plates?",
+      "answer": "In Canada, licence plates are issued on the provincial or territorial level. Federally issued plates are only used by the Department of National Defence. All provinces issue plates in which the letters and numbers are embossed so that they are slightly raised above its surface. The territory of Nunavut introduced the first flat registration plate in Canada in July 2012. In the Canadian provinces and territories of Alberta, New Brunswick, Newfoundland and Labrador, the Northwest Territories, Nova Scotia, Nunavut, Prince Edward Island, Quebec, Saskatchewan, and the Yukon, registration plates are currently only required on the rear of the vehicle. The remaining provincesBritish Columbia, Manitoba, and Ontariorequire the registration plates to be mounted on both the front and rear of the vehicle, with the exception of some special registration classes in BC such as dealer licences and \"collector floater\" plates where only one plate is issued. When a person moves from one province to another, they are normally required to obtain new registration plates issued by the new place of residence, with some agreements between individual provinces allowing temporary workers, and post secondary students to keep their home plates. In 1956, all North American passenger vehicle registration plates (except for French-controlled St. Pierre and Miquelon), were standardised at a size of , although a smaller size is used for certain vehicle classes, such as motorcycles, and for the state of Delaware's historic alternate black and white plates, which are . The plates of the Northwest Territories are shaped like a polar bear but bolt to the standard holes. Nunavut inherited this design on its creation but switched to rectangular plates in 2012. Canadian Forces vehicles that travel on regular ro"
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Colombia\" in the context of Number Plates?",
+      "answer": "Private black-on-yellow plates with the ABC·123 format are used in Colombia. The municipality of issuance is embossed at the bottom of the plate."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Plate design considerations\" in the context of Number Plates?",
+      "answer": "An engineering study by the University of Illinois published in 1960 recommended that the state of Illinois adopt a numbering system and plate design \"composed of combinations of characters which can be perceived quickly and accurately, are legible at a distance of approximately under daylight conditions, and are readily adapted to filing and administrative procedures\". It also recommended that a standard plate size of by be adopted through the United States to replace the earlier by size to allow longer registration numbers to be displayed without excessively tight spacing or excessively thin or narrow characters. In order to combat registration plate fraud, from the 1920s several jurisdictions developed their own anti-fraud typefaces so that characters cannot be painted or modified to resemble other characters. Since the 1990s, many jurisdictions have adopted the FE-Schrift typeface. English uses twenty-six letters (languages such as German, Icelandic and Danish have more letters), so assuming that the letters vs. digits must appear in particular locations (common on plates in most jurisdictions, for instance four decimal digits and two letters where the letters must come first, allowing AB1234 but excluding A12B34), allowing for repeating letters and digits, the combinations for each of these will be: If letters and digits can appear in any order, it is problematic to allow both the letter O and the digit 0 to be used. Even if the license plate uses distinguishable characters for the two, someone transcribing the plate may not know which symbol has which meaning, and the owner of plate EM6F9VO may get in trouble for something the owner of plate EM6F9V0 did. Other letter–digit pairs, like I and 1, may be similarly problematic to a lesser degree. Allowing for repeating"
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Materials\" in the context of Number Plates?",
+      "answer": "The earliest plates were made of enamel on metal or ceramic with no backing, which made them fragile and impractical. Few of these early plates survived. Later experimental materials include cardboard, leather, plastic, and, during wartime shortages, copper and pressed soybeans. File:1916 Wyoming License Plate 3088.jpg|The damage to the enamel on this Wyoming license plate from 1916 exposed the iron, causing it to rust. File:1944 Wyoming License Plate 17 12.jpg|In 1944, Wyoming license plates were made of soybean-based fiberboard due to metal conservation for World War II. File:First Minnesota license plate.jpg|Black leather automobile license tag with a brass number on the center front. The first automobile license plate in Minnesota, 1903. As of the 21st century, most plates are made out of aluminium. Metal plates are manufactured through one of two processes: embossing or riveting. For riveting, holes are drilled through the plate and then individual letters are riveted one-by-one to the plate. New technology has allowed for the development of digital license plates. In 2018, Michigan approved Public Act 656, making electronic license plates legal."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Sizes\" in the context of Number Plates?",
+      "answer": "Early 20th century plates varied in size and shape from one jurisdiction to the next, such that if someone moved or the car was resold in a new area, new holes would need to be drilled into the automobile (often on the bumper) to support the new plate, or an adapter plate be made. Standardization of plates came in 1957, when automobile manufacturers came to agreement with governments and international standards organizations. While peculiar local variants exist, there are four basic standards worldwide: * or – in the bulk of European countries and many of their former overseas territories, as well as North Korea and South Korea. * – in the Mercosur member countries: Brazil, Argentina, Uruguay, and Paraguay, originally based on the 1990 Brazilian standard. * – in the majority of North America and Central America, and parts of South America; occasionally in Switzerland and Liechtenstein; and many Persian Gulf countries, also allowed for imported vehicles in the United Kingdom. * – in Australia and some other Pacific Rim countries, about halfway between the dimensions of the other two standards, longer than Western Hemisphere plates but taller than European ones. Additional sizes include: * – two line pattern, optional in several European countries for 4×4 and imported vehicles; * – in Russia for imported Japanese and American vehicles. * – in Switzerland and Liechtenstein. * – in Saudi Arabia. * – in Andorra. * In Vietnam: ** from to – for car, ** – for bike. * – in Japan. * In Monaco: ** – for the rear, ** – for the front. * – in Thailand. * – in Italy (front plates), and Oman. * – in New Zealand. * – in Chile. * – in Taiwan. * – in San Marino. * – in the Philippines * – in Ecuador. * – in Jordan. * In Indonesia ** – for two-or-three-wheeled vehicles, in the front and re"
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Botswana\" in the context of Number Plates?",
+      "answer": "Normal vehicles have number plates starting with the letter B, followed by three digits, followed by three letters. The digits and letters are assigned by a registrar. The three letters never include the letter Q, to avoid confusion with O. Botswana number plates have a reflective white front and yellow rear background, and black lettering. Government vehicles all have the prefix \"BX\", these number plates have a white reflective background with red lettering at the front and white on red at the rear. After 'BX' are the last two numerals of the date of issue and then up to four digits issued serially. Botswana Defence Force vehicles have the prefix \"BDF\" in white on an 'army' green background. Diplomatic vehicles' number plates start with two numerals which indicate the embassy to which they are attached, then two letters CD (Corps Diplomatique), CC (Consular Corps status) or CT (Foreign Technical and Advisory personnel) and another three digits which are serial. The official car of the Head of Mission uses the letters CMD rather than CD and the private vehicle uses CDA. This series is allocated by the Minister of Foreign Affairs. Botswana is the former British Protectorate of Bechuanaland, and number plates then used a 'BP' prefix (then BPA, BPB, etc.) followed by up to three digits, in white on black background, the plates being made in the characteristic style of South Africa at that time."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Burkina Faso\" in the context of Number Plates?",
+      "answer": "Vehicles are fitted with registration plates in the front and rear of the vehicle. Motorcycles (50cc or more) must be licensed and only bear rear plates. Registration is performed at the local police or Gendarmerie station. The first digits of the plate indicate the province in which the vehicle is registered. Only plates which meet government standards and are sold by licensed dealers may be fitted. Private passenger car registration plates have a white background with black letters and digits. Plates exist in a long pattern and a rectangular pattern, similar in size and appearance to French plates. The plate is adorned with a small flag of Burkina Faso in the shape of the country, inscribed in a black circle. The letters \"BF\" appear below the circle, also in black. This circle and BF design is to the right of the long plate and to the upper right of the rectangular plate. Motorcycle plates are similar to rectangular automobile plates, but smaller. Commercial registration plates are similar in appearance to private plates, but the background is blue, and the writing and circle are white. Security forces plates are black with white letters. They are adorned with the emblem of the relevant security service."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Cameroon\" in the context of Number Plates?",
+      "answer": "The current scheme of regular license plates was introduced in 1985. It has AB1234V formats or AB123VH where AB is the code region, 1234 is the number, and SH is the series. The regular plate has an orange background with black marks. Since 2005, to reflect the German FE font used, on the left side of the plate are the emblems of the Economic Community of Central African States code and the CMR emblem."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Kenya\" in the context of Number Plates?",
+      "answer": "The current series of vehicle registration plates in Kenya are on a white plate with black lettering and look quite similar to UK suffix style registrations. The format is LLL 000L, where 'L' denotes a letter and '0' denotes a digit. The older series of number plates were black with white or silver lettering. The rear plates in the older series of number plates were yellow and black lettering. According to Kenya National Bureau of Statistics there are over 1,626,380 vehicles on Kenyan roads as at 2011."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Morocco\" in the context of Number Plates?",
+      "answer": "Agadir registration plate New-style (post-1983, black lettering on white) Moroccan vehicle registrations have one or two digits to the right of the plate to indicate the town of registration. Each number is separated by a vertical line. To the left of the plate are a series of up to 5 digits issued consecutively. These are separated from the town of registration digits by a hyphen. Earlier plates (1972–1983, black lettering on white. Pre-1972, white lettering on black) differed in that they could have either one or two numbers to indicate the town of registration. The group of digits was separated from the rest of the plate by a vertical line. The current plates use numerals without script. Earlier plates used numerals and included Arabic script."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Bolivia\" in the context of Number Plates?",
+      "answer": "as indicated by the \"L\" sticker in the top right corner Bolivia's current registration plate system consists of four numbers followed by three letters. At the top of the plate, \"BOLIVIA\" is spelled out. At the top left corner, the Bolivian flag may be present, and at the top right corner, a letter denoting the department in which the car is registered, according to the ISO 3166-2:BO code, is displayed on either a metal tab on older plates or a sticker on newer plates. The current registration plate design consists of a white background with a blue borderline and blue letters and numbers. Serial digits progress sequentially from right to left, with the 000 AAA format followed by the 1000AAA format and currently the 4000AAA format. Older plate serials consisted of three numbers followed by three letters (A to Z, except O and Q). They had a white background with black letters and numbers."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Ecuador\" in the context of Number Plates?",
+      "answer": "Vehicle number plates in Ecuador have only one design, with the word \"Ecuador\" appearing in uppercase letters centred at the top of the plate and a unique letter-number combination which consists of three letters (except for motorbikes, diplomatic vehicles and vehicles owned by international organisations) followed by three or more numerical digits. Formats in use are ABC-123 (old format) and ABC-1234 (new format). The first letter in the letter-number combination indicates the province of issue. The second letter might be sequential or a \"key letter\" identifying the type of registration plate; the following letters and numbers are assigned in sequential order to the date the vehicle has been registered."
+    },
+    {
+      "category": "Number Plates",
+      "question": "Can you explain \"Greenland\" in the context of Number Plates?",
+      "answer": "Greenlandic vehicle registration plates normally have two letters and five digits. The combination is simply a serial and has no connection with a geographic location, but the digits have a number series based on vehicle type."
+    },
+    {
+      "category": "High Security Registration Plate (HSRP)",
+      "question": "Is High Security Registration Plate (HSRP) mandatory for all vehicles in India?",
+      "answer": "Yes. The Ministry of Road Transport and Highways (MoRTH) mandates HSRP and color-coded fuel stickers for all vehicles registered before April 1, 2019. Non-compliance can result in traffic fines ranging from ₹5,000 to ₹10,000 under the Motor Vehicles Act."
+    },
+    {
+      "category": "High Security Registration Plate (HSRP)",
+      "question": "How can I order an HSRP plate and color sticker online?",
+      "answer": "Vehicle owners in states like Delhi, UP, and Himachal Pradesh can order online at bookmyhsrp.com. Select high security license plate with color sticker, enter your State, Registration Number, Chassis Number, and Engine Number, choose home delivery or dealer fitment, and pay the fee online."
+    },
+    {
+      "category": "High Security Registration Plate (HSRP)",
+      "question": "What do the different color-coded fuel stickers on HSRP represent?",
+      "answer": "Blue stickers denote Petrol and CNG vehicles, Orange stickers denote Diesel vehicles, and Green strip stickers denote Electric vehicles (EVs). These stickers are affixed to the top-left inner side of the vehicle windshield."
+    },
+    {
+      "category": "Parivahan Technical Support",
+      "question": "How do I check the real-time status of my RTO application on Parivahan?",
+      "answer": "Go to parivahan.gov.in, navigate to Online Services -> Application Status, enter your Application Number and Date of Birth, enter the captcha, and click Submit to track stage-by-stage approval, document verification, and smart card dispatch."
+    },
+    {
+      "category": "Parivahan Technical Support",
+      "question": "What should I do if my payment succeeded on Sarathi but application status shows pending payment?",
+      "answer": "Do not pay twice. Go to Sarathi Parivahan portal, select your State, click 'Check Payment Status' or 'Verify Pay Status' under the Payments menu, enter your Application Number and Date of Birth to reconcile and update the transaction automatically."
+    },
+    {
+      "category": "Parivahan Technical Support",
+      "question": "How can I cancel or reschedule an RTO appointment slot on Sarathi?",
+      "answer": "Log in to the Sarathi Parivahan portal, go to Appointments -> Cancel Slot Booking, enter your Application Number and Date of Birth. After cancelling, click 'Slot Booking' to select a fresh date and time slot."
+    },
+    {
+      "category": "Parivahan Technical Support",
+      "question": "Why does Aadhaar e-KYC authentication fail during contactless Learner's License test?",
+      "answer": "Aadhaar e-KYC face authentication fails if your mobile number is not linked with Aadhaar, if the camera quality is low, or if the photo on Aadhaar is outdated. In case of repeated failures, opt for non-Aadhaar mode and book a physical slot at your local RTO."
+    },
+    {
+      "category": "Vehicle Registration & Transfer",
+      "question": "What are Form 28, Form 29, and Form 30 used for in RTO vehicle ownership transfer?",
+      "answer": "Form 28 is the application for No Objection Certificate (NOC) when transferring a vehicle to another RTO/state. Form 29 is the notice of ownership transfer submitted by the seller. Form 30 is the application for confirmation of ownership transfer submitted by the buyer."
+    },
+    {
+      "category": "Vehicle Registration & Transfer",
+      "question": "What happens if I do not transfer vehicle ownership within 30 days of sale?",
+      "answer": "Under Section 50 of the Motor Vehicles Act, the buyer and seller must report the transfer within 30 days (or 45 days if inter-state). Delay incurs a late penalty fee of ₹300–₹500 per month. Legally, the registered seller remains liable for traffic accidents or misuse until official RC transfer."
+    },
+    {
+      "category": "Vehicle Registration & Transfer",
+      "question": "How do I remove Hypothecation (Bank Loan closure) from my Vehicle RC?",
+      "answer": "After paying off your vehicle loan, collect NOC letters and two signed copies of Form 35 from your bank. Apply on Vahan Parivahan portal under 'Hypothecation Deletion', upload Form 35, bank NOC, valid PUC, and Insurance, pay the fee (~₹200-₹500), and submit at the RTO to issue a clean RC."
+    },
+    {
+      "category": "Vehicle Registration & Transfer",
+      "question": "What is the validity of a Vehicle Registration Certificate (RC) for private cars?",
+      "answer": "A private vehicle Registration Certificate (RC) is valid for 15 years from the original registration date. After 15 years, the vehicle must undergo an automated fitness inspection for RC renewal (Form 25), valid for an additional 5 years."
+    },
+    {
+      "category": "Traffic Enforcement & E-Challan",
+      "question": "How can I check and pay pending traffic e-challans online in India?",
+      "answer": "Visit echallan.parivahan.gov.in, enter your Vehicle Number or DL Number, click 'Get Detail'. You will see all pending traffic fines. Select the challan and pay securely via net banking/UPI/debit card, or contest it via Virtual Court if disputed."
+    },
+    {
+      "category": "Traffic Enforcement & E-Challan",
+      "question": "How can I settle pending traffic e-challans at a discount during Lok Adalat?",
+      "answer": "National Lok Adalat sessions are organized quarterly by DLSA/SLSA. Visit the state traffic police Lok Adalat portal during pre-registration dates, generate a court token notice for your pending challan numbers, and present it at the designated Lok Adalat bench for judicial waiver or discount."
+    },
+    {
+      "category": "Traffic Enforcement & E-Challan",
+      "question": "What happens if an e-challan is sent to Virtual Court?",
+      "answer": "If an e-challan is unpaid past 60 days, it is referred to Virtual Court (vcourts.gov.in). You can view the case details using your mobile number or vehicle number, accept the fine and pay online, or contest the violation before the magistrate."
+    },
+    {
+      "category": "Pollution Under Control (PUC) & Safety",
+      "question": "What is the validity of a Pollution Under Control (PUC) Certificate?",
+      "answer": "For new BS4 and BS6 vehicles, the initial PUC certificate issued upon purchase is valid for 1 year. Thereafter, PUC testing is mandatory every 6 months for petrol/diesel vehicles. Driving without a valid PUC attracts a fine of ₹10,000 under Section 190(2)."
+    },
+    {
+      "category": "Pollution Under Control (PUC) & Safety",
+      "question": "Can I renew my vehicle insurance or transfer ownership without a valid PUC?",
+      "answer": "No. The Parivahan / Vahan 4.0 database is integrated with emission testing centers across India. Valid PUC status is mandatory for online insurance renewal, RC transfer, address change, and fitness renewal."
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "project": "Transport and RTO Services AI Guidance Prototype",
+  "version": "1.0.0",
+  "states_supported": [
+    "DL",
+    "MH",
+    "KA",
+    "UP",
+    "TN",
+    "TS",
+    "GJ"
+  ],
+  "source_scope": "Public standard guidelines (MORTH / Parivahan Sewa 2026) - Mock Status for fee variations"
+}

@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:data": "node src/data/build.js",
+    "scrape": "node scraper/run.js",
+    "scrape:dry": "node scraper/run.js --dry-run"
   },
   "dependencies": {
     "lucide-react": "^1.30.0",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import rtoDatabase from './data/rto_database.json';
+import rtoDatabase from './data/index.js';
 import { RAGEngine } from './utils/ragEngine';
 import { IntelligenceEngine } from './utils/intelligenceEngine';
 
@@ -133,9 +133,19 @@ function App() {
     
     // Simulate thinking...
     setTimeout(() => {
+      const stateNames = {
+        DL: 'Delhi',
+        MH: 'Maharashtra',
+        KA: 'Karnataka',
+        UP: 'Uttar Pradesh',
+        TN: 'Tamil Nadu',
+        TS: 'Telangana',
+        GJ: 'Gujarat'
+      };
+
       const ctx = {
         stateCode,
-        stateName: stateCode === 'DL' ? 'Delhi' : stateCode === 'MH' ? 'Maharashtra' : 'Karnataka',
+        stateName: stateNames[stateCode] || stateCode,
         vehicleType,
         applicantType,
         language
